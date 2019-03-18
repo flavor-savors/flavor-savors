@@ -5,6 +5,7 @@ const admin = require('firebase-admin')
 const serviceAccount = require('./firebase-key.json')
 const rc = require('./controllers/recipes_controller')
 const ac = require('./controllers/auth_controller')
+const uc = require('./controllers/user_controller')
 const app = express()
 
 admin.initializeApp({
@@ -41,6 +42,9 @@ app.delete('/recipes/:id', rc.delete_recipe) // delete a recipe
 
 // user routes
 // these should be protected via the frontend
+app.get('/users/:id', uc.get_user_by_id) // get user by id
+app.get('/users', uc.get_user_by_username) // get user by username by appending `?user=<username>`
+app.get('/users/favorites/:id', uc.get_user_favorites)
 
 // meal plan routes
 
