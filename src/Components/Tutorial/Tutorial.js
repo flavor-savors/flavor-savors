@@ -1,12 +1,13 @@
 import React, { Component } from 'react'
+import './_tutorial.scss'
 
 class Tutorial extends Component {
   render() {
     return (
-      <div>
-          <div> browse recipes</div>
-          <div> createna plan</div>
-          <div> sign up and save plans</div>
+      <div className='tut-div'>
+          <div className='tut-steps'> browse recipes</div>
+          <div className='tut-steps'> createna plan</div>
+          <div className='tut-steps'> sign up and save plans</div>
       </div>
     )
   }
