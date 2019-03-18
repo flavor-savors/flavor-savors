@@ -1,0 +1,21 @@
+.header-div{
+    background-color: black;
+    color: white;
+    height: 10vh;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.header-div-2{
+    // border: solid 1px yellow;
+    width: 50%;
+    margin-left: 10vw;
+}
+
+.header-ul{
+    display: flex;
+    // border: solid 1px red;
+    justify-content:space-around;
+    list-style-type: none;
+}
