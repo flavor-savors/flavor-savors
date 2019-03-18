@@ -1,4 +1,5 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import './_header.scss'
 
 class Header extends Component {
   render() {

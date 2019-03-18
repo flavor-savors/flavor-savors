@@ -10,13 +10,13 @@ class LargeRecipe extends Component {
 
 
     componentDidMount(){
-        // call for individual recipe based on matching params
+        // call for individual recipe based on id passed in from SmallRecipe
     }
 
     render(){
         return(
             <div>
-                <img src={} alt="recipe image"/>
+                {/* <img src={} alt="recipe image"/> */}
                 <h1>recipe title</h1>
                 <div>ingredients</div>    
                 <div>tags</div>
