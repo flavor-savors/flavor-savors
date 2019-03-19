@@ -1,12 +1,16 @@
 module.exports = {
 	get_current_user: (req, res) => {
-		const admin = req.app.get('admin')
+		try {
+			const admin = req.app.get('admin')
 
-		let user = admin.firebase.auth().currentUser
-		if (user) {
-			res.status(200).json(user)
-		} else {
-			res.status(409).json('No user signed in')
+			let user = admin.firebase.auth().currentUser
+			if (user) {
+				res.status(200).json(user)
+			} else {
+				res.status(409).json('No user signed in')
+			}
+		} catch (err) {
+			res.status(500).json(err)
 		}
 	},
 
