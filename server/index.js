@@ -6,6 +6,7 @@ const serviceAccount = require('./firebase-key.json')
 const rc = require('./controllers/recipes_controller')
 const ac = require('./controllers/auth_controller')
 const uc = require('./controllers/user_controller')
+const fc = require('./controllers/forum_controller')
 const app = express()
 
 admin.initializeApp({
@@ -23,9 +24,7 @@ app.use(cors())
 
 // TODO:
 //      + Fix search, may need to change structure of ingredients array
-//      + Token verification
-//      + Port login and register to the frontend
-//      + Verify auth system works
+//
 
 // auth routes
 app.get('/user/current', ac.get_current_user) // see if a user is signed in
@@ -44,11 +43,17 @@ app.delete('/recipes/:id', rc.delete_recipe) // delete a recipe
 // these should be protected via the frontend
 app.get('/users/:id', uc.get_user_by_id) // get user by id
 app.get('/users', uc.get_user_by_username) // get user by username by appending `?user=<username>`
-app.get('/users/favorites/:id', uc.get_user_favorites)
+app.get('/users/favorites/:id', uc.get_user_favorites) // get user favorites
 
 // meal plan routes
 
 // forum routes
+app.get('/forum/:id', fc.get_post) // get a specific post
+app.get('/forum', fc.get_all_posts) // get all posts
+app.post('/forum', fc.create_post) // create a new post
+app.post('/forum/reply/:id', fc.add_reply) // add a reply to the post
+app.put('/forum/:id', fc.update_post) // change the content of the post
+app.delete('/forum/:id', fc.delete_post) // delete a post
 
 const port = 4000
 app.listen(port, () => console.log(`Listening on localhost:${port}`))
