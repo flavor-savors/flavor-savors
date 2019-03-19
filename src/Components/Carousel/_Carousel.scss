@@ -1,6 +1,4 @@
-*{
-    margin: 0;
-    padding: 0;
+.mainCarousel{
     list-style: none;
 }
 // .hero-textOne, .hero-textTwo, .hero-textThree, .hero-textFour, .hero-textFive{
@@ -22,9 +20,9 @@
 
 .shadow{
     position: absolute;
-    z-index: 3;
+    z-index: 1;
     background:rgba(0, 0, 0, 0.50);
-    top: 0vh;
+    top: 10vh;
     height: 100vh;
     width: 100%;
 }

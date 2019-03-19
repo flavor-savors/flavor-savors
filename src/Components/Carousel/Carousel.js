@@ -1,9 +1,8 @@
 import React from 'react'
-import './Carousel.scss'
 
 const Carousel = () => {
   return (
-    <div>
+    <div className='mainCarousel'>
       <div className="slider">
             <div className='shadow'/>
                <figure>

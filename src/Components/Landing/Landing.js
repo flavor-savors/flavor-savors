@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-//import carousel/video component here
+import RecipeCreator from '../RecipeCreator/RecipeCreator';
+import Carousel from '../Carousel/Carousel';
+
 
 
 //This component is the landing page with links to:
@@ -15,31 +17,33 @@ class Landing extends Component {
     render(){
         return(
            <div>
-               {/* video or carousel of images will be rendered here */}
+               <Carousel/>
                 
 {/* the div below holds the two main cards that link to Home with the planner either extended or hidden */}
-                <div>
-                    <Link to='/home'>
-                    <div>View Recipes</div>
-                    </Link>
+                <div className='main-landing'>
+                    <div>
+                        <Link to='/home'>
+                        <div>View Recipes</div>
+                        </Link>
 
-                    <Link to='/home/build'>
-                    <div>Build a plan</div>
+                        <Link to='/home/build'>
+                        <div>Build a plan</div>
+                        </Link>
+                    </div>
+
+    {/* the div below holds the how to graphic  */}
+
+                    <Link to='/tutorial'>
+                    <div>
+                        <div>step one</div>
+                        <div>arrow</div>
+                        <div>step two</div>
+                        <div>arrow</div>
+                        <div>step three</div>
+                    </div>
                     </Link>
                 </div>
-
-{/* the div below holds the how to graphic  */}
-
-                <Link to='/tutorial'>
-                <div>
-                    <div>step one</div>
-                    <div>arrow</div>
-                    <div>step two</div>
-                    <div>arrow</div>
-                    <div>step three</div>
-                </div>
-                </Link>
-
+                <RecipeCreator/>
            </div> 
         )
     }

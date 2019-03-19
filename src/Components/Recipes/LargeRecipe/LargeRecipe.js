@@ -5,10 +5,6 @@ import React, { Component } from 'react';
 //after a specific recipe has been chosen to inspect
 
 class LargeRecipe extends Component {
-    constructor(props){
-        super(props)
-    }
-
 
 
     componentDidMount(){
