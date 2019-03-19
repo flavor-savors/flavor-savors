@@ -2,10 +2,11 @@ import React, { Component } from 'react';
 import SmallRecipes from '../Recipes/SmallRecipe/SmallRecipe';
 import Planner from '../PlannerDrawer/Planner';
 import Filter from '../FilterDrawer/Filter';
+import axios from 'axios';
 
 
 //this component is the main home page for browsing/searching recipes and meal planning 
-// it renders 5 views:
+//it renders 5 views:
 
 //default:
     //SmallRecipes (with specific call)
@@ -21,33 +22,39 @@ class Home extends Component {
         super()
 
         this.state = {
-            planner: false,
-            filter: false
+            showPlanner: false,
+            showFilter: false,
+            recipes:[]
         }
     }
 
     componentDidMount(){
-        //if url has builder in it toggle the planner state to true
+            axios.get(`/recipes/all`).then(res=>{
+                this.setState({recipes: res.data})
+            })
     }
 
     togglePlanner = () =>{
-        this.setState({planner: !this.state.planner})
+        this.setState({showPlanner: !this.state.showPlanner})
+        console.log(this.state)
     }
     toggleFilter = () =>{
-        this.setState({filter: !this.state.filter})
+        this.setState({showFilter: !this.state.showFilter})
     }
 
 
 
     render(){
+        console.log(this.state.recipes)
         return(
             <div>
-                {!this.state.filterShow ? null : <Filter/>}
+                {!this.state.filter ? null : <Filter/>}
                 
                 <SmallRecipes
-                togglePlanner={this.togglePlanner}/>
+                togglePlanner={this.togglePlanner}
+                recipes={this.state.recipes}/>
 
-                {!this.state.plannerShow ? null : <Planner/>}
+                {!this.state.showPlanner ? null : <Planner/>}
 
                
 
