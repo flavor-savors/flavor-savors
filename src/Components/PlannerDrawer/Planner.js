@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { timingSafeEqual } from 'crypto';
 
 
 class Planner extends Component {
@@ -54,13 +53,18 @@ class Planner extends Component {
         }
     }
 
+    componentDidMount(){
+        console.log(this.props)
+    }
+
     handleChange = e => {
         this.setState({ [e.target.name]: e.target.value });
-        console.log(e)
+        console.log(e.target)
       };
 
 
     render(){
+        console.log(this.props.currentRecipe)
         return(
             <div>
                 <div className='planner-main'>
@@ -68,7 +72,7 @@ class Planner extends Component {
                     <div className='planner-top-section'>
                         <div className='day'>
                             <p>day1</p>
-                            <input type='button' name='breakfast' value={this.props.currentRecipe}/>
+                            <input type='button' name='breakfast' value={this.props.currentRecipe} onClick={this.handleChange}/>
                         </div>
 
                     </div>

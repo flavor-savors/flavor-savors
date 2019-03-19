@@ -31,7 +31,6 @@ class SmallRecipe extends Component {
     getRecipe = (i) => {
             axios.get(`/recipe/${i}`).then(res=>{
             this.setState({recipe: res.data})
-            console.log(res)
         })
     }
 
