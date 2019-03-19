@@ -48,14 +48,18 @@ class Home extends Component {
         console.log(this.state.recipes)
         return(
             <div>
-                {!this.state.filter ? null : <Filter/>}
+                <button onClick={this.togglePlanner}>planner</button>
+                <button onClick={this.toggleFilter}>filter search</button>
+
+                
                 
                 <SmallRecipes
+                toggleFilter={this.toggleFilter}
                 togglePlanner={this.togglePlanner}
                 recipes={this.state.recipes}/>
 
                 {!this.state.showPlanner ? null : <Planner/>}
-
+                {!this.state.showFilter ? null : <Filter/>}
                
 
             </div>
@@ -64,3 +68,5 @@ class Home extends Component {
 }
 
 export default Home;
+
+

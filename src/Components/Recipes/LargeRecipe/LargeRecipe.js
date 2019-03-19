@@ -1,14 +1,23 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 
 
 //this component will be a modal over the small recipe cards 
 //after a specific recipe has been chosen to inspect
 
 class LargeRecipe extends Component {
+    constructor(){
+        super()
 
+        this.state ={
+            recipe:[]
+        }
+    }
 
     componentDidMount(){
-        // call for individual recipe based on id passed in from SmallRecipe, or could possibly be sent as a prop?
+        axios.get(`/recipe/${this.props.currentRecipe}`).then(res=>{
+            this.setState({recipes: res.data})
+        })
     }
 
     render(){
