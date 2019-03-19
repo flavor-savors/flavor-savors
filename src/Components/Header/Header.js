@@ -2,6 +2,18 @@ import React, { Component } from 'react';
 import './_header.scss'
 
 class Header extends Component {
+  constructor(){
+    super();
+    this.state = {
+      showSignIn: false
+    }
+  }
+
+  displaySignIn = () => {
+    this.setState({showEdit: !this.state.showEdit})
+  }
+
+
   render() {
     return (
       <div className='header-div'>

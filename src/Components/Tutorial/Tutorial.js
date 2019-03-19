@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import './_tutorial.scss'
+// import Assests from '../../Assets'
 
 class Tutorial extends Component {
   render() {
