@@ -2,7 +2,6 @@ module.exports = {
 	get_user_by_id: (req, res) => {
 		try {
 			const db = req.app.get('db')
-
 			db.collection('users')
 				.doc(req.params.id)
 				.get()
@@ -76,5 +75,28 @@ module.exports = {
 
 	update_profile: (req, res) => {
 		// update user profile pictures, etc
+	},
+
+	// add a recipe id to a users favorites
+	add_to_favorites: (req, res) => {
+		try {
+			// get user id
+			// get recipe id
+			// append recipe id to recipes array on the user's object
+
+			db.collection('users')
+				// fetch the currentUser and send in either their uid or doc id
+				// for now i'll set it up like the doc id is being sent in
+				.doc(req.body.userID)
+				.get()
+				.then((snapshot) => {
+					snapshot.update({
+						// maybe switch to passing this in via the request body
+						favorites: admin.firebase.FieldValue.arrayUnion(req.params.id),
+					})
+				})
+		} catch (err) {
+			res.status(500).json(err)
+		}
 	},
 }
