@@ -43,12 +43,16 @@ class SmallRecipe extends Component {
                     <h1>{e.recipeName}</h1>
                    { e.ingredient.map((e,i)=>{
                         return(
-                            <div key={i}>{e.name} {e.amount}</div> 
+                            <div key={i}>{e.amount} {e.name}</div> 
                         )
                     })}
                     
-
-                    <div>{e.dietTags[0]}</div>
+                    {e.dietTags.map((e, i) => {
+                        return(
+                            <div key={i}>{e}</div>
+                        )
+                    })}
+                    
                     <div>   
                          <button>add to favs</button>
                          <button onClick={this.props.togglePlanner}>add to meal plan</button>

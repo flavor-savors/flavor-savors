@@ -20,10 +20,11 @@ class LargeRecipe extends Component {
          ? 'large showBlock'
          : 'large showNone' 
         return(
-            <div className = {showHideClassname} >
+            <div className = {showHideClassname} onClick={this.props.toggleLarge} >
 
                 <div className='largeCard'>
-                    <div onClick={this.props.toggleLarge}>
+                <h1>placeholder text</h1>
+                    <div >
                         {this.props.recipe}
                     </div>
                     <div>   
