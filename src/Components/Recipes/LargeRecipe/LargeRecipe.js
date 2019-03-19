@@ -5,27 +5,37 @@ import React, { Component } from 'react';
 //after a specific recipe has been chosen to inspect
 
 class LargeRecipe extends Component {
-
+    constructor(props){
+        super(props)
+    }
 
 
 
     componentDidMount(){
-        // call for individual recipe based on id passed in from SmallRecipe
+        // call for individual recipe based on id passed in from SmallRecipe, or could possibly be sent as a prop?
     }
 
     render(){
-        return(
-            <div>
-                {/* <img src={} alt="recipe image"/> */}
-                <h1>recipe title</h1>
-                <div>ingredients</div>    
-                <div>tags</div>
-                <div>directions</div> 
+        if(!this.props.showLarge){
+            return null;
+        }
 
-                <div>   
-                    <button>add to favs</button>
-                    <button>add to meal plan</button>
-                </div>                   
+        const showHideClassname = this.props.showLarge 
+         ? 'large showBlock'
+         : 'large showNone' 
+        return(
+            <div className = {showHideClassname} >
+
+                <div className='largeCard'>
+                    <div onClick={this.props.toggleLarge}>
+                        {this.props.recipe}
+                    </div>
+                    <div>   
+                        <button>add to favs</button>
+                        <button>add to meal plan</button>
+                    </div>  
+                </div>
+
             </div>
         )
     }

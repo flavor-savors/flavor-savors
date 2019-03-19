@@ -1,0 +1,25 @@
+.large {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width:100%;
+    height: 100%;
+    background: rgba($black, .7);
+    
+    .largeCard{
+      position: fixed;
+      top: 20%;
+      left: 20%;
+      width: 60%;
+      height: 60%;
+      background-color: $light-blue;
+    }
+  }
+
+  .showBlock {
+    display: block;
+  }
+  
+  .showNone {
+    display: none;
+  }
