@@ -24,20 +24,31 @@ class Home extends Component {
         this.state = {
             showPlanner: false,
             showFilter: false,
-            recipes:[]
+            recipes:[],
+            currentRecipe: null
         }
     }
 
     componentDidMount(){
-            axios.get(`/recipes/all`).then(res=>{
-                this.setState({recipes: res.data})
-            })
+        axios.get(`/recipes/all`).then(res=>{
+            this.setState({recipes: res.data})
+        })
     }
 
-    togglePlanner = () =>{
+    setCurrentRecipe = (id) =>{
+        this.setState({currentRecipe: id})
+        console.log(this.state.currentRecipe)
+    }
+
+    togglePlanner = (add) =>{
+        if(add===true){
+            this.setState({showPlanner: true})
+        }else{
         this.setState({showPlanner: !this.state.showPlanner})
         console.log(this.state)
+        }
     }
+
     toggleFilter = () =>{
         this.setState({showFilter: !this.state.showFilter})
     }
@@ -54,13 +65,16 @@ class Home extends Component {
                 
                 
                 <SmallRecipes
+                setCurrentRecipe={this.setCurrentRecipe}
                 toggleFilter={this.toggleFilter}
                 togglePlanner={this.togglePlanner}
                 recipes={this.state.recipes}/>
 
-                {!this.state.showPlanner ? null : <Planner/>}
-                {!this.state.showFilter ? null : <Filter/>}
-               
+                {!this.state.showPlanner ? null 
+                    : <Planner 
+                        currentRecipe={this.props.currentRecipe}/>}
+                {!this.state.showFilter ? null : <Filter />}
+
 
             </div>
         )
