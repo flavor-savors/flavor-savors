@@ -73,4 +73,8 @@ module.exports = {
 			res.json(500).json(err)
 		}
 	},
+
+	update_profile: (req, res) => {
+		// update user profile pictures, etc
+	},
 }
