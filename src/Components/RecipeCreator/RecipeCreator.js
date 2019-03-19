@@ -11,7 +11,8 @@ class RecipeCreator extends Component {
             imgUrl:"",
             ingredients:[],
             directions:"",
-            tags:[]
+            tags:[],
+            public: true
         }
     }
 
@@ -36,15 +37,9 @@ class RecipeCreator extends Component {
 
                     <fieldset>
                         <legend>Ingredients:</legend>
-
                         <div>
-                            <input type="number" value={}/>
-                                <select>
-                                    <option>tsp.</option>
-                                    <option>Tbsp.</option>
-                                    <option>Cup</option>
-                                </select>
-                            <input type="text" value={this.state.ingredients}/>
+                            <input type="text" value={this.state.ingredients.amount}/>
+                            <input type="text" value={this.state.ingredients.name}/>
                         </div>
 
                         {/* need to figure out the coding to add more fields  */}
@@ -68,9 +63,9 @@ class RecipeCreator extends Component {
                     </fieldset>
                     
                     <fieldset>
-                        <legend>Allow other users to view this recipe?</legend>
-                        <input type="radio" name="tags" value="Public"/>
-                        <input type="radio" name="tags" value="Private"/>
+                        <legend>Make this recipe private?</legend>
+                        <input type="checkbox" name="tags" value="Private"/>
+
                     </fieldset>
 
 

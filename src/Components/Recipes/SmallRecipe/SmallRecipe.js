@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import axios from 'axios';
 import LargeRecipe from '../LargeRecipe/LargeRecipe';
 
 //this component is the map for rendering the small recipe cards after a specific call is made for:
@@ -15,47 +16,60 @@ class SmallRecipe extends Component {
         super(props)
 
         this.state ={
-            largeRecipe: false
+            showLarge: false,
+            recipes:[]
         }
+    }
+
+    componentDidMount(){
+        axios.get(`/recipes/all`).then(res=>{
+            this.setState({recipes: res.data})
+        })
+    }
+
+    toggleLarge = () => {
+        this.setState({showLarge: !this.state.showLarge})
+        this.setState()
     }
 
     render(){
 
 
-        // const recipes = placeholderArray.map((e, i)=>{
-        //     return(
-        //         <Link>
-                // <div key={i} style={background-image:{e.image}}>
-                //     <h1>{e.title}</h1>
-                //     <div>{e.ingredients}</div>    
-                //     <div>{e.tags}</div>
-                //     <div>   
-                //          <button>add to favs</button>
-                //          <button onClick={this.props.togglePlanner}>add to meal plan</button>
-                //     </div>
-                // </div>  
-        //         </Link>              
-        //     )
-        // })
-
-        return(
-            <div>
-                {!this.state.largeRecipeShow ? 
-                    null : 
-                    //need to add code to pass individual id's to this component when user clicks
-                    <LargeRecipe/> }
+// still need to clean up how to present all information.
+        const recipe = this.state.recipes.map((e, i)=>{
+            return(
                 
-                {/* {recipes} */}
-                {/* the following is placeholder code until functionality is established */}
-                <div>
-                    <h1>title</h1>
-                    <div>ingredients</div>    
-                    <div>tags</div>
+                <div key={i} onClick={this.toggleLarge}>
+                    <h1>{e.recipeName}</h1>
+                   { e.ingredient.map((e,i)=>{
+                        return(
+                            <div key={i}>{e.name} {e.amount}</div> 
+                        )
+                    })}
+                    
+
+                    <div>{e.dietTags[0]}</div>
                     <div>   
                          <button>add to favs</button>
                          <button onClick={this.props.togglePlanner}>add to meal plan</button>
                     </div>
                 </div>  
+                
+            )
+        })
+
+        return(
+            <div>
+                <div>
+                    {recipe}
+                </div>
+                <div>
+                    {/* need to add code to pass individual id's to this component when user clicks */}
+                    <LargeRecipe
+                    showLarge={this.state.showLarge}
+                    toggleLarge={this.toggleLarge}/>
+                </div>
+
             </div>
         )
     }
