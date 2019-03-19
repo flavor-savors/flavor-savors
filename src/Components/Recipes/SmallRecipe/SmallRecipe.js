@@ -17,7 +17,8 @@ class SmallRecipe extends Component {
 
         this.state ={
             showLarge: false,
-            recipes:[]
+            recipes:[],
+            recipe: {}
         }
     }
 
@@ -27,34 +28,36 @@ class SmallRecipe extends Component {
         })
     }
 
-    toggleLarge = () => {
+    getRecipe = (i) => {
+            axios.get(`/recipe/${i}`).then(res=>{
+            this.setState({recipe: res.data})
+            console.log(res)
+        })
+    }
+
+    toggleLarge = (id) => {
         this.setState({showLarge: !this.state.showLarge})
-        this.setState()
+        this.setState({currentRecipe: id})
+        this.props.setCurrentRecipe(id)
     }
 
     render(){
 
-
 // still need to clean up how to present all information.
         const recipe = this.state.recipes.map((e, i)=>{
             return(
-                
-                <div key={i} onClick={this.toggleLarge}>
-                    <h1>{e.recipeName}</h1>
-                   { e.ingredient.map((e,i)=>{
-                        return(
-                            <div key={i}>{e.name} {e.amount}</div> 
-                        )
-                    })}
-                    
-
-                    <div>{e.dietTags[0]}</div>
-                    <div>   
-                         <button>add to favs</button>
-                         <button onClick={this.props.togglePlanner}>add to meal plan</button>
-                    </div>
-                </div>  
-                
+                <div key={i} onMouseEnter={()=>this.getRecipe(e.id)}>
+                    <div>
+                        <div>
+                            <h1>{e.recipeName}</h1>
+                            <img src={e.imageURL}/>
+                        </div>
+                        <div>   
+                            <button>add to favs</button>
+                            <button onClick={()=>this.toggleLarge(e.id)}>View this recipe</button>
+                        </div>
+                    </div>  
+                </div>
             )
         })
 
@@ -64,10 +67,12 @@ class SmallRecipe extends Component {
                     {recipe}
                 </div>
                 <div>
-                    {/* need to add code to pass individual id's to this component when user clicks */}
                     <LargeRecipe
+                    recipe={this.state.recipe}
                     showLarge={this.state.showLarge}
-                    toggleLarge={this.toggleLarge}/>
+                    toggleLarge={this.toggleLarge}
+                    togglePlanner={this.props.togglePlanner}
+                    />
                 </div>
 
             </div>
