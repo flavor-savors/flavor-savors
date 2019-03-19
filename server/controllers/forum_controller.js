@@ -1,4 +1,5 @@
 const moment = require('moment')
+const uuid = require('short-uuid')
 
 module.exports = {
 	create_post: (req, res) => {
@@ -100,6 +101,7 @@ module.exports = {
 				.doc(req.params.id)
 				.update({
 					replies: admin.firestore.FieldValue.arrayUnion({
+						id: uuid.generate(),
 						content: req.body.content,
 						created: moment().format('MMMM Do YYYY, h:mm:ss a'),
 						upvotes: 0,
@@ -108,6 +110,7 @@ module.exports = {
 				})
 			res.status(200).json('Reply added')
 		} catch (err) {
+			console.log(err)
 			res.status(500).json(err)
 		}
 	},
@@ -118,6 +121,44 @@ module.exports = {
 			const db = req.app.get('db')
 			const admin = req.app.get('admin')
 		} catch (err) {
+			res.status(500).json(err)
+		}
+	},
+
+	upvote_reply: (req, res) => {
+		// get post id
+		// get reply id
+		// increment fieldvalue
+
+		try {
+			const db = req.app.get('db')
+			const admin = req.app.get('admin')
+			let replies
+
+			db.collection('forum')
+				.doc(req.params.id)
+				.get()
+				.then((snapshot) => {
+					replies = snapshot.data().replies
+					replies.forEach((reply, index) => {
+						if (reply.id === req.body.id) {
+							replies[index].upvotes++
+						}
+					})
+
+					db.collection('forum')
+						.doc(req.params.id)
+						.update({
+							replies: replies,
+						})
+						.then(() => res.json('updated'))
+				})
+				.catch((err) => {
+					console.log(err)
+					res.status(500).json(err)
+				})
+		} catch (err) {
+			console.log(err)
 			res.status(500).json(err)
 		}
 	},

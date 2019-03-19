@@ -80,21 +80,44 @@ module.exports = {
 	// add a recipe id to a users favorites
 	add_to_favorites: (req, res) => {
 		try {
+			const db = req.app.get('db')
+			const admin = req.app.get('admin')
+
 			// get user id
 			// get recipe id
 			// append recipe id to recipes array on the user's object
-
 			db.collection('users')
 				// fetch the currentUser and send in either their uid or doc id
 				// for now i'll set it up like the doc id is being sent in
 				.doc(req.body.userID)
-				.get()
-				.then((snapshot) => {
-					snapshot.update({
-						// maybe switch to passing this in via the request body
-						favorites: admin.firebase.FieldValue.arrayUnion(req.params.id),
-					})
+				.update({
+					favorites: admin.firestore.FieldValue.arrayUnion(req.params.id),
 				})
+
+			res.status(200).json('Updated')
+		} catch (err) {
+			console.log(err)
+			res.status(500).json(err)
+		}
+	},
+
+	remove_from_favorites: (req, res) => {
+		try {
+			const db = req.app.get('db')
+			const admin = req.app.get('admin')
+
+			// get user id
+			// get recipe id of victim
+			// sacrifice
+			db.collection('users')
+				// fetch the currentUser and send in either their uid or doc id
+				// for now i'll set it up like the doc id is being sent in
+				.doc(req.body.userID)
+				.update({
+					favorites: admin.firestore.FieldValue.arrayRemove(req.params.id),
+				})
+
+			res.status(200).json('Updated')
 		} catch (err) {
 			res.status(500).json(err)
 		}
