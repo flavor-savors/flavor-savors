@@ -13,7 +13,12 @@ class Profile extends Component {
         </div>
 
         <div className='recCrtr'>
-        
+          <div className='profile-buttons'>
+            <button>View Favorites</button>
+            <button>My Recipes</button>
+            <button> My Plans</button>
+            <button> View Forum</button>
+          </div>
         </div>
       </div>     
     )

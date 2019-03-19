@@ -1,15 +1,9 @@
 import React, { Component } from 'react';
 
-
-//this component will be a modal over the small recipe cards 
-//after a specific recipe has been chosen to inspect
+//this component is a modal over the small recipe cards 
+//which displays after a specific recipe has been chosen to inspect
 
 class LargeRecipe extends Component {
-
-
-    componentDidMount(){
-        // call for individual recipe based on id passed in from SmallRecipe, or could possibly be sent as a prop?
-    }
 
     render(){
         if(!this.props.showLarge){
@@ -20,15 +14,31 @@ class LargeRecipe extends Component {
          ? 'large showBlock'
          : 'large showNone' 
         return(
-            <div className = {showHideClassname} >
+            <div className = {showHideClassname} onClick={this.props.toggleLarge} >
 
                 <div className='largeCard'>
-                    <div onClick={this.props.toggleLarge}>
-                        {this.props.recipe}
+                <h1>{this.props.recipe.recipeName}</h1>
+                <img src={this.props.imageURL}/>
+                <div>
+                    {this.props.recipe.dietTags.map((e,i)=>{
+                        return(
+                            <div key={i}>{e}</div> 
+                        )
+                    })}
+                </div>
+                <div>
+                    {this.props.recipe.ingredient.map((e,i)=>{
+                        return(
+                            <div key={i}>{e.amount} {e.name}</div> 
+                        )
+                    })}
+                </div>
+                    <div>
+                        {this.props.recipe.directions}
                     </div>
                     <div>   
                         <button>add to favs</button>
-                        <button>add to meal plan</button>
+                        <button onClick={()=>this.props.togglePlanner(true)}>add to meal plan</button>
                     </div>  
                 </div>
 
