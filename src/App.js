@@ -3,6 +3,7 @@ import './App.scss';
 import Header from './Components/Header/Header';
 import {BrowserRouter} from 'react-router-dom';
 import routes from './routes'
+// import Footer from './Components/Footer/Footer';
 
 
 class App extends Component {
@@ -12,6 +13,7 @@ class App extends Component {
       <div className="App">
         <Header/>
         {routes}
+        {/* <Footer/> */}
       </div>
       </BrowserRouter>
     );
