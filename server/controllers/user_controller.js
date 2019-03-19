@@ -61,14 +61,20 @@ module.exports = {
 							.then((snapshot) => {
 								return snapshot.data()
 							})
+							.catch((err) => res.status(500).json(err))
 						docs.push(x)
 					}
 				})
 				.then(() => {
 					res.json(docs)
 				})
+				.catch((err) => res.status(500).json(err))
 		} catch (err) {
 			res.json(500).json(err)
 		}
+	},
+
+	update_profile: (req, res) => {
+		// update user profile pictures, etc
 	},
 }

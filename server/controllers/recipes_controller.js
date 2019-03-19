@@ -76,9 +76,7 @@ module.exports = {
 	add_recipe: (req, res) => {
 		const db = req.app.get('db')
 
-		let timestamp = moment()
-			.subtract(10, 'days')
-			.calendar()
+		let timestamp = moment().format('MMMM Do YYYY, h:mm:ss a')
 
 		// convert this to request objects when the front-end is built
 		let data = {
@@ -86,7 +84,7 @@ module.exports = {
 			id: '',
 			edited: false,
 			user: 'great',
-			public: true, //default: public: true
+			public: true,
 			imageURL: 'nice',
 			directions: 'it works',
 			upvotes: 0,
@@ -113,8 +111,12 @@ module.exports = {
 		db.collection('recipes')
 			.add(data)
 			.then((ref) => {
-				ref.update({ id: ref.id }).then((resp) => res.json(data))
+				ref
+					.update({ id: ref.id })
+					.then(() => res.json(data))
+					.catch((err) => res.status(500).json(err))
 			})
+			.catch((err) => res.status(500).json(err))
 	},
 
 	// this will defintely need to be reworked once we see
