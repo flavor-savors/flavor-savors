@@ -27,7 +27,6 @@ class LargeRecipe extends Component {
             <div className = {showHideClassname} >
 
                 <div className='largeCard'>
-                    {/* <img src={} alt="recipe image"/> */}
                     <div onClick={this.props.toggleLarge}>
                         {this.props.recipe}
                     </div>
