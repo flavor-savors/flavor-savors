@@ -25,7 +25,9 @@ class Home extends Component {
             showPlanner: false,
             showFilter: false,
             recipes:[],
-            currentRecipe: null
+            currentRecipeId: '',
+            currentRecipeName:'',
+            filters:[]
         }
     }
 
@@ -35,46 +37,47 @@ class Home extends Component {
         })
     }
 
-    setCurrentRecipe = (id) =>{
-        this.setState({currentRecipe: id})
-        console.log(this.state.currentRecipe)
+    setCurrentRecipe = (id, name) =>{
+        this.setState({currentRecipeId: id, currentRecipeName: name})
     }
 
     togglePlanner = (add) =>{
-        if(add===true){
-            this.setState({showPlanner: true})
-        }else{
         this.setState({showPlanner: !this.state.showPlanner})
-        console.log(this.state)
-        }
     }
 
     toggleFilter = () =>{
         this.setState({showFilter: !this.state.showFilter})
     }
 
+    filterSearch = () =>{
+
+    }
+
 
 
     render(){
-        console.log(this.state.recipes)
+        // console.log(this.state.currentRecipe)
         return(
-            <div>
-                <button onClick={this.togglePlanner}>planner</button>
+            <div className='home-main'>
+
                 <button onClick={this.toggleFilter}>filter search</button>
-
+                <button onClick={this.togglePlanner}>planner</button>
                 
-                
-                <SmallRecipes
-                setCurrentRecipe={this.setCurrentRecipe}
-                toggleFilter={this.toggleFilter}
-                togglePlanner={this.togglePlanner}
-                recipes={this.state.recipes}/>
+                <div className='home-components'>
+                    <SmallRecipes
+                    setCurrentRecipe={this.setCurrentRecipe}
+                    toggleFilter={this.toggleFilter}
+                    togglePlanner={this.togglePlanner}
+                    recipes={this.state.recipes}/>
 
-                {!this.state.showPlanner ? null 
-                    : <Planner 
-                        currentRecipe={this.props.currentRecipe}/>}
-                {!this.state.showFilter ? null : <Filter />}
-
+                    {!this.state.showPlanner ? null 
+                        : <Planner 
+                            currentRecipeId={this.state.currentRecipeId}
+                            currentRecipeName={this.state.currentRecipeName}/>}
+                    {!this.state.showFilter ? null 
+                        : <Filter 
+                            filterSearch={this.filterSearch}/>}
+                </div>
 
             </div>
         )

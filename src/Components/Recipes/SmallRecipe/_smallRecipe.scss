@@ -1,0 +1,20 @@
+.small-recipe-main{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    width: 70%;
+    margin: auto 30% auto 10%;
+
+    .small-recipe-card-holder{
+        display: flex;
+        flex-wrap: wrap;
+        align-items: baseline;
+        .small-recipe-card{
+        width: 300px;
+        height:300px;
+        margin:20px auto;
+        }
+    }
+}
+
+
