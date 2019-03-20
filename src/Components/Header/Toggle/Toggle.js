@@ -45,15 +45,11 @@ class SignIn extends Component {
   
     return (
       <div className='sign-cont'>
-        {/* <form className='sign-form' onSubmit={this.submit}> */}
         <div className='sign-form' onClick={this.toggleBtns}>
         <button disabled={this.state.disabled === "1"} id="1">log</button>
         <button disabled={this.state.disabled === "2"} id="2">reg</button>
         {this.state.disabled === "1" ? <p>login</p> : <Register/>}
         </div>
-
-        {/* <button onClick={() => this.setState({login: !this.state.login})}>{this.state.login ? 'Register': 'Login'}</button> */}
-        {/* </form> */}
       </div>
     )
   }
