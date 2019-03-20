@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import axios from 'axios'
 
 //this component is a modal over the user page to input a new recipe.
 
@@ -22,6 +23,7 @@ class RecipeCreator extends Component {
 
   handleSubmit = e => {
     e.preventDefault()
+    axios.post(`/recipes`, this.state)
   };
 
   handleChange = e => {

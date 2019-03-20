@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
-import SmallRecipes from '../Recipes/SmallRecipe/SmallRecipe';
-import Planner from '../PlannerDrawer/Planner';
-import Filter from '../FilterDrawer/Filter';
+// import SmallRecipes from '../Recipes/SmallRecipe/SmallRecipe';
+// import Planner from '../PlannerDrawer/Planner';
+// import Filter from '../FilterDrawer/Filter';
 import axios from 'axios';
 
+
+import RecipeCreator from '../RecipeCreator/RecipeCreator'
 
 //this component is the main home page for browsing/searching recipes and meal planning 
 //it renders 5 views:
@@ -56,11 +58,12 @@ class Home extends Component {
 
 
     render(){
-        // console.log(this.state.currentRecipe)
         return(
             <div className='home-main'>
 
-                <button onClick={this.toggleFilter}>filter search</button>
+            <RecipeCreator/>
+
+                {/* <button onClick={this.toggleFilter}>filter search</button>
                 <button onClick={this.togglePlanner}>planner</button>
                 
                 <div className='home-components'>
@@ -77,7 +80,7 @@ class Home extends Component {
                     {!this.state.showFilter ? null 
                         : <Filter 
                             filterSearch={this.filterSearch}/>}
-                </div>
+                </div> */}
 
             </div>
         )
