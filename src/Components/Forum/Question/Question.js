@@ -47,6 +47,7 @@ class Question extends Component {
                 {!this.state.showReplies ? null
                     : <Answer
                     showReplies={this.state.showReplies}
+                    question={this.state.question[this.state.currentQuestion].content}
                     replies={this.state.question[this.state.currentQuestion].replies}
                     toggleReplies = {this.toggleReplies}
                 /> }

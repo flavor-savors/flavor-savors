@@ -18,15 +18,20 @@ class Answer extends Component {
         
         const replies = this.props.replies.map((e, i)=>{
             return(
-                <div key={i} className='replies-card'>
+                <div key={i} >
                     <div>{e.content}</div>
                 </div>
             )
         })
         return(
             <div className={showHideReplies}>
-                {replies}
-                <button onClick={this.props.toggleReplies}>close</button>
+
+                <div className='replies-card'>
+                    <h1>{this.props.question}</h1>
+                    <div>{replies}</div>
+                    <button onClick={this.props.toggleReplies}>close</button>
+                </div>
+
             </div>
         )
     }
