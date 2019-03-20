@@ -38,9 +38,6 @@ class Planner extends Component {
     };
   }
 
-  componentDidMount() {
-    // console.log(this.props.currentRecipe)
-  }
 
   handleChange = meal => {
     this.setState(prevState => ({
@@ -50,7 +47,6 @@ class Planner extends Component {
         { name: this.props.currentRecipeName, id: this.props.currentRecipeId }
       ]
     }));
-    console.log(this.state[meal]);
   };
 
   removeRecipe = (meal, i) => {
