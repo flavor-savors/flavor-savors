@@ -98,29 +98,15 @@ module.exports = {
 			created: moment().format('MMMM Do YYYY, h:mm:ss a'),
 			id: '',
 			edited: false,
-			user: 'great', // should be pulled from the current user and sent in
+			user: req.body.user, // should be pulled from the current user and sent in
 			public: true,
-			imageURL: 'nice',
-			directions: 'it works',
+			imageURL: req.body.imageURL,
+			directions: req.body.directions,
 			upvotes: 0,
-			recipeName: 'test',
-			dietTags: ['vegan', 'chinese', 'test'],
-			ingredient: [
-				{
-					name: 'beef',
-					amount: '1 tbsp',
-				},
-				{
-					name: 'bologna',
-					amount: '3 crumbs',
-				},
-			],
-			addons: [
-				{
-					name: 'garbage',
-					amount: '2 scoops',
-				},
-			],
+			recipeName: req.body.recipeName,
+			dietTags: req.body.dietTags,
+			ingredient: req.body.ingredients,
+			addons: req.body.addons,
 		}
 
 		try {
