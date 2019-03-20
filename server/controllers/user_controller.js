@@ -73,6 +73,7 @@ module.exports = {
 		}
 	},
 
+	// need to figure out what image storage service to use for this
 	update_profile: (req, res) => {
 		// update user profile pictures, etc
 	},

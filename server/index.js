@@ -1,17 +1,22 @@
+require('dotenv').config()
 const express = require('express')
 const { json } = require('body-parser')
 const cors = require('cors')
+const multer = require('multer')
 const admin = require('firebase-admin')
 const serviceAccount = require('./firebase-key.json') // move to env
 const rc = require('./controllers/recipes_controller')
 const ac = require('./controllers/auth_controller')
 const uc = require('./controllers/user_controller')
 const fc = require('./controllers/forum_controller')
+const pc = require('./controllers/plan_controller')
 const app = express()
+const upload = multer() // give us access to req.file
 
 admin.initializeApp({
 	credential: admin.credential.cert(serviceAccount),
 	databaseURL: 'https://flavor-savor.firebaseio.com', // move to env
+	storageBucket: 'gs://flavor-savor.appspot.com/',
 })
 
 const db = admin.firestore()
@@ -26,6 +31,8 @@ app.use(cors())
 //  TODO:
 //      + When a user creates a recipe it should go into their recipes array
 //      + Create plan schema or find a place for it
+//		+ Multi-tag filter search
+//		+ Redis or Memcached to cache recipes and make calls faster?
 //
 
 // auth routes
@@ -50,6 +57,12 @@ app.put('/users/favorites/:id', uc.add_to_favorites) // add a recipe to user fav
 app.delete('/users/favorites/:id', uc.remove_from_favorites) // remove recipe from favorites
 
 // meal plan routes
+// generate pdf
+// add plan to db *
+// save pdf to user account
+app.get('/plans/:id', pc.get_plan_list) // return a list of plan links
+app.get('/plans/pdf/:id', pc.get_plan) // return link to single plan using ?plan=<filename>
+app.post('/upload', upload.single('file'), pc.upload_pdf)
 
 // forum routes
 app.get('/forum/:id', fc.get_post) // get a specific post

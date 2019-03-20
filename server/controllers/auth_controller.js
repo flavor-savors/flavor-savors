@@ -25,7 +25,7 @@ module.exports = {
 					email: req.body.email,
 					password: req.body.password,
 					displayName: req.body.displayName,
-					photoURL: req.body.photoURL,
+					photoURL: req.body.photoURL || 'https://via.placeholder.com/150',
 				})
 				.then((user) => {
 					db.collection('users')
@@ -36,6 +36,7 @@ module.exports = {
 							uid: user.uid,
 							favorites: [],
 							recipes: [],
+							plans: [],
 						})
 						.then((ref) => ref.update({ id: ref.id }))
 						.catch((err) => res.status(500).json(err))
