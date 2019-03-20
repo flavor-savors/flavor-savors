@@ -13,7 +13,9 @@ class Profile extends Component {
         </div>
 
         <div className='recCrtr'>
-          <div><p>input recipe</p></div>
+          <div className='pro-recipe-input'>
+            <p>input recipe</p>
+          </div>
           <div className='profile-buttons'>
             <button className='pro-btn'>View Favorites</button>
             <button className='pro-btn'>My Recipes</button>

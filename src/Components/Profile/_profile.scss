@@ -32,15 +32,23 @@
     width: 40%;
     border: solid 1px blue;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    // justify-content: center;
     align-items: center;
+}
+
+.pro-recipe-input{
+    border: solid 2px red;
+    margin: 5vh 0 5vh 0;
+    width: 80%;
+    height: 25vh;
 }
 
 .profile-buttons{
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    width: 60%;
+    width: 80%;
     height: 25vh;
     border: solid 1px blue;
 }
