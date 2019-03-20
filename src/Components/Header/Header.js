@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './_header.scss'
-import SignIn from './SignIn/SignIn';
+import Toggle from './Toggle/Toggle';
 import Search from './Search/Search';
 import {Link} from 'react-router-dom'
 
@@ -34,7 +34,7 @@ class Header extends Component {
                 <li onClick={this.displaySearch} className='searchModal'>SEARCH</li>
                 <li>VIEW FAVS</li>
                 <li className='signInModal' onClick={this.displaySignIn}>SIGN IN</li>
-                {this.state.showSignIn ?( <SignIn x={this.displaySignIn}/>):(null)}
+                {this.state.showSignIn ?( <Toggle x={this.displaySignIn}/>):(null)}
             </ul>
         </div>
       </div>
