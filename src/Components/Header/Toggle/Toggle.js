@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-// import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
 // import firebase from '../../firebase/firebase'
 // import * as firebase from '../../../../server/firebase-key.json'
 // import '../../../../server/firebase-key'
-import Register from '../Register/Register'
+// import Register from '../Register/Register';
+import SignIn from '../SignIn/SignIn'
 
-class SignIn extends Component {
+class Toggle extends Component {
     constructor(){
         super();
         this.state ={
@@ -29,30 +29,19 @@ class SignIn extends Component {
     
     // firebase.initializeApp(config);
 
-    //   uiConfig = {
-    //   // Popup signin flow rather than redirect flow.
-    //   signInFlow: 'popup',
-    //   // Redirect to /signedIn after sign in is successful. Alternatively you can provide a callbacks.signInSuccess function.
-    //   signInSuccessUrl: '/signedIn',
-    //   // We will display Google and Facebook as auth providers.
-    //   signInOptions: [
-    //     firebase.auth.GoogleAuthProvider.PROVIDER_ID,
-    //     firebase.auth.FacebookAuthProvider.PROVIDER_ID
-    //   ]
-    // };
-
   render() {
   
     return (
       <div className='sign-cont'>
         <div className='sign-form' onClick={this.toggleBtns}>
+        <p onClick={this.props.x}>x</p>
         <button disabled={this.state.disabled === "1"} id="1">log</button>
         <button disabled={this.state.disabled === "2"} id="2">reg</button>
-        {this.state.disabled === "1" ? <p>login</p> : <Register/>}
+        {this.state.disabled === "1" ? <SignIn/> :  null}
         </div>
       </div>
     )
   }
 }
 
-export default SignIn
+export default Toggle
