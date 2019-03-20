@@ -1,0 +1,19 @@
+.filter-main{
+    position: absolute;
+    top:12%;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    height:50%;
+    width:10%;
+
+    .filter-tags{
+        display: flex;
+        flex-direction: column;
+        width: 150px;
+        .tag{
+            display: flex;
+            margin-left: 10px;
+        }
+    }
+}

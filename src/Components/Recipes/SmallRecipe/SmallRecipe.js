@@ -29,15 +29,20 @@ class SmallRecipe extends Component {
     }
 
     getRecipe = (i) => {
-            axios.get(`/recipe/${i}`).then(res=>{
+            axios.get(`/recipes/${i}`).then(res=>{
             this.setState({recipe: res.data})
+            console.log(res)
         })
+        console.log(i)
     }
 
-    toggleLarge = (id) => {
-        this.setState({showLarge: !this.state.showLarge})
-        this.setState({currentRecipe: id})
-        this.props.setCurrentRecipe(id)
+    toggleLarge = (id, name) => {
+        this.setState({showLarge: true})
+        this.props.setCurrentRecipe(id, name)
+    }
+
+    hideLarge = () => {
+        this.setState({showLarge: false})
     }
 
     render(){
@@ -45,15 +50,15 @@ class SmallRecipe extends Component {
 // still need to clean up how to present all information.
         const recipe = this.state.recipes.map((e, i)=>{
             return(
-                <div key={i} onMouseEnter={()=>this.getRecipe(e.id)}>
+                <div key={i} onMouseEnter={()=>this.getRecipe(e.id)} className='small-recipe-card'>
                     <div>
                         <div>
                             <h1>{e.recipeName}</h1>
-                            <img src={e.imageURL}/>
+                            <img src={e.imageURL} alt='recipe'/>
                         </div>
                         <div>   
                             <button>add to favs</button>
-                            <button onClick={()=>this.toggleLarge(e.id)}>View this recipe</button>
+                            <button onClick={()=>this.toggleLarge(e.id, e.recipeName)}>View this recipe</button>
                         </div>
                     </div>  
                 </div>
@@ -61,15 +66,15 @@ class SmallRecipe extends Component {
         })
 
         return(
-            <div>
-                <div>
+            <div className='small-recipe-main'>
+                <div className='small-recipe-card-holder'>
                     {recipe}
                 </div>
                 <div>
                     <LargeRecipe
                     recipe={this.state.recipe}
                     showLarge={this.state.showLarge}
-                    toggleLarge={this.toggleLarge}
+                    hideLarge={this.hideLarge}
                     togglePlanner={this.props.togglePlanner}
                     />
                 </div>
