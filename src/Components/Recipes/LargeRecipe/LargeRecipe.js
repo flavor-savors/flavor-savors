@@ -10,13 +10,13 @@ class LargeRecipe extends Component {
             return null;
         }
 
-        const showHideClassname = this.props.showLarge 
-         ? 'large showBlock'
-         : 'large showNone' 
+        const showHideLarge = this.props.showLarge 
+         ? 'large show-large'
+         : 'large show-no-large' 
         return(
-            <div className = {showHideClassname} onClick={this.props.toggleLarge} >
+            <div className = {showHideLarge} onClick={this.props.toggleLarge} >
 
-                <div className='largeCard'>
+                <div className='large-card'>
                 <h1>{this.props.recipe.recipeName}</h1>
                 <img src={this.props.imageURL} alt='recipe'/>
                 <div>

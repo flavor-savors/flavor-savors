@@ -31,9 +31,7 @@ class SmallRecipe extends Component {
     getRecipe = (i) => {
             axios.get(`/recipes/${i}`).then(res=>{
             this.setState({recipe: res.data})
-            console.log(res)
         })
-        console.log(i)
     }
 
     toggleLarge = (id, name) => {

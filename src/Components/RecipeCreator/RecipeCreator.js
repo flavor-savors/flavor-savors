@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import axios from 'axios'
 
-//this component is a modal over the user page to input a new recipe.
+//this component is a modal over the user admin page to input a new recipe.
 
 class RecipeCreator extends Component {
   constructor() {
@@ -16,14 +16,18 @@ class RecipeCreator extends Component {
       }],
       directions: "",
       dietTags: [],
-      public: true
-    };
+      public: true,
+      user:'',
+      addons: []
+     };
   }
 
 
-  handleSubmit = e => {
+  handleSubmit = (e) => {
     e.preventDefault()
-    axios.post(`/recipes`, this.state)
+   const state=this.state
+  axios.post(`/recipes`, state).then(res=>{
+    })
   };
 
   handleChange = e => {
@@ -34,7 +38,6 @@ class RecipeCreator extends Component {
       }else{
           this.setState({ [e.target.name]: e.target.value });
         }
-        console.log(e.target.value)
   };
 
   addIngredient = (e) => {
@@ -48,12 +51,10 @@ class RecipeCreator extends Component {
       ...this.state,
       dietTags: [...this.state.dietTags, e.target.value]
     });
-    // console.log(this.state)
   };
 
   makePrivate = () => {
       this.setState({public: !this.state.public})
-      console.log(this.state)
   }
 
   render() {
@@ -74,7 +75,7 @@ class RecipeCreator extends Component {
               />
               Recipe Image:
               <input
-                type="url"
+                type="text"
                 name="imageURL"
                 value={this.state.imageURL}
                 onChange={this.handleChange}
@@ -119,8 +120,6 @@ class RecipeCreator extends Component {
                       )
                   })
               }
-
-
             </fieldset>
 
             <fieldset>

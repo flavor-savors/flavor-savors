@@ -6,7 +6,7 @@
     height: 100%;
     background: rgba($black, .7);
     
-    .largeCard{
+    .large-card{
       position: fixed;
       top: 20%;
       left: 20%;
@@ -16,10 +16,10 @@
     }
   }
 
-  .showBlock {
+  .show-large {
     display: block;
   }
   
-  .showNone {
+  .show-no-large {
     display: none;
   }
