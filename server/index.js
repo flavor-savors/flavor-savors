@@ -33,6 +33,8 @@ app.use(cors())
 //      + Create plan schema or find a place for it
 //		+ Multi-tag filter search
 //		+ Redis or Memcached to cache recipes and make calls faster?
+//		+ Measure the speed of all functions
+//		+ Work out hypothetical Redis flow
 //
 
 // auth routes
@@ -47,6 +49,7 @@ app.get('/recipes/:user', rc.get_recipe_by_user) // get recipes for a user
 app.get('/recipes', rc.get_recipe_by_query) // search for a recipe
 app.post('/recipes', rc.add_recipe) // add a recipe
 app.put('/recipes/:id', rc.edit_recipe) // edit a recipe's ingredients
+app.put('/recipes/upvote/:id', rc.upvote_recipe) // upvote a recipe
 app.delete('/recipes/:id', rc.delete_recipe) // delete a recipe
 
 // user routes

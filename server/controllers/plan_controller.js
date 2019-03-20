@@ -14,10 +14,10 @@ module.exports = {
 
 		// try {
 		// 	const admin = req.app.get('admin')
-        //     const storage = admin.storage().bucket()
-        //     const file = storage.file(req.file.originalname)
+		//     const storage = admin.storage().bucket()
+		//     const file = storage.file(req.file.originalname)
 
-        //     storage.upload(file).then()
+		//     storage.upload(file).then()
 		// } catch (err) {
 		// 	console.log(err)
 		// 	res.status(500).json(err)
@@ -62,4 +62,22 @@ module.exports = {
 			res.status(500).json(err)
 		}
 	},
+
+	get_ingredients: (req, res) => {
+		// return a list of ingredients, like a grocery list
+	},
 }
+
+//      GROCERY LIST STRUCTURE
+// {
+//     b1: [
+//        {
+//              recipe_name: '',
+//              recipe_id: ''
+//        },
+//        {
+//              recipe_name: '',
+//              recipe_id: ''
+//         }
+//     ]
+// }
