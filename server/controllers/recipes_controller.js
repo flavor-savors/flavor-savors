@@ -105,7 +105,7 @@ module.exports = {
 			upvotes: 0,
 			recipeName: req.body.recipeName,
 			dietTags: req.body.dietTags,
-			ingredient: req.body.ingredients,
+			ingredient: req.body.ingredient,
 			addons: req.body.addons,
 		}
 
