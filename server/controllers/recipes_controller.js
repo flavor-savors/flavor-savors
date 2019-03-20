@@ -106,7 +106,6 @@ module.exports = {
 			recipeName: req.body.recipeName,
 			dietTags: req.body.dietTags,
 			ingredient: req.body.ingredient,
-			addons: req.body.addons,
 		}
 
 		try {
@@ -162,9 +161,29 @@ module.exports = {
 		}
 	},
 
-	// this will most likely end up in the plan controller
-	// (which has yet to be created)
-	get_ingredients: (req, res) => {
-		// return a list of the ingredients needed from the meal plan
+	upvote_recipe: (req, res) => {
+		try {
+			const db = req.app.get('db')
+			const admin = req.app.get('admin')
+
+			db.collection('recipes')
+				.doc(req.params.id)
+				.update({
+					upvotes: admin.firestore.FieldValue.increment(1),
+				})
+				.then(() => {
+					db.collection('recipes')
+						.doc(req.params.id)
+						.get()
+						.then((snapshot) => res.status(200).json(snapshot.data()))
+				})
+				.catch((err) => {
+					console.log(err)
+					res.status(500).json(err)
+				})
+		} catch (err) {
+			console.log(err)
+			res.status(500).json(err)
+		}
 	},
 }
