@@ -166,8 +166,6 @@ module.exports = {
 			const db = req.app.get('db')
 			const admin = req.app.get('admin')
 
-			// get recipe id
-			// increment the fieldvalue
 			db.collection('recipes')
 				.doc(req.params.id)
 				.update({
