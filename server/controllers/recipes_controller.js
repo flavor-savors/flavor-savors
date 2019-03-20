@@ -163,9 +163,8 @@ module.exports = {
 	},
 
 	delete_recipe: (req, res) => {
-		const db = req.app.get('db')
-
 		try {
+			const db = req.app.get('db')
 			db.collection('recipes')
 				.doc(req.params.id)
 				.delete()

@@ -23,7 +23,8 @@
     "react-slick": "^0.23.2",
     "redux": "^4.0.1",
     "redux-logger": "^3.0.6",
-    "redux-promise-middleware": "^6.1.0"
+    "redux-promise-middleware": "^6.1.0",
+    "short-uuid": "^3.1.0"
   },
   "scripts": {
     "start": "react-scripts start",
