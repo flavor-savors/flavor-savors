@@ -124,6 +124,7 @@ module.exports = {
 				.catch((err) => res.status(500).json(err))
 			// need to get the current user's id and add the recipe to their recipes
 		} catch (err) {
+			console.log(err)
 			res.status(500).json(err)
 		}
 	},

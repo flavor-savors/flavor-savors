@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-// import SmallRecipes from '../Recipes/SmallRecipe/SmallRecipe';
-// import Planner from '../PlannerDrawer/Planner';
-// import Filter from '../FilterDrawer/Filter';
+import SmallRecipes from '../Recipes/SmallRecipe/SmallRecipe';
+import Planner from '../PlannerDrawer/Planner';
+import Filter from '../FilterDrawer/Filter';
 import axios from 'axios';
 
 
@@ -63,7 +63,7 @@ class Home extends Component {
 
             <RecipeCreator/>
 
-                {/* <button onClick={this.toggleFilter}>filter search</button>
+                <button onClick={this.toggleFilter}>filter search</button>
                 <button onClick={this.togglePlanner}>planner</button>
                 
                 <div className='home-components'>
@@ -80,7 +80,7 @@ class Home extends Component {
                     {!this.state.showFilter ? null 
                         : <Filter 
                             filterSearch={this.filterSearch}/>}
-                </div> */}
+                </div>
 
             </div>
         )
