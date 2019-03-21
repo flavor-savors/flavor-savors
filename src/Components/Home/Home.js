@@ -54,6 +54,7 @@ class Home extends Component {
         this.setState({ recipes: res.data });
         });
       }
+      // console.log(this.state)
   }
 
   setCurrentRecipe = (id, name) => {
@@ -76,16 +77,22 @@ class Home extends Component {
         filter
       ]
     }));
-    console.log(this.state)
+    // console.log(this.state)
   }
 
   filterSearch = () => {
-    const recipes =  this.state.recipes
-    const filters = this.state.filters
-    var filtered = recipes.filter((recipe)=>{
-      filters.includes(recipe.dietTag)
-    })
-    console.log(filtered)
+   const recipes = this.state.recipes
+   const filters =  this.state.filters
+      let filtered = []
+      for(let i=0; i<recipes.length; i++){
+        for(let j=0; j<recipes[i].dietTags.length; j++){
+          if(filters.includes(recipes[i].dietTags[j])){
+            filtered.push(recipes[i])
+            break
+          }
+        }
+      }
+      this.setState({recipes: filtered})
   };
 
   addToFavorites = () => {
@@ -95,6 +102,8 @@ class Home extends Component {
 
 
   render() {
+      console.log(this.state)
+
     return (
       <div className='home-main'>
 

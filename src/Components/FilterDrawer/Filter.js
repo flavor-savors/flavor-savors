@@ -8,6 +8,10 @@ class Filter extends Component {
         console.log(this.props)
     }
 
+    showTarget = (e) =>{
+        console.log(e)
+    }
+
     render(){
         return(
             <div className="filter-main">
@@ -47,11 +51,11 @@ class Filter extends Component {
                                 <input type="checkbox" name="dietTags" value="paleo" id='paleo' onClick={()=>this.props.setFilters('paleo')}/>
                                 <label htmlFor="paleo">Paleo</label>
                             </div>
-                            
+                            <button onClick={()=>this.showTarget()}>Filter</button>
                         </div>
                     </fieldset>
                 </form>
-                <button onClick={this.props.filterSearch}>Filter</button>
+                
             </div>
         )
     }
