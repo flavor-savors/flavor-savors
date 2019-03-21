@@ -4,6 +4,9 @@ import React, { Component } from 'react';
 
 class Filter extends Component {
 
+    componentDidMount(){
+        console.log(this.props)
+    }
 
     render(){
         return(
@@ -44,10 +47,11 @@ class Filter extends Component {
                                 <input type="checkbox" name="dietTags" value="paleo" id='paleo' onClick={()=>this.props.setFilters('paleo')}/>
                                 <label htmlFor="paleo">Paleo</label>
                             </div>
-                            <button onClick={this.props.filterSearch}>Filter</button>
+                            
                         </div>
                     </fieldset>
                 </form>
+                <button onClick={this.props.filterSearch}>Filter</button>
             </div>
         )
     }
