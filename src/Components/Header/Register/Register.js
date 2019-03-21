@@ -5,19 +5,19 @@ class Register extends Component {
     constructor(){
         super();
         this.state = {
-            cr8Eamil: '',
-            cr8Pass: '',
-            cr8Name: '',
-            cr8Photo: '',
+            email: '',
+            password: '',
+            displayName: '',
+            photoURL: '',
             info: []
         }
     }
 
     handleRegister = (e) => {
         e.preventDefault()
-        const {cr8Eamil,cr8Pass,cr8Name,cr8Photo}=this.state
+        const {email, password, displayName, photoURL}=this.state
         axios
-        .post('/register', {cr8Eamil,cr8Pass,cr8Name,cr8Photo})
+        .post('/register', {email, password, displayName, photoURL})
         .then(response => {
             this.setState({info: response.data})
         })
@@ -33,22 +33,22 @@ class Register extends Component {
       <form onSubmit={(e) =>this.handleRegister(e)}>
           <input
             placeholder='Username'
-            name='cr8Name'
+            name='displayName'
             onChange={this.handleRegInputs}
           />
           <input
             placeholder='Email'
-            name='cr8Email'
+            name='email'
             onChange={this.handleRegInputs}
           />
           <input
             placeholder='Password'
-            name='cr8Pass'
+            name='password'
             onChange={this.handleRegInputs}
           />
           <input
             placeholder='Photo'
-            name='cr8Photo'
+            name='photoURL'
             onChange={this.handleRegInputs}
           />
           <input type='submit' value='Submit'/>

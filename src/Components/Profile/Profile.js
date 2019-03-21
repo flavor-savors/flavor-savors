@@ -1,12 +1,15 @@
 import React, { Component } from 'react'
 import './_profile.scss'
 import firebase from '../firebase/firebase';
-
+import ChangePassword from './ChangePassword/ChangePassword';
+import {NavLink} from 'react-router-dom';
+ 
 class Profile extends Component {
     constructor(){
       super();
       this.state ={
-        isSignedin: false
+        isSignedin: false,
+        changePass: false
       }
     }
 
@@ -14,6 +17,10 @@ class Profile extends Component {
       this.unregisterAuthObserver = firebase.auth().onAuthStateChanged(
         (user) => this.setState({isSignedin: !!user})
     );
+    }
+
+    showChangePass = () => {
+      this.setState({changePass: !this.state.changePass})
     }
 
 
@@ -26,6 +33,8 @@ class Profile extends Component {
           <img className='pro-img' src={firebase.auth().currentUser.photoURL} alt='profile'/>
           <div className='user-info'>
             <p>{firebase.auth().currentUser.displayName}</p>
+            <button onClick={this.showChangePass}>Change Password</button>
+            {this.state.changePass ?( <ChangePassword/>):(null)}
           </div>
         </div>
 
@@ -34,10 +43,10 @@ class Profile extends Component {
             <p>input recipe</p>
           </div>
           <div className='profile-buttons'>
-            <button className='pro-btn'>View Favorites</button>
-            <button className='pro-btn'>My Recipes</button>
-            <button className='pro-btn'> My Plans</button>
-            <button className='pro-btn'> View Forum</button>
+            <NavLink to='/home/favorites' className='pro-btn'>View Favorites</NavLink>
+            <NavLink to='/home/myrecipes' className='pro-btn'>My Recipes</NavLink>
+            {/* <NavLink className='pro-btn'> My Plans</NavLink>
+            <NavLink className='pro-btn'> View Forum</NavLink> */}
           </div>
         </div>
       </div>     
