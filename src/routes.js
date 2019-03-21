@@ -4,6 +4,7 @@ import Landing from './Components/Landing/Landing';
 import Home from './Components/Home/Home';
 import Profile from './Components/Profile/Profile';
 import Tutorial from './Components/Tutorial/Tutorial';
+import ForumHome from './Components/Forum/ForumHome/ForumHome';
 
 export default (
     <Switch>
@@ -14,6 +15,6 @@ export default (
         <Route path='/home/myrecipes' component={Home}/>       
         <Route path='/profile' component={Profile}/>
         <Route path='/tutorial' component={Tutorial}/>
-        <Route/>
+        <Route path='/forum' component={ForumHome}/>
     </Switch>
 )

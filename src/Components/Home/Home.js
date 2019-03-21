@@ -4,6 +4,7 @@ import Planner from "../PlannerDrawer/Planner/Planner";
 import Filter from "../FilterDrawer/Filter";
 import axios from "axios";
 
+
 // import RecipeCreator from '../RecipeCreator/RecipeCreator'
 
 
@@ -53,6 +54,7 @@ class Home extends Component {
         this.setState({ recipes: res.data });
         });
       }
+      // console.log(this.state)
   }
 
   setCurrentRecipe = (id, name) => {
@@ -75,11 +77,22 @@ class Home extends Component {
         filter
       ]
     }));
-    console.log(this.state.filters)
+    // console.log(this.state)
   }
 
   filterSearch = () => {
-    // let filtered = this.state.recipes.filter()
+   const recipes = this.state.recipes
+   const filters =  this.state.filters
+      let filtered = []
+      for(let i=0; i<recipes.length; i++){
+        for(let j=0; j<recipes[i].dietTags.length; j++){
+          if(filters.includes(recipes[i].dietTags[j])){
+            filtered.push(recipes[i])
+            break
+          }
+        }
+      }
+      this.setState({recipes: filtered})
   };
 
   addToFavorites = () => {
@@ -89,6 +102,8 @@ class Home extends Component {
 
 
   render() {
+      console.log(this.state)
+
     return (
       <div className='home-main'>
 
