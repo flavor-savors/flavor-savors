@@ -27,6 +27,7 @@ class RecipeCreator extends Component {
     e.preventDefault()
    const state=this.state
   axios.post(`/recipes`, state).then(res=>{
+    console.log(res)
     })
   };
 
@@ -55,6 +56,7 @@ class RecipeCreator extends Component {
 
   makePrivate = () => {
       this.setState({public: !this.state.public})
+      console.log(this.state)
   }
 
   render() {

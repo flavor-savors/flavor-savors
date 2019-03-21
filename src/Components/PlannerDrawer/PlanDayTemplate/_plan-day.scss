@@ -1,0 +1,17 @@
+.day{
+    width: 100%;
+    height: 200%;
+    border-color: red;
+    
+    .day-title{
+        font-family: $text-font;
+        text-decoration: underline;
+        width: 100%;
+    }
+    .meal-names{
+        height: 19%;
+        .meal-name{
+            display: flex;
+        }
+    }
+} 

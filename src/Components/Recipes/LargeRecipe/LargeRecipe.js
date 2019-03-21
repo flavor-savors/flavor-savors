@@ -37,7 +37,9 @@ class LargeRecipe extends Component {
                         {this.props.recipe.directions}
                     </div>
                     <div>   
-                        <button>add to favs</button>
+                    <button 
+                        // onClick={()=>this.props.addToFavorites(uid)}
+                    >add to favs</button>
                         <button onClick={()=>this.props.hideLarge()}>add to meal plan</button>
                     </div>  
                 </div>

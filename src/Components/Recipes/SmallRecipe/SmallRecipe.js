@@ -17,21 +17,16 @@ class SmallRecipe extends Component {
 
         this.state ={
             showLarge: false,
-            recipes:[],
             recipe: {}
         }
     }
 
-    componentDidMount(){
-        axios.get(`/recipes/all`).then(res=>{
-            this.setState({recipes: res.data})
-        })
-    }
 
     getRecipe = (i) => {
             axios.get(`/recipes/${i}`).then(res=>{
             this.setState({recipe: res.data})
         })
+        console.log(i)
     }
 
     toggleLarge = (id, name) => {
@@ -46,16 +41,18 @@ class SmallRecipe extends Component {
     render(){
 
 // still need to clean up how to present all information.
-        const recipe = this.state.recipes.map((e, i)=>{
+        const recipe = this.props.recipes.map((e, i)=>{
             return(
                 <div key={i} onMouseEnter={()=>this.getRecipe(e.id)} className='small-recipe-card'>
                     <div>
                         <div>
                             <h1>{e.recipeName}</h1>
-                            <img src={e.imageURL} alt='recipe'/>
+                            <img src={e.imageURL} alt='recipe' className='small-recipe-card-image'/>
                         </div>
                         <div>   
-                            <button>add to favs</button>
+                            <button 
+                            // onClick={()=>this.props.addToFavorites(uid)}
+                            >add to favs</button>
                             <button onClick={()=>this.toggleLarge(e.id, e.recipeName)}>View this recipe</button>
                         </div>
                     </div>  
@@ -71,6 +68,7 @@ class SmallRecipe extends Component {
                 <div>
                     <LargeRecipe
                     recipe={this.state.recipe}
+                    addToFavorites={this.props.addToFavorites}
                     showLarge={this.state.showLarge}
                     hideLarge={this.hideLarge}
                     togglePlanner={this.props.togglePlanner}

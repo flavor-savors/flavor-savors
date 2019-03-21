@@ -3,7 +3,7 @@
     flex-wrap: wrap;
     align-items: baseline;
     width: 70%;
-    margin: auto 30% auto 10%;
+    margin: auto;
 
     .small-recipe-card-holder{
         display: flex;
@@ -13,6 +13,10 @@
         width: 300px;
         height:300px;
         margin:20px auto;
+        .small-recipe-card-image {
+            width: 200px;
+            height: 200px;
+        }
         }
     }
 }

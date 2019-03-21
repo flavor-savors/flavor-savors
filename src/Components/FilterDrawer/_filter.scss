@@ -1,11 +1,12 @@
 .filter-main{
-    position: absolute;
+    position: -webkit-sticky;
+    position: sticky;
     top:12%;
     left: 0;
     display: flex;
     flex-direction: column;
     height:50%;
-    width:10%;
+    width:10vw;
 
     .filter-tags{
         display: flex;
