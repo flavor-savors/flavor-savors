@@ -50,8 +50,8 @@ app.post('/register', ac.register_user) // Sign a user up
 // recipe routes
 app.get('/recipes/all', rc.get_all_recipes) // get all recipes
 app.get('/recipes', rc.get_public_recipes) // get all public recipes
-app.get('/recipes/:id', rc.get_recipe_by_id) // get recipe by id
-app.get('/recipes/:user', rc.get_recipe_by_user) // get recipes for a user
+app.get('/recipes/id/:id', rc.get_recipe_by_id) // get recipe by id
+app.get('/recipes/:uid', rc.get_recipe_by_user) // get recipes for a user
 app.get('/recipes', rc.get_recipe_by_query) // search for a recipe
 app.post('/recipes', rc.add_recipe) // add a recipe
 app.put('/recipes/:id', rc.edit_recipe) // edit a recipe's ingredients
