@@ -1,23 +1,10 @@
 module.exports = {
-	get_current_user: (req, res) => {
-		try {
-			const admin = req.app.get('admin')
-
-			let user = admin.firebase.auth().currentUser
-			if (user) {
-				res.status(200).json(user)
-			} else {
-				res.status(409).json('No user signed in')
-			}
-		} catch (err) {
-			res.status(500).json(err)
-		}
-	},
-
 	register_user: (req, res) => {
 		try {
 			const admin = req.app.get('admin')
 			const db = req.app.get('db')
+
+			console.log('req.body:', req.body)
 
 			admin
 				.auth()

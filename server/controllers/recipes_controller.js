@@ -53,12 +53,16 @@ module.exports = {
 
 	// get user uid and find associated document
 	get_recipe_by_user: (req, res) => {
+		// NEW FLOW:
+		// get user uid off req.params
+		//
+
 		try {
 			const db = req.app.get('db')
 			let recipes = []
 
 			db.collection('recipes')
-				.where('user', '==', req.params.user)
+				.where('uid', '==', req.params.user)
 				.get()
 				.then((snapshot) => {
 					if (snapshot.empty) {
