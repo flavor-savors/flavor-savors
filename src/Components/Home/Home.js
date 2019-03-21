@@ -1,9 +1,11 @@
 import React, { Component } from "react";
-// import SmallRecipes from "../Recipes/SmallRecipe/SmallRecipe";
-// import Planner from "../PlannerDrawer/Planner";
-// import Filter from "../FilterDrawer/Filter";
+import SmallRecipes from "../Recipes/SmallRecipe/SmallRecipe";
+import Planner from "../PlannerDrawer/Planner/Planner";
+import Filter from "../FilterDrawer/Filter";
 import axios from "axios";
-import ForumHome from '../Forum/ForumHome/ForumHome'
+
+// import RecipeCreator from '../RecipeCreator/RecipeCreator'
+
 
 //this component is the main home page for browsing/searching recipes and meal planning
 //it renders 5 views:
@@ -25,7 +27,8 @@ class Home extends Component {
       showFilter: false,
       currentRecipeId: "",
       currentRecipeName: "",
-      filters: []
+      filters: [],
+      recipes:[]
     };
   }
 
@@ -33,9 +36,23 @@ class Home extends Component {
       if(this.props.history.location.pathname === "/home/build"){
           this.togglePlanner()
       }
-    axios.get(`/recipes/all`).then(res => {
-      this.setState({ recipes: res.data });
-    });
+      if(this.props.history.location.pathname === "/home/favorites"){
+//still need autorization set up for this endpoint
+        // axios.get(`/users/favorites/${uid}`).then(res => {
+        //   this.setState({ recipes: res.data });
+        //   });        
+      }
+      if(this.props.history.location.pathname === "/home/myrecipes"){
+//still need autorization set up for this endpoint
+        // axios.get(`/recipes/${uid}`).then(res => {
+        //   this.setState({ recipes: res.data });
+        //   });
+      }
+      else{
+        axios.get(`/recipes/all`).then(res => {
+        this.setState({ recipes: res.data });
+        });
+      }
   }
 
   setCurrentRecipe = (id, name) => {
@@ -50,22 +67,50 @@ class Home extends Component {
     this.setState({ showFilter: !this.state.showFilter });
   };
 
-  filterSearch = () => {};
+  setFilters = (filter) =>{
+    this.setState(prevState => ({
+      ...prevState,
+      filters: [
+        ...prevState.filters,
+        filter
+      ]
+    }));
+    console.log(this.state.filters)
+  }
+
+  filterSearch = () => {
+    // let filtered = this.state.recipes.filter()
+  };
+
+  addToFavorites = () => {
+//still need autorization set up for this endpoint
+    // axios.put(`/users/favorites/:${uid}`)
+  };
+
 
   render() {
     return (
       <div className='home-main'>
-      <ForumHome/>
 
+      {/* <RecipeCreator/> */}
 
-        {/* <button onClick={this.toggleFilter}>filter search</button>
+        <button onClick={this.toggleFilter}>filter search</button>
         <button onClick={this.togglePlanner}>planner</button>
 
         <div className='home-components'>
+
+          {!this.state.showFilter ? null : (
+            <Filter 
+            setFilters={this.setFilters}
+            filterSearch={this.filterSearch} />
+          )}
+
           <SmallRecipes
+            recipes={this.state.recipes}
             setCurrentRecipe={this.setCurrentRecipe}
             toggleFilter={this.toggleFilter}
             togglePlanner={this.togglePlanner}
+            addToFavorites={this.addToFavorites}
           />
 
           {!this.state.showPlanner ? null : (
@@ -74,10 +119,8 @@ class Home extends Component {
               currentRecipeName={this.state.currentRecipeName}
             />
           )}
-          {!this.state.showFilter ? null : (
-            <Filter filterSearch={this.filterSearch} />
-          )}
-        </div> */}
+
+        </div>
       </div>
     );
   }

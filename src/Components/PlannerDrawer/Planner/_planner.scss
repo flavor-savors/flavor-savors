@@ -1,0 +1,21 @@
+.planner-main{
+    position: -webkit-sticky;
+    position: sticky;
+    top:10%;
+    right: 0;
+    display: flex;
+    flex-direction: column;
+    height:90vh;
+    width: 25vw;
+
+    .planner-top-section, .planner-bottom-section{
+        display: flex;
+        justify-content: space-around;
+        height:10vw;
+        margin-top: 10px;
+        margin-bottom: 15vw;
+
+   
+    }
+
+}

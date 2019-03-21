@@ -9,11 +9,11 @@ export default (
     <Switch>
         <Route path='/' exact component={Landing}/>
         <Route path='/home' component={Home}/>
+        <Route path='/home/build' component={Home}/>
+        <Route path='/home/favorites' component={Home}/>
+        <Route path='/home/myrecipes' component={Home}/>       
         <Route path='/profile' component={Profile}/>
         <Route path='/tutorial' component={Tutorial}/>
-        <Route path='/home/build' component={Home}/>
-        <Route/>
-        <Route/>
         <Route/>
     </Switch>
 )

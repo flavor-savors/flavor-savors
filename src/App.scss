@@ -8,18 +8,20 @@
 @import './Components/Home/home';
 @import './Components/Landing/landing';
 @import './Components/PDFDisplay/pdfDisplay';
-@import './Components/PlannerDrawer/planner';
+@import './Components/PlannerDrawer/Planner/planner';
+@import './Components/PlannerDrawer/PlanDayTemplate/plan-day';
 @import './Components/Profile/profile';
 @import './Components/RecipeCreator/recipeCreator';
 @import './Components/Recipes/LargeRecipe/largeRecipe';
-@import './Components/Recipes/SmallRecipe/SmallRecipe';
+@import './Components/Recipes/SmallRecipe/smallRecipe';
 @import './Components/Tutorial/tutorial';
 @import './Components/FilterDrawer/filter';
-@import './Components/Carousel/Carousel';
+@import './Components/Carousel/carousel';
 @import './Components/Header/Toggle/toggle';
 @import './Components/Header/Search/search';
 @import './Components/Header/SignIn/signin';
 @import './Components/Header/Register/register';
+
 
 .App {
   text-align: center;
