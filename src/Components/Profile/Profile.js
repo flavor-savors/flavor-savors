@@ -3,13 +3,15 @@ import './_profile.scss'
 import firebase from '../firebase/firebase';
 import ChangePassword from './ChangePassword/ChangePassword';
 import {NavLink} from 'react-router-dom';
+import RecipeCreator from '../RecipeCreator/RecipeCreator'
  
 class Profile extends Component {
     constructor(){
       super();
       this.state ={
         isSignedin: false,
-        changePass: false
+        changePass: false,
+        cr8Rec: false
       }
     }
 
@@ -21,6 +23,20 @@ class Profile extends Component {
 
     showChangePass = () => {
       this.setState({changePass: !this.state.changePass})
+    }
+
+    showRec = () => {
+      this.setState({cr8Rec: !this.state.cr8Rec})
+    }
+
+    deleteAcc = () => {
+      var user = firebase.auth().currentUser
+      user.delete()
+      .then(user => {
+
+      }).catch(err => {
+        console.log(err)
+      })
     }
 
 
@@ -40,13 +56,14 @@ class Profile extends Component {
 
         <div className='recCrtr'>
           <div className='pro-recipe-input'>
-            <p>input recipe</p>
+            <button onClick={this.showRec}>input recipe</button>
+    {this.state.cr8Rec ? <RecipeCreator/>: null}
           </div>
           <div className='profile-buttons'>
             <NavLink to='/home/favorites' className='pro-btn'>View Favorites</NavLink>
             <NavLink to='/home/myrecipes' className='pro-btn'>My Recipes</NavLink>
-            {/* <NavLink className='pro-btn'> My Plans</NavLink>
-            <NavLink className='pro-btn'> View Forum</NavLink> */}
+            <button className='pro-btn'> My Plans</button>
+            <button className='pro-btn'> View Forum</button>
           </div>
         </div>
       </div>     
