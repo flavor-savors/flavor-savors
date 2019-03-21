@@ -35,6 +35,13 @@ app.use(cors())
 //		+ Redis or Memcached to cache recipes and make calls faster?
 //		+ Measure the speed of all functions
 //		+ Work out hypothetical Redis flow
+//		+ Mess with user data
+//		+ Fix routes that require user's UUID:
+//			- get_recipes_by_user
+//			- add_recipe (should add the recipe ID to the correct user document)
+//			- get_user_favorites (should use the uuid to get the user document id)
+//			- add_to_favorites
+//			- remove_from_favorites
 //
 
 // auth routes
@@ -60,7 +67,7 @@ app.put('/users/favorites/:id', uc.add_to_favorites) // add a recipe to user fav
 app.delete('/users/favorites/:id', uc.remove_from_favorites) // remove recipe from favorites
 
 // meal plan routes
-// generate pdf
+app.get('/plans/pdf', pc.create_pdf)
 // add plan to db *
 // save pdf to user account
 app.get('/plans/:id', pc.get_plan_list) // return a list of plan links
