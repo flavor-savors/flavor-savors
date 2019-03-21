@@ -51,6 +51,7 @@ module.exports = {
 		}
 	},
 
+	// get user uid and find associated document
 	get_recipe_by_user: (req, res) => {
 		try {
 			const db = req.app.get('db')
@@ -128,7 +129,7 @@ module.exports = {
 		}
 	},
 
-	// this will defintely need to be reworked once we see
+	// this will definitely need to be reworked once we see
 	// the shape of the data coming in from the front-end
 	edit_recipe: (req, res) => {
 		try {
