@@ -45,7 +45,6 @@ app.use(cors())
 //
 
 // auth routes
-app.get('/user/current', ac.get_current_user) // see if a user is signed in
 app.post('/register', ac.register_user) // Sign a user up
 
 // recipe routes
