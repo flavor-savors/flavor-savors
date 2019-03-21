@@ -1,15 +1,17 @@
 import React, { Component } from 'react';
 import './_header.scss'
 import Toggle from './Toggle/Toggle';
-import Search from './Search/Search';
+// import Search from './Search/Search';
 import {Link} from 'react-router-dom'
+import firebase from '../firebase/firebase'
 
 class Header extends Component {
   constructor(){
     super();
     this.state = {
       showSignIn: false,
-      showSearch: false
+      showSearch: false,
+      signedIn: false
     }
   }
 
@@ -21,8 +23,15 @@ class Header extends Component {
     this.setState({showSearch: !this.state.showSearch})
   }
 
+  componentDidMount(){
+    this.unregisterAuthObserver = firebase.auth().onAuthStateChanged(
+      (user) => this.setState({signedIn: !!user})
+  );
+  }
+
 
   render() {
+    console.log(firebase.auth().currentUser)
     return (
       <div className='header-div'>
         <div>
@@ -30,8 +39,8 @@ class Header extends Component {
         </div>
         <div className='header-div-2'>
             <ul className='header-ul'>
-                {this.state.showSearch ?( <Search/>):(null)}
-                <li onClick={this.displaySearch} className='searchModal'>SEARCH</li>
+                {/* {this.state.showSearch ?( <Search/>):(null)} */}
+                <Link to='home'><li className='searchModal'>SEARCH</li></Link>
                 <li>VIEW FAVS</li>
                 <li className='signInModal' onClick={this.displaySignIn}>SIGN IN</li>
                 {this.state.showSignIn ?( <Toggle x={this.displaySignIn}/>):(null)}
