@@ -6,8 +6,20 @@
         constructor(){
             super();
             this.state ={
-                isSignedIn: false
+                isSignedIn: false,
+                logEmail: '',
+                logPass: ''
             }
+        }
+
+        handleLogInputs = (e) => {
+          this.setState({[e.target.name]: e.target.value})
+        }
+
+        handleLogin = (e) => {
+          e.preventDefault();
+          const {logEmail, logPass} =this.state;
+          firebase.auth().signInWithEmailAndPassword(logEmail, logPass)
         }
 
         componentDidMount(){
@@ -16,34 +28,30 @@
             );
         }
 
-       uiConfig = {
-      // Popup signin flow rather than redirect flow.
-      signInFlow: 'popup',
-      // Redirect to /signedIn after sign in is successful. Alternatively you can provide a callbacks.signInSuccess function.
-      signInSuccessUrl: '/signedIn',
-      // We will display Google and Facebook as auth providers.
-      signInOptions: [
-        firebase.auth.EmailAuthProvider.PROVIDER_ID,
-        // firebase.auth.GoogleAuthProvider.PROVIDER_ID,
-        // firebase.auth.FacebookAuthProvider.PROVIDER_ID
-      ],
-      callbacks: {
-        signInSuccessWithAuthResult: () => false
-      }
-    };
+        uiConfig = {
+          // Popup signin flow rather than redirect flow.
+          signInFlow: 'popup',
+          // Redirect to /signedIn after sign in is successful. Alternatively you can provide a callbacks.signInSuccess function.
+          signInSuccessUrl: 'http://localhost:3000/',
+          // We will display Google and Facebook as auth providers.
+          signInOptions: [
+            firebase.auth.EmailAuthProvider.PROVIDER_ID,
 
-    // componentWillUnmount() {
-    //     this.unregisterAuthObserver();
-    //   }
+          ],
+          credentialHelper: 'none'
+        };
+    componentWillUnmount() {
+        this.unregisterAuthObserver();
+      }
     
     render() {
-        console.log(this.state.isSignedIn)
+        console.log(firebase.auth().currentUser)
         if (!this.state.isSignedIn) {
           return (
             <div>
               <h3>LOGIN</h3>
               <p>Please sign-in:</p>
-              <StyledFirebaseAuth uiCallback={ui => ui.disableAutoSignIn()}  uiConfig={this.uiConfig} firebaseAuth={firebase.auth()}/>
+              <StyledFirebaseAuth  uiConfig={this.uiConfig} firebaseAuth={firebase.auth()}/>
             </div>
           );
         }
@@ -56,6 +64,5 @@
         );
       }
     }
-    
     export default SignIn
     
