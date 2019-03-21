@@ -80,28 +80,12 @@ class Home extends Component {
   }
 
   filterSearch = () => {
-    const recipes = this.state.recipes
+    const recipes =  this.state.recipes
     const filters = this.state.filters
-    let filteredRecipes = recipes.filter((recipes)=>{
-      return filters.filter((filters)=>{
-        return filters == recipes.dietTags 
-      })
+    var filtered = recipes.filter((recipe)=>{
+      filters.includes(recipe.dietTag)
     })
-
-
-
-    console.log(recipes)
-    console.log(filters)
-
-    // recipes.map((recipe, i)=>{
-    //   if(recipe.dietTags.includes(filters)){
-    //     filteredRecipes.push(recipe[i])
-    //   }
-    // })
-    // this.setState({recipes: filteredRecipes})
-    
-    //this.state.filters
-    //this.state.recipes.dietTags
+    console.log(filtered)
   };
 
   addToFavorites = () => {
