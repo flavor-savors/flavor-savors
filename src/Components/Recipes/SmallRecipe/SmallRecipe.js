@@ -17,7 +17,7 @@ class SmallRecipe extends Component {
 
         this.state ={
             showLarge: false,
-            recipe: {}
+            recipe: []
         }
     }
 

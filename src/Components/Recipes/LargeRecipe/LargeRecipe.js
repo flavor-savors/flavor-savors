@@ -37,6 +37,7 @@ class LargeRecipe extends Component {
                         {this.props.recipe.directions}
                     </div>
                     <div>   
+{/* /needs a conditional render of a delete button and edit button if the questions uid matches the user uid */}
                     <button 
                         onClick={()=>this.props.addToFavorites(this.props.recipe.recipeId)}
                     >add to favs</button>
