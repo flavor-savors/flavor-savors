@@ -42,7 +42,6 @@ module.exports = {
 	delete_user: (req, res) => {
 		try {
 			const admin = req.app.get('admin')
-			const user = admin.firebase.auth().currentUser // not sure if this can be used in node, we'll have to wait
 
 			console.log(user)
 		} catch (err) {
