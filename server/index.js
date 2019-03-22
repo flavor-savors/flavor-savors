@@ -42,6 +42,7 @@ app.use(cors())
 //			- get_user_favorites (should use the uuid to get the user document id)
 //			- add_to_favorites
 //			- remove_from_favorites
+//			- edit recipe (use set)
 //
 
 // auth routes
@@ -81,6 +82,7 @@ app.post('/forum/reply/:id', fc.add_reply) // add a reply to the post
 app.put('/forum/:id', fc.update_post) // change the content of the post
 app.delete('/forum/:id', fc.delete_post) // delete a post
 app.put('/forum/reply/:id', fc.upvote_reply) // upvote a reply, send postID in through params and reply id through body
+app.get('/forum/user/:id', fc.get_posts_by_user_id) // get posts by user id
 
 const port = 4000
 app.listen(port, () => console.log(`Listening on localhost:${port}`))

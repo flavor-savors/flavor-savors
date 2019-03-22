@@ -17,7 +17,7 @@ class SmallRecipe extends Component {
 
         this.state ={
             showLarge: false,
-            recipe: {}
+            recipe: []
         }
     }
 
@@ -36,7 +36,11 @@ class SmallRecipe extends Component {
 
 //hides the large version of the recipe
     hideLarge = () => {
-        this.setState({showLarge: false})
+        this.setState({showLarge: false}) 
+        console.log(this.props.showPlanner)
+        if(this.props.showPlanner === false ){
+            this.props.togglePlanner()
+        }
     }
 
     render(){
