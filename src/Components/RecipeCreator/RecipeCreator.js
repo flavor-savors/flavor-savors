@@ -62,14 +62,13 @@ class RecipeCreator extends Component {
   render() {
       let {ingredient} = this.state
     return (
-      <div>
-        
+      <div className='h'>
         <form onSubmit={this.handleSubmit} className="recipeForm">
-          <fieldset>
+          <fieldset className='rc-field'>
             <legend>Create A Recipe</legend>
 
-            <fieldset>
-              Recipe Name:
+            <fieldset className='rc-1'>
+              <small>Recipe Name:</small>
               <input
                 type="text"
                 name="recipeName"

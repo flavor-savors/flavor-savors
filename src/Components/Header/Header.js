@@ -44,6 +44,7 @@ class Header extends Component {
                 {/* {this.state.showSearch ?( <Search/>):(null)} */}
                 <Link to='home'><li className='searchModal'>SEARCH</li></Link>
                 <Link className='view-favs' to='/home/favorites'><li>VIEW FAVS</li></Link>
+                {/* {!this.state.signedIn ? <SignIn/> : <Link className='view-favs' to='/home/favorites'><li>VIEW FAVS</li></Link>} */}
               {!this.state.signedIn? <li className='signInModal' onClick={this.displaySignIn}>SIGN IN</li>: <DropDown/>}  
                 {this.state.showSignIn ?( <Toggle x={this.displaySignIn}/>):(null)}
             </ul>

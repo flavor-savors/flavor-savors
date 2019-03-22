@@ -45,7 +45,7 @@
       }
     
     render() {
-        console.log(firebase.auth().currentUser)
+        // console.log(firebase.auth().currentUser)
         if (!this.state.isSignedIn) {
           return (
             <div>
@@ -54,14 +54,7 @@
               <StyledFirebaseAuth  uiConfig={this.uiConfig} firebaseAuth={firebase.auth()}/>
             </div>
           );
-        }
-        return (
-          <div>
-            <h1>My App</h1>
-            <p>Welcome {firebase.auth().currentUser.displayName}! You are now signed-in!</p>
-            <button onClick={() => firebase.auth().signOut()}>Sign-out</button>
-          </div>
-        );
+        } else{return null}
       }
     }
     export default SignIn
