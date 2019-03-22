@@ -21,35 +21,35 @@ class SmallRecipe extends Component {
         }
     }
 
-
+//on mouse over makes a call for a single recipe to prepare to render on the large recipe card component
     getRecipe = (i) => {
-            axios.get(`/recipes/${i}`).then(res=>{
+            axios.get(`/recipes/id/${i}`).then(res=>{
             this.setState({recipe: res.data})
         })
     }
 
+//shows the large version of the recipe and sets the current recipe name and id for use on the planner
     toggleLarge = (id, name) => {
         this.setState({showLarge: true})
         this.props.setCurrentRecipe(id, name)
     }
 
+//hides the large version of the recipe
     hideLarge = () => {
         this.setState({showLarge: false})
     }
 
     render(){
-
-// still need to clean up how to present all information.
         const recipe = this.props.recipes.map((e, i)=>{
             return(
                 <div key={i} onMouseEnter={()=>this.getRecipe(e.id)} className='small-recipe-card'>
                     <div>
                         <div>
-                            <h1>{e.recipeName}</h1>
                             <img src={e.imageURL} alt='recipe' className='small-recipe-card-image'/>
                         </div>
                         <div>   
-                            <button onClick={this.props.addToFavorites}>add to favs</button>
+                            <h1>{e.recipeName}</h1>
+                            <button onClick={()=>this.props.addToFavorites(e.id)}>Add to favs</button>
                             <button onClick={()=>this.toggleLarge(e.id, e.recipeName)}>View this recipe</button>
                         </div>
                     </div>  

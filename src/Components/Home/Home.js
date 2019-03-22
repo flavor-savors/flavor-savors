@@ -31,6 +31,10 @@ class Home extends Component {
     };
   }
 
+
+//calls for a set of recipes based on where the user is coming from and sets them to a default recipes array and an array to use for filtering
+//toggles planner open if coming from the 'build' link on the landing page
+//
   componentDidMount() {
     if (this.props.history.location.pathname === "/home/build") {
       this.togglePlanner();
@@ -38,11 +42,13 @@ class Home extends Component {
     if (this.props.history.location.pathname === "/home/favorites") {
       axios.get(`/users/favorites/${firebase.auth().currentUser.uid}`).then(res => {
         this.setState({ recipes: res.data });
+        this.setState({ filteredRecipes: res.data });
         });
     }
     if (this.props.history.location.pathname === "/home/myrecipes") {
       axios.get(`/recipes/${firebase.auth().currentUser.uid}`).then(res => {
         this.setState({ recipes: res.data });
+        this.setState({ filteredRecipes: res.data });
         });
     } else {
       axios.get(`/recipes/all`).then(res => {
@@ -50,27 +56,26 @@ class Home extends Component {
         this.setState({ filteredRecipes: res.data });
       });
     }
-    // console.log(this.state)
   }
 
-
-
+//open and closes the planner
   togglePlanner = add => {
     this.setState({ showPlanner: !this.state.showPlanner });
   };
 
+//opens and closes the filter 
   toggleFilter = () => {
     this.setState({ showFilter: !this.state.showFilter });
   };
 
-
-  //sets the current recipe name and id so the information is ready to be input into the meal planner
+//sets the current recipe name and id so the information is ready to be input into the meal planner or added to user favorites
   setCurrentRecipe = (id, name) => {
     this.setState({ currentRecipeId: id, currentRecipeName: name });
   };
 
   
-//set 
+//set the array of filters on click of the checkbox on the filter component
+//deletes if it is already in the array, or adds if not currently in the array
   setFilters = tag => {
     if (this.state.filters.includes(tag)) {
       let filters = this.state.filters;
@@ -90,6 +95,8 @@ class Home extends Component {
     console.log(this.state);
   };
 
+//filters the filtered array using the array of filter tags 
+//if no tags will return all recipes
   filterSearch = () => {
     if (!this.state.filters.length) {
       this.setState({ filteredRecipes: this.state.recipes });
@@ -109,12 +116,14 @@ class Home extends Component {
     }
   };
 
+//resets the array of filters and resets the filtered recipes to all recipes, when called the checkboxes on the filter component are cleared
   resetFilters = () => {
     this.setState({filteredRecipes:this.state.recipes, filters: []})
   }
 
-  addToFavorites = () => {
-    axios.put(`/users/favorites/${this.state.currentRecipeID}`, {uid: firebase.auth().currentUser.uid})
+//adds the current recipe id to the users favorites
+  addToFavorites = (id) => {
+    axios.put(`/users/favorites/${id}`, {uid: firebase.auth().currentUser.uid})
   };
 
   render() {
