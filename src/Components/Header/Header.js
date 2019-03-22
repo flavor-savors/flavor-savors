@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import './_header.scss'
 import Toggle from './Toggle/Toggle';
 // import Search from './Search/Search';
-import {Link} from 'react-router-dom'
-import firebase from '../firebase/firebase'
+import {Link} from 'react-router-dom';
+import firebase from '../firebase/firebase';
+import DropDown from './DropDown/DropDown';
 
 class Header extends Component {
   constructor(){
@@ -11,7 +12,8 @@ class Header extends Component {
     this.state = {
       showSignIn: false,
       showSearch: false,
-      signedIn: false
+      signedIn: false,
+      
     }
   }
 
@@ -41,8 +43,8 @@ class Header extends Component {
             <ul className='header-ul'>
                 {/* {this.state.showSearch ?( <Search/>):(null)} */}
                 <Link to='home'><li className='searchModal'>SEARCH</li></Link>
-                <li>VIEW FAVS</li>
-                <li className='signInModal' onClick={this.displaySignIn}>SIGN IN</li>
+                <Link className='view-favs' to='/home/favorites'><li>VIEW FAVS</li></Link>
+              {!this.state.signedIn? <li className='signInModal' onClick={this.displaySignIn}>SIGN IN</li>: <DropDown/>}  
                 {this.state.showSignIn ?( <Toggle x={this.displaySignIn}/>):(null)}
             </ul>
         </div>

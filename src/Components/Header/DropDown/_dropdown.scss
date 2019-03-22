@@ -1,0 +1,22 @@
+
+
+.drop-img{
+    height: 5vh;
+    // padding: 20px;
+    cursor: pointer;
+    border-radius: 50%;
+    background-color: white;
+    position: absolute;
+    z-index: 2;
+    top: 3%;
+}
+
+.dp{
+    position: absolute;
+    z-index: 2; 
+    top: 8%;
+    background-color: whitesmoke;
+    color: black;
+    display: flex;
+    flex-direction: column;
+}
