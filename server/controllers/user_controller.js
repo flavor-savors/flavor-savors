@@ -44,31 +44,47 @@ module.exports = {
 
 			let recipes = []
 			let docs = []
+			let id = ''
 
 			db.collection('users')
-				.doc(req.params.id)
+				.where('uid', '==', req.params.id)
 				.get()
 				.then((snapshot) => {
-					recipes = snapshot.data().favorites
+					snapshot.forEach((doc) => (id = doc.data().id))
+					// console.log(id)
+					db.collection('users')
+						.doc(id)
+						.get()
+						.then((snapshot) => {
+							recipes = snapshot.data().favorites
+						})
+						.then(async () => {
+							for (let i = 0; i < recipes.length; i++) {
+								console.log('recipeid', recipes)
+								let x = await db
+									.collection('recipes')
+									.doc(recipes[i])
+									.get()
+									.then((snapshot) => {
+										return snapshot.data()
+									})
+									.catch((err) => {
+										console.log('error on 71', err)
+										res.status(500).json(err)
+									})
+								docs.push(x)
+							}
+						})
+						.then(() => {
+							res.json(docs)
+						})
+						.catch((err) => {
+							console.log('error on 81', err)
+							res.status(500).json(err)
+						})
 				})
-				.then(async () => {
-					for (let i = 0; i < recipes.length; i++) {
-						let x = await db
-							.collection('recipes')
-							.doc(recipes[i].id)
-							.get()
-							.then((snapshot) => {
-								return snapshot.data()
-							})
-							.catch((err) => res.status(500).json(err))
-						docs.push(x)
-					}
-				})
-				.then(() => {
-					res.json(docs)
-				})
-				.catch((err) => res.status(500).json(err))
 		} catch (err) {
+			console.log('error in catch block', err)
 			res.json(500).json(err)
 		}
 	},
@@ -80,22 +96,30 @@ module.exports = {
 
 	// add a recipe id to a users favorites
 	add_to_favorites: (req, res) => {
+		// This method is way slower compared to old but sacrifices had
+		// to be made so that the data is easier to pass in on the frontend
+
 		try {
 			const db = req.app.get('db')
 			const admin = req.app.get('admin')
 
-			// get user id
-			// get recipe id
-			// append recipe id to recipes array on the user's object
 			db.collection('users')
-				// fetch the currentUser and send in either their uid or doc id
-				// for now i'll set it up like the doc id is being sent in
-				.doc(req.body.userID)
-				.update({
-					favorites: admin.firestore.FieldValue.arrayUnion(req.params.id),
-				})
+				.where('uid', '==', req.body.uid)
+				.get()
+				.then((snapshot) => {
+					let id
+					snapshot.forEach((doc) => {
+						id = doc.data().id
+					})
 
-			res.status(200).json('Updated')
+					db.collection('users')
+						.doc(id)
+						.update({
+							favorites: admin.firestore.FieldValue.arrayUnion(req.params.id),
+						})
+					res.status(200).json('Added to favorites')
+				})
+				.catch((err) => res.status(500).json(err))
 		} catch (err) {
 			console.log(err)
 			res.status(500).json(err)
@@ -107,18 +131,23 @@ module.exports = {
 			const db = req.app.get('db')
 			const admin = req.app.get('admin')
 
-			// get user id
-			// get recipe id of victim
-			// sacrifice
 			db.collection('users')
-				// fetch the currentUser and send in either their uid or doc id
-				// for now i'll set it up like the doc id is being sent in
-				.doc(req.body.userID)
-				.update({
-					favorites: admin.firestore.FieldValue.arrayRemove(req.params.id),
-				})
+				.where('uid', '==', req.body.uid)
+				.get()
+				.then((snapshot) => {
+					let id
+					snapshot.forEach((doc) => {
+						id = doc.data().id
+					})
 
-			res.status(200).json('Updated')
+					db.collection('users')
+						.doc(id)
+						.update({
+							favorites: admin.firestore.FieldValue.arrayUnion(req.params.id),
+						})
+					res.status(200).json('Added to favorites')
+				})
+				.catch((err) => res.status(500).json(err))
 		} catch (err) {
 			res.status(500).json(err)
 		}
