@@ -16,20 +16,24 @@
 }
 
 .pro-img{
-    height: 30vh;
+    height: 200px;
+    width: 200px;
+    object-fit: contain;
     border-radius: 100%;
-    margin: 4vh 0 3vh 0;
+    margin: 4vh 0vw 3vh 0;
+    border: solid 1px black;
 }
 
 .user-info{
     border: solid 2px red;
     height: 30vh;
     width: 70%;
-   
+   display: flex;
+   flex-direction: column;
 }
 
 .recCrtr{
-    width: 40%;
+    width: 50%;
     border: solid 1px blue;
     display: flex;
     flex-direction: column;
@@ -38,10 +42,10 @@
 }
 
 .pro-recipe-input{
-    border: solid 2px red;
+    // border: solid 2px red;
     margin: 5vh 0 5vh 0;
-    width: 80%;
-    height: 25vh;
+    width: 100%;
+    height: 70vh;
 }
 
 .profile-buttons{
@@ -55,4 +59,9 @@
 
 .pro-btn{
     height: 5vh;
+}
+
+.recp-cr8tor{
+    // border: 2px black solid;
+    // width: 40%;
 }

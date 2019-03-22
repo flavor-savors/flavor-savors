@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import './_profile.scss'
 import firebase from '../firebase/firebase';
 import ChangePassword from './ChangePassword/ChangePassword';
-import {NavLink, Redirect} from 'react-router-dom';
+import { Redirect} from 'react-router-dom';
 import RecipeCreator from '../RecipeCreator/RecipeCreator'
  
 class Profile extends Component {
@@ -64,7 +64,7 @@ class Profile extends Component {
     if(!firebase.auth().currentUser){
       return <Redirect push to='/'/>
     }
-    // console.log(firebase.auth().currentUser)
+    // console.log(firebase.auth().currentUser.uid)
     if(this.state.isSignedin){
     return (
       <div className='prof-cont'>
@@ -81,13 +81,7 @@ class Profile extends Component {
         <div className='recCrtr'>
           <div className='pro-recipe-input'>
             <button onClick={this.showRec}>input recipe</button>
-    {this.state.cr8Rec ? <RecipeCreator/>: null}
-          </div>
-          <div className='profile-buttons'>
-            <NavLink to='/home/favorites' className='pro-btn'>View Favorites</NavLink>
-            <NavLink to='/home/myrecipes' className='pro-btn'>My Recipes</NavLink>
-            <button className='pro-btn'> My Plans</button>
-            <button className='pro-btn'> View Forum</button>
+    {this.state.cr8Rec ?<RecipeCreator/>: null}
           </div>
         </div>
       </div>     
