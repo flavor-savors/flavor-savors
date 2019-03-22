@@ -51,7 +51,6 @@ module.exports = {
 		}
 	},
 
-	// get user uid and find associated document
 	get_recipe_by_user: (req, res) => {
 		// NEW FLOW:
 		// get user uid off req.params
@@ -60,20 +59,6 @@ module.exports = {
 
 		try {
 			const db = req.app.get('db')
-			let recipes = []
-
-			// db.collection('recipes')
-			// 	.where('uid', '==', req.params.uid)
-			// 	.get()
-			// 	.then((snapshot) => {
-			// 		if (snapshot.empty) {
-			// 			res.status(404).json('User has no recipes')
-			// 		} else {
-			// 			snapshot.forEach((doc) => recipes.push(doc.data()))
-			// 			res.status(200).json(recipes)
-			// 		}
-			// 	})
-
 			db.collection('users')
 				.where('uid', '==', req.params.uid)
 				.get()
@@ -81,10 +66,10 @@ module.exports = {
 					if (snapshot.empty) {
 						res.status(404).json('User has no recipes')
 					} else {
-						snapshot.forEach((doc) => recipes.push(doc.data().recipes))
-						res.status(200).json(recipes)
+						snapshot.forEach((doc) => res.json(doc.data().recipes))
 					}
 				})
+				.catch((err) => res.status(500).json(err))
 		} catch (err) {
 			res.status(500).json(err)
 		}
@@ -111,6 +96,7 @@ module.exports = {
 		}
 	},
 
+	
 	add_recipe: (req, res) => {
 		let data = {
 			created: moment().format('MMMM Do YYYY, h:mm:ss a'),
@@ -205,11 +191,3 @@ module.exports = {
 		}
 	},
 }
-
-// for(let i = 0; i < length; i++) {
-// 	for(let j = 0; j < dietTags.length; j++) {
-// 		if(tags[i] === arr[i].dietTags[j]) {
-// 			push
-// 		}
-// 	}
-// }
