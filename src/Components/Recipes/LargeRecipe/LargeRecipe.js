@@ -18,7 +18,7 @@ class LargeRecipe extends Component {
 
                 <div className='large-card'>
                 <h1>{this.props.recipe.recipeName}</h1>
-                <img src={this.props.imageURL} alt='recipe'/>
+                <img src={this.props.recipe.imageURL} alt='recipe'/>
                 <div>
                     {this.props.recipe.dietTags.map((e,i)=>{
                         return(
@@ -38,7 +38,7 @@ class LargeRecipe extends Component {
                     </div>
                     <div>   
                     <button 
-                        // onClick={()=>this.props.addToFavorites(uid)}
+                        onClick={()=>this.props.addToFavorites(this.props.recipe.recipeId)}
                     >add to favs</button>
                         <button onClick={()=>this.props.hideLarge()}>add to meal plan</button>
                     </div>  

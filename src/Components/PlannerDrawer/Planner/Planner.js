@@ -65,6 +65,7 @@ class Planner extends Component {
       <div>
         <div className='planner-main'>
           <h1>Planner</h1>
+          <p>View a recipe to add it to the plan</p>
           <div className='planner-top-section'>
 {/* day one plan */}
           <PlanDay
