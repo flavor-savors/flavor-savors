@@ -23,8 +23,6 @@ class Question extends Component {
 
     setCurrentQuestion = (i) => {
         this.setState({currentQuestion: i})
-        console.log(i)
-        console.log(this.state.question[this.state.currentQuestion].replies[0].content)
     }
 
     toggleReplies = () => {
@@ -34,8 +32,9 @@ class Question extends Component {
     render(){
         const question = this.state.question.map((e, i)=>{
             return(
-                <div key={i} onMouseEnter={()=>this.setCurrentQuestion(i)}  >
+                <div key={i} onMouseEnter={()=>this.setCurrentQuestion(i)}>
                     <div>{e.content}</div>
+                    <p>Posted by: {e.user}</p>
                     <button onClick={this.toggleReplies}>view replies</button>
                 </div>
             )

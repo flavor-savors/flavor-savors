@@ -3,6 +3,8 @@ import React, { Component } from 'react'
 
 class Answer extends Component {
 
+
+//call for all forum 
     componentDidMount(){
         console.log(this.props.replies)
     }

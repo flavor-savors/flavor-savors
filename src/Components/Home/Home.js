@@ -3,7 +3,7 @@ import SmallRecipes from "../Recipes/SmallRecipe/SmallRecipe";
 import Planner from "../PlannerDrawer/Planner/Planner";
 import Filter from "../FilterDrawer/Filter";
 import axios from "axios";
-import firebase from '../firebase/firebase'
+import firebase from "../firebase/firebase";
 
 //this component is the main home page for browsing/searching recipes and meal planning
 //it renders 5 views:
@@ -27,55 +27,61 @@ class Home extends Component {
       currentRecipeName: "",
       recipes: [],
       filters: [],
-      filteredRecipes: []
+      filteredRecipes: [],
+      uid: false
     };
   }
 
-
-//calls for a set of recipes based on where the user is coming from and sets them to a default recipes array and an array to use for filtering
-//toggles planner open if coming from the 'build' link on the landing page
-//
+  //calls for a set of recipes based on where the user is coming from and sets them to a default recipes array and an array to use for filtering
+  //toggles planner open if coming from the 'build' link on the landing page
+  //
   componentDidMount() {
+    firebase.auth().onAuthStateChanged(user => {
+      this.setState({ uid: user.uid });
+      console.log(this.state.uid);
+    });
     if (this.props.history.location.pathname === "/home/build") {
       this.togglePlanner();
     }
-    if (this.props.history.location.pathname === "/home/favorites") {
-      axios.get(`/users/favorites/${firebase.auth().currentUser.uid}`).then(res => {
-        this.setState({ recipes: res.data });
-        this.setState({ filteredRecipes: res.data });
-        });
-    }
-    if (this.props.history.location.pathname === "/home/myrecipes") {
-      axios.get(`/recipes/${firebase.auth().currentUser.uid}`).then(res => {
-        this.setState({ recipes: res.data });
-        this.setState({ filteredRecipes: res.data });
-        });
-    } else {
-      axios.get(`/recipes/all`).then(res => {
-        this.setState({ recipes: res.data });
+    axios.get(`/recipes/all`).then(res => {
+      this.setState({ recipes: res.data });
+      this.setState({ filteredRecipes: res.data });
+    });
+  }
+
+//calls for current users favorites  
+  viewUserFavRecipes = () => {
+    if (this.state.uid !== false) {
+      axios.get(`/users/favorites/${this.state.uid}`).then(res => {
         this.setState({ filteredRecipes: res.data });
       });
     }
-  }
+  };
 
-//open and closes the planner
+//calls for current users own input recipes    
+  viewUserInputRecipes = () => {
+    axios.get(`/recipes/${this.state.uid}`).then(res => {
+      this.setState({ filteredRecipes: res.data });
+    });
+  };
+
+  //open and closes the planner
   togglePlanner = add => {
     this.setState({ showPlanner: !this.state.showPlanner });
   };
 
-//opens and closes the filter 
+  //opens and closes the filter
   toggleFilter = () => {
     this.setState({ showFilter: !this.state.showFilter });
   };
 
-//sets the current recipe name and id so the information is ready to be input into the meal planner or added to user favorites
+  //sets the current recipe name and id so the information is ready to be input into the meal planner or added to user favorites
   setCurrentRecipe = (id, name) => {
     this.setState({ currentRecipeId: id, currentRecipeName: name });
   };
 
-  
-//set the array of filters on click of the checkbox on the filter component
-//deletes if it is already in the array, or adds if not currently in the array
+  //set the array of filters on click of the checkbox on the filter component
+  //deletes if it is already in the array, or adds if not currently in the array
   setFilters = tag => {
     if (this.state.filters.includes(tag)) {
       let filters = this.state.filters;
@@ -95,8 +101,8 @@ class Home extends Component {
     console.log(this.state);
   };
 
-//filters the filtered array using the array of filter tags 
-//if no tags will return all recipes
+  //filters the filtered array using the array of filter tags
+  //if no tags will return all recipes
   filterSearch = () => {
     if (!this.state.filters.length) {
       this.setState({ filteredRecipes: this.state.recipes });
@@ -116,26 +122,37 @@ class Home extends Component {
     }
   };
 
-//resets the array of filters and resets the filtered recipes to all recipes, when called the checkboxes on the filter component are cleared
+  //resets the array of filters and resets the filtered recipes to all recipes, when called the checkboxes on the filter component are cleared
   resetFilters = () => {
-    this.setState({filteredRecipes:this.state.recipes, filters: []})
-  }
+    this.setState({ filteredRecipes: this.state.recipes, filters: [] });
+  };
 
-//adds the current recipe id to the users favorites
-  addToFavorites = (id) => {
-    axios.put(`/users/favorites/${id}`, {uid: firebase.auth().currentUser.uid})
+  //adds the current recipe id to the users favorites
+  addToFavorites = id => {
+    axios.put(`/users/favorites/${id}`, {
+      uid: firebase.auth().currentUser.uid
+    });
   };
 
   render() {
+    console.log(firebase.auth().currentUser);
     return (
       <div className='home-main'>
-        {/* <RecipeCreator/> */}
 
+      <div>
+        {this.state.uid !== false ?
+        <div>
+          <button onClick={this.viewUserFavRecipes}>View My Favorites</button>
+          <button onClick={this.viewUserInputRecipes}>View My Own Recipes</button> 
+        </div>
+        : null}
+        <button onClick={this.resetFilters}>View All Recipes</button>
         <button onClick={this.toggleFilter}>filter search</button>
         <button onClick={this.togglePlanner}>planner</button>
+      </div>
+
 
         <div className='home-components'>
-
           {!this.state.showFilter ? null : (
             <Filter
               filterSearch={this.filterSearch}
@@ -146,6 +163,7 @@ class Home extends Component {
 
           <SmallRecipes
             recipes={this.state.filteredRecipes}
+            showPlanner={this.state.showPlanner}
             setCurrentRecipe={this.setCurrentRecipe}
             togglePlanner={this.togglePlanner}
             addToFavorites={this.addToFavorites}
