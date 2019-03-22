@@ -44,31 +44,47 @@ module.exports = {
 
 			let recipes = []
 			let docs = []
+			let id = ''
 
 			db.collection('users')
-				.doc(req.params.id)
+				.where('uid', '==', req.params.id)
 				.get()
 				.then((snapshot) => {
-					recipes = snapshot.data().favorites
+					snapshot.forEach((doc) => (id = doc.data().id))
+					// console.log(id)
+					db.collection('users')
+						.doc(id)
+						.get()
+						.then((snapshot) => {
+							recipes = snapshot.data().favorites
+						})
+						.then(async () => {
+							for (let i = 0; i < recipes.length; i++) {
+								console.log('recipeid', recipes)
+								let x = await db
+									.collection('recipes')
+									.doc(recipes[i])
+									.get()
+									.then((snapshot) => {
+										return snapshot.data()
+									})
+									.catch((err) => {
+										console.log('error on 71', err)
+										res.status(500).json(err)
+									})
+								docs.push(x)
+							}
+						})
+						.then(() => {
+							res.json(docs)
+						})
+						.catch((err) => {
+							console.log('error on 81', err)
+							res.status(500).json(err)
+						})
 				})
-				.then(async () => {
-					for (let i = 0; i < recipes.length; i++) {
-						let x = await db
-							.collection('recipes')
-							.doc(recipes[i].id)
-							.get()
-							.then((snapshot) => {
-								return snapshot.data()
-							})
-							.catch((err) => res.status(500).json(err))
-						docs.push(x)
-					}
-				})
-				.then(() => {
-					res.json(docs)
-				})
-				.catch((err) => res.status(500).json(err))
 		} catch (err) {
+			console.log('error in catch block', err)
 			res.json(500).json(err)
 		}
 	},
