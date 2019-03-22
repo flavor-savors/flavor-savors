@@ -1,24 +1,22 @@
-.small-recipe-main{
+.small-recipe-main {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  width: 70%;
+  margin: auto;
+
+  .small-recipe-card-holder {
     display: flex;
     flex-wrap: wrap;
     align-items: baseline;
-    width: 70%;
-    margin: auto;
-
-    .small-recipe-card-holder{
-        display: flex;
-        flex-wrap: wrap;
-        align-items: baseline;
-        .small-recipe-card{
-        width: 300px;
-        height:300px;
-        margin:20px auto;
-        .small-recipe-card-image {
-            width: 200px;
-            height: 200px;
-        }
-        }
+    .small-recipe-card {
+      width: 300px;
+      height: 300px;
+      margin: 20px auto;
+      .small-recipe-card-image {
+        width: 200px;
+        height: 200px;
+      }
     }
+  }
 }
-
-
