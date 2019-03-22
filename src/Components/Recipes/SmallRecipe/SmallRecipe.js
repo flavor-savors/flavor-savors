@@ -49,9 +49,7 @@ class SmallRecipe extends Component {
                             <img src={e.imageURL} alt='recipe' className='small-recipe-card-image'/>
                         </div>
                         <div>   
-                            <button 
-                            // onClick={()=>this.props.addToFavorites(uid)}
-                            >add to favs</button>
+                            <button onClick={this.props.addToFavorites}>add to favs</button>
                             <button onClick={()=>this.toggleLarge(e.id, e.recipeName)}>View this recipe</button>
                         </div>
                     </div>  
