@@ -31,7 +31,7 @@ class Header extends Component {
 
 
   render() {
-    console.log(firebase.auth().currentUser)
+    // console.log(firebase.auth().currentUser)
     return (
       <div className='header-div'>
         <div>

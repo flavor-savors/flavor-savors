@@ -39,7 +39,7 @@ class Planner extends Component {
     };
   }
 
-
+  
   handleChange = meal => {
     this.setState(prevState => ({
       ...prevState,
