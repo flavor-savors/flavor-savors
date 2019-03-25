@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import axios from 'axios'
+import firebase from "../firebase/firebase";
+
 
 //this component is a modal over the user admin page to input a new recipe.
 
@@ -18,35 +20,68 @@ class RecipeCreator extends Component {
       dietTags: [],
       public: true,
       user:'',
-      addons: []
+      addons: [],
+      uid: false
      };
   }
 
+//sets up for user verification
+  componentDidMount() {
+    firebase.auth().onAuthStateChanged(user => {
+      this.setState({ uid: user.uid });
+    });
+  }
 
+//submits the new recipe and resets the form by resetting state
   handleSubmit = (e) => {
     e.preventDefault()
-   const state=this.state
+   const state = this.state
   axios.post(`/recipes`, state).then(res=>{
     console.log(res)
     })
+    this.setState({
+      recipeName: "",
+      imageURL: "",
+      ingredient: [{
+        name: "",
+        amount: ""
+      }],
+      directions: "",
+      dietTags: [],
+      public: true,
+      user:'',
+      addons: [],
+    })
   };
 
-  handleChange = e => {
+//handles all input changes
+  handleChange = (e) => {
       if(['name', 'amount'].includes(e.target.className)){
           let ingredient = [...this.state.ingredient]
           ingredient[e.target.dataset.id][e.target.className] = e.target.value
-          this.setState({ingredient}, ()=> console.log(this.state.ingredient))
+          this.setState({ingredient})
       }else{
           this.setState({ [e.target.name]: e.target.value });
         }
   };
 
+//adds another ingredient object to state
   addIngredient = (e) => {
+    e.preventDefault()
       this.setState((prevState)=>({
           ingredient: [...prevState.ingredient, {name:"", amount:""}]
       }))
   }
 
+//removes an ingredient object
+  deleteIngredient = (id) => {
+    let ingredients = this.state.ingredient
+    ingredients.splice(id, 1);
+    this.setState({ingredient: ingredients})
+    console.log(id)
+  }
+
+//adds tags to the recipe 
   handleTags = e => {
     this.setState({
       ...this.state,
@@ -54,6 +89,7 @@ class RecipeCreator extends Component {
     });
   };
 
+//allows user to make a recipe private  
   makePrivate = () => {
       this.setState({public: !this.state.public})
       console.log(this.state)
@@ -118,6 +154,7 @@ class RecipeCreator extends Component {
                                 onChange={this.handleChange}
                             />
                             </label>
+                            <button type='button' onClick={()=>this.deleteIngredient(id)}>X</button>
                           </div>
                       )
                   })
@@ -126,7 +163,7 @@ class RecipeCreator extends Component {
 
             <fieldset>
               <legend>Directions:</legend>
-              <textarea
+              <textarea className='directions'
                 type="text"
                 name="directions"
                 value={this.state.directions}
