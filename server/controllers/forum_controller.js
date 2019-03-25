@@ -11,6 +11,7 @@ module.exports = {
 			created: moment().format('MMMM Do YYYY, h:mm:ss a'),
 			edited: false,
 			uid: req.body.uid,
+			username: req.body.username,
 			replies: [
 				{
 					content: 'nice. me too thanks',
@@ -106,7 +107,7 @@ module.exports = {
 						content: req.body.content,
 						created: moment().format('MMMM Do YYYY, h:mm:ss a'),
 						upvotes: 0,
-						user: req.body.user,
+						uid: req.body.uid,
 					}),
 				})
 			res.status(200).json('Reply added')
@@ -167,7 +168,6 @@ module.exports = {
 	get_posts_by_user_id: (req, res) => {
 		// do it
 		try {
-			
 		} catch (err) {
 			res.status(500).json(err)
 		}
