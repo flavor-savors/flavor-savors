@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import './_profile.scss'
 import firebase from '../firebase/firebase';
-import ChangePassword from './ChangePassword/ChangePassword';
+import ChangeImage from './ChangeImage/ChangeImage';
 import { Redirect} from 'react-router-dom';
 import RecipeCreator from '../RecipeCreator/RecipeCreator'
  
@@ -11,14 +11,23 @@ class Profile extends Component {
       this.state ={
         isSignedin: false,
         changeImg: false,
-        cr8Rec: false
+        cr8Rec: false,
+        user: {}
       }
     }
 
     componentDidMount(){
-    firebase.auth().onAuthStateChanged(user => {
-     this.setState({isSignedin: user})
-    })
+      this.authListener()
+    }
+
+    authListener = () => {
+      firebase.auth().onAuthStateChanged(user => {
+        if(user){
+          this.setState({user})
+        } else {
+          this.setState({user: null})
+        }
+      })
     }
 
     showRec = () => {
@@ -38,7 +47,7 @@ class Profile extends Component {
       
       auth.sendPasswordResetEmail(firebase.auth().currentUser.email)
       .then(() => {
-        alert('email was sent to your email')
+        alert('Password Rest has been sent to your email.')
       }).catch(err => {
         console.log(err)
       })
@@ -55,17 +64,20 @@ class Profile extends Component {
       })
     }
 
-    // componentWillUnmount() {
-    //   this.unregisterAuthObserver();
-    // }
+  componentDidUpdate(prevState){
+    if(this.state.user !== prevState.user){
+      this.authListener();
+    }
+  }
 
 
   render() {
+    console.log(this.state.user)
     if(!firebase.auth().currentUser){
       return <Redirect push to='/'/>
     }
     // console.log(firebase.auth().currentUser.uid)
-    if(this.state.isSignedin){
+    if(this.state.user){
     return (
       <div className='prof-cont'>
         <div className='pro-info'>
@@ -74,7 +86,7 @@ class Profile extends Component {
             <p>{firebase.auth().currentUser.displayName}</p>
             <button onClick={this.resetPass}>Change Password</button>
             <button onClick={this.showChangeImg}>change Img</button>
-            {this.state.changeImg ?( <ChangePassword/>):(null)}
+            {this.state.changeImg ?( <ChangeImage/>):(null)}
           </div>
         </div>
 

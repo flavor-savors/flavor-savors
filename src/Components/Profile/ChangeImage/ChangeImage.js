@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import firebase from '../../firebase/firebase';
 
-class ChangePassword extends Component {
+class ChangeImage extends Component {
     constructor(){
         super();
         this.state = {
@@ -41,4 +41,4 @@ class ChangePassword extends Component {
   }
 }
 
-export default ChangePassword
+export default ChangeImage;
