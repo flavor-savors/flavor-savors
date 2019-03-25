@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import firebase from '../../firebase/firebase';
+import {Redirect} from 'react-router-dom'
 
 class ChangeImage extends Component {
     constructor(){
@@ -16,7 +17,7 @@ class ChangeImage extends Component {
         user.updateProfile({
           photoURL: this.state.newImage
         }).then(() => {
-          alert('s=sucessfully changed password')
+          return <Redirect push to ='/profile'/>
         }).catch(err => {
           console.log(err)
         })

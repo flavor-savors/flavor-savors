@@ -1,0 +1,21 @@
+.reg-form{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    // border: solid 1px black;
+    width: 30vw;
+    height: 35vh;
+    margin: 3vh 10vw 0 10vw;
+}
+
+.reg-ipt{
+    height: 5vh;
+}
+
+.regsub{
+    width: 40%;
+    padding:10px;
+    margin-left: auto;
+    background-color: #3F51B5;
+    color: white;
+}
