@@ -1,17 +1,28 @@
 module.exports = {
 	get_user_by_id: (req, res) => {
 		try {
-			const db = req.app.get('db')
-			db.collection('users')
-				.doc(req.params.id)
-				.get()
-				.then((snapshot) => {
-					if (snapshot.empty) {
-						res.status(404).json('User not found')
-					}
+			// const db = req.app.get('db')
+			// db.collection('users')
+			// 	.doc(req.params.id)
+			// 	.get()
+			// 	.then((snapshot) => {
+			// 		if (snapshot.empty) {
+			// 			res.status(404).json('User not found')
+			// 		}
 
-					res.status(200).json(snapshot.data())
-				})
+			// 		res.status(200).json(snapshot.data())
+			// 	})
+
+			// this should probably be converted to use the user's uid
+			const client = req.app.get('client')
+			client.hmget('users', req.params.id, (err, result) => {
+				if (err) {
+					console.log(err)
+					res.status(500).json(err)
+				}
+
+				res.status(200).json(JSON.parse(result))
+			})
 		} catch (err) {
 			res.status(500).json(err)
 		}
@@ -20,16 +31,36 @@ module.exports = {
 	// for whatever reason params aren't working for this, so query it is for now
 	get_user_by_username: (req, res) => {
 		try {
-			const db = req.app.get('db')
+			// const db = req.app.get('db')
 
-			db.collection('users')
-				.where('username', '==', req.query.user)
-				.get()
-				.then((snapshot) => {
-					snapshot.forEach((doc) => {
-						res.status(200).json(doc.data())
-					})
-				})
+			// db.collection('users')
+			// 	.where('username', '==', req.query.user)
+			// 	.get()
+			// 	.then((snapshot) => {
+			// 		snapshot.forEach((doc) => {
+			// 			res.status(200).json(doc.data())
+			// 		})
+			// 	})
+
+			const client = req.app.get('client')
+			let all_users = []
+
+			client.hgetall('users', (err, result) => {
+				if (err) {
+					console.log(err)
+					res.status(500).json(err)
+				}
+
+				for (let key in result) {
+					all_users.push(JSON.parse(result[key]))
+				}
+
+				if (all_users.length < 1) {
+					res.status(500).json('Something went wrong')
+				} else {
+					res.status(200).json(all_users.filter((user) => user.username === req.query.user))
+				}
+			})
 		} catch (err) {
 			console.log(err)
 			res.status(500).json(err)
@@ -47,7 +78,7 @@ module.exports = {
 			let id = ''
 
 			db.collection('users')
-				.where('uid', '==', req.params.id)
+				.where('uid', '==', req.params.uid)
 				.get()
 				.then((snapshot) => {
 					snapshot.forEach((doc) => (id = doc.data().id))
@@ -83,6 +114,40 @@ module.exports = {
 							res.status(500).json(err)
 						})
 				})
+
+			// I'll come back to this
+			// const client = req.app.get('client')
+			// let all_users = []
+			// let user_favorites = []
+
+			// console.log(req.params.uid)
+			// client.hgetall('users', (err, result) => {
+			// 	if (err) {
+			// 		console.log(err)
+			// 		res.status(500).json(err)
+			// 	}
+
+			// 	for (let key in result) {
+			// 		all_users.push(JSON.parse(result[key]))
+			// 	}
+
+			// 	let user = all_users.filter((user) => user.uid === req.params.uid)
+			// 	user_favorites = user[0].favorites
+
+			// 	// inactive block
+			// 	user_favorites.forEach((recipe) => {
+			// 		client.hmget('recipes', recipe, (err, result) => {
+			// 			if (err) {
+			// 				console.log(err)
+			// 				res.status(500).json(err)
+			// 			}
+
+			// 			return result
+			// 		})
+			// 	})
+
+			// 	res.status(200).json(user_favorites)
+			// })
 		} catch (err) {
 			console.log('error in catch block', err)
 			res.json(500).json(err)

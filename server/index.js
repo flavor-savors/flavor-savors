@@ -1,17 +1,20 @@
-require('dotenv').config()
+// require('dotenv').config()
 const express = require('express')
-const { json } = require('body-parser')
-const cors = require('cors')
-const multer = require('multer')
 const admin = require('firebase-admin')
 const serviceAccount = require('./firebase-key.json') // move to env
+const { json } = require('body-parser')
+const cors = require('cors')
+const redis = require('redis')
+const client = redis.createClient('6379', '174.12.0.3')
+const multer = require('multer')
+const upload = multer() // give us access to req.file
+const app = express()
+
 const rc = require('./controllers/recipes_controller')
 const ac = require('./controllers/auth_controller')
 const uc = require('./controllers/user_controller')
 const fc = require('./controllers/forum_controller')
 const pc = require('./controllers/plan_controller')
-const app = express()
-const upload = multer() // give us access to req.file
 
 admin.initializeApp({
 	credential: admin.credential.cert(serviceAccount),
@@ -20,57 +23,54 @@ admin.initializeApp({
 })
 
 const db = admin.firestore()
-app.set('db', db) // set the db so that it's accessible outside of this file
+app.set('db', db)
 app.set('admin', admin)
+app.set('client', client)
 
 // middleware
 app.use(json())
 app.use(cors())
 
+const update_cache = (req, res, next) => {
+	console.log('updating cache')
+	init()
+	next()
+}
+
 //
 //  TODO:
 //      + When a user creates a recipe it should go into their recipes array
-//      + Create plan schema or find a place for it
-//		+ Multi-tag filter search
-//		+ Redis or Memcached to cache recipes and make calls faster?
-//		+ Measure the speed of all functions
-//		+ Work out hypothetical Redis flow
-//		+ Mess with user data
-//		+ Fix routes that require user's UUID:
-//			- get_recipes_by_user
-//			- add_recipe (should add the recipe ID to the correct user document)
-//			- get_user_favorites (should use the uuid to get the user document id)
-//			- add_to_favorites
-//			- remove_from_favorites
-//			- edit recipe (use set)
+//		+ Finish query search
+//		+ Have get_user_recipes return the full recipe
 //
 
 // auth routes
-app.post('/register', ac.register_user) // Sign a user up
+app.post('/register', update_cache, ac.register_user) // Sign a user up
 
 // recipe routes
-app.get('/recipes/all', rc.get_all_recipes) // get all recipes
-app.get('/recipes', rc.get_public_recipes) // get all public recipes
-app.get('/recipes/id/:id', rc.get_recipe_by_id) // get recipe by id
-app.get('/recipes/:uid', rc.get_recipe_by_user) // get recipes for a user
-app.get('/recipes', rc.get_recipe_by_query) // search for a recipe
-app.post('/recipes', rc.add_recipe) // add a recipe
-app.put('/recipes/:id', rc.edit_recipe) // edit a recipe's ingredients
-app.put('/recipes/upvote/:id', rc.upvote_recipe) // upvote a recipe
-app.delete('/recipes/:id', rc.delete_recipe) // delete a recipe
+app.get('/recipes/all', rc.get_all_recipes) // get all recipes ✔️
+app.get('/recipes', rc.get_public_recipes) // get all public recipes ✔️
+app.get('/recipes/id/:id', rc.get_recipe_by_id) // get recipe by id ✔️
+app.get('/recipes/:uid', rc.get_recipe_by_user) // get recipes for a user ✔️
+app.get('/recipes/search/general', rc.get_recipe_by_query_search) // search for a recipe
+app.post('/recipes', update_cache, rc.add_recipe) // add a recipe ✔️
+app.put('/recipes/:id', update_cache, rc.edit_recipe) // edit a recipe's ingredients
+app.put('/recipes/upvote/:id', update_cache, rc.upvote_recipe) // upvote a recipe ✔️
+app.delete('/recipes/:id', update_cache, rc.delete_recipe) // delete a recipe ✔️
 
 // user routes
-app.get('/users/:id', uc.get_user_by_id) // get user by id
-app.get('/users', uc.get_user_by_username) // get user by username by appending `?user=<username>`
-app.get('/users/favorites/:id', uc.get_user_favorites) // get user favorites
-app.put('/users/favorites/:id', uc.add_to_favorites) // add a recipe to user favorites
-app.delete('/users/favorites/:id', uc.remove_from_favorites) // remove recipe from favorites
+app.get('/users/:id', uc.get_user_by_id) // get user by id ✔️
+app.get('/users', uc.get_user_by_username) // get user by username by appending `?user=<username>` ✔️
+app.get('/users/favorites/recipes/:uid', uc.get_user_favorites) // get user favorites
+app.put('/users/favorites/:id', update_cache, uc.add_to_favorites) // add a recipe to user favorites
+app.delete('/users/favorites/:id', update_cache, uc.remove_from_favorites) // remove recipe from favorites
 
 // meal plan routes
 app.get('/plans/pdf', pc.create_pdf)
 // add plan to db *
 // save pdf to user account
 app.get('/plans/:id', pc.get_plan_list) // return a list of plan links
+
 app.get('/plans/pdf/:id', pc.get_plan) // return link to single plan using ?plan=<filename>
 app.post('/upload', upload.single('file'), pc.upload_pdf)
 
@@ -84,5 +84,52 @@ app.delete('/forum/:id', fc.delete_post) // delete a post
 app.put('/forum/reply/:id', fc.upvote_reply) // upvote a reply, send postID in through params and reply id through body
 app.get('/forum/user/:id', fc.get_posts_by_user_id) // get posts by user id
 
+// this function is purely for development, remove this in production
+// it initializes the cache in redis by storing all of the data
+const init = () => {
+	try {
+		console.log('latest build caching db')
+		db.collection('recipes')
+			.get()
+			.then((snapshot) => {
+				snapshot.forEach((doc) => {
+					client.hmset('recipes', doc.data().id, JSON.stringify(doc.data()))
+				})
+			})
+			.catch((err) => console.log(err))
+
+		db.collection('users')
+			.get()
+			.then((snapshot) => {
+				snapshot.forEach((doc) => {
+					client.hmset('users', doc.data().id, JSON.stringify(doc.data()))
+				})
+			})
+			.catch((err) => console.log(err))
+
+		db.collection('forum')
+			.get()
+			.then((snapshot) => {
+				snapshot.forEach((doc) => {
+					client.hmset('forum', doc.data().id, JSON.stringify(doc.data()))
+				})
+			})
+			.catch((err) => console.log(err))
+
+		db.collection('plans')
+			.get()
+			.then((snapshot) => {
+				snapshot.forEach((doc) => {
+					client.hmset('plans', doc.data().id, JSON.stringify(doc.data()))
+				})
+			})
+	} catch (err) {
+		console.log(err)
+	}
+}
+
 const port = 4000
-app.listen(port, () => console.log(`Listening on localhost:${port}`))
+app.listen(port, () => {
+	init()
+	console.log(`Listening on localhost:${port}`)
+})

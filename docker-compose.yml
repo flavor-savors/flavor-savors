@@ -1,0 +1,23 @@
+version: '3'
+services:
+  node:
+    container_name: api
+    build: .
+    image: jml/api
+    networks:
+      - compose-test
+    ports:
+      - '4000:4000'
+  redis-server:
+    container_name: cache
+    image: redis
+    networks:
+      compose-test:
+        ipv4_address: 174.12.0.3
+
+networks:
+  compose-test:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 174.12.0.0/24
