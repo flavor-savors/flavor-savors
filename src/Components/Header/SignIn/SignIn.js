@@ -48,11 +48,12 @@
         // console.log(firebase.auth().currentUser)
         if (!this.state.isSignedIn) {
           return (
-            <div>
-              <h3>LOGIN</h3>
-              <p>Please sign-in:</p>
+            <div className='new'>
+              <h3 className='sm-log'>LOGIN</h3>
+              {/* <p>Please sign-in:</p> */}
               <StyledFirebaseAuth  uiConfig={this.uiConfig} firebaseAuth={firebase.auth()}/>
             </div>
+            
           );
         } else{return null}
       }

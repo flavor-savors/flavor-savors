@@ -28,3 +28,43 @@
     color: white;
     text-decoration: none;
 }
+
+.tooltip {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+    // border-bottom: 1px dotted black;
+  }
+  
+  .tooltip .tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: whitesmoke;
+    color: black;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    position: absolute;
+    z-index: 2;
+    top: 150%;
+    left: 50%;
+    margin-left: -60px;
+    font-size: 15px;
+
+  }
+  
+  .tooltip .tooltiptext::after {
+    content: "";
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    font-size: 2px;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent transparent whitesmoke transparent;
+  }
+  
+  .tooltip:hover .tooltiptext {
+    visibility: visible;
+  }
