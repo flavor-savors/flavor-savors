@@ -7,7 +7,7 @@ module.exports = {
 		// once we get the frontend built out
 		let data = {
 			id: '',
-			content: 'how to making the butter',
+			content: req.body.content,
 			created: moment().format('MMMM Do YYYY, h:mm:ss a'),
 			edited: false,
 			uid: req.body.uid,

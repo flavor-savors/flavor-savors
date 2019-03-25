@@ -29,7 +29,7 @@ class Home extends Component {
       recipes: [],
       filters: [],
       filteredRecipes: [],
-      uid: false,
+      user: "",
       b1: [],
       b2: [],
       b3: [],
@@ -66,8 +66,8 @@ class Home extends Component {
   //
   componentDidMount() {
     firebase.auth().onAuthStateChanged(user => {
-      this.setState({ uid: user.uid });
-      // console.log(this.state.uid);
+      this.setState({ user: user.uid });
+      console.log(this.state.user);
     });
     if (this.props.history.location.pathname === "/home/build") {
       this.togglePlanner();
@@ -76,12 +76,15 @@ class Home extends Component {
       this.setState({ recipes: res.data });
       this.setState({ filteredRecipes: res.data });
     });
+   
+
+    
   }
 
 //calls for current users favorites  
   viewUserFavRecipes = () => {
-    if (this.state.uid !== false) {
-      axios.get(`/users/favorites/${this.state.uid}`).then(res => {
+    if (this.state.user !=="") {
+      axios.get(`/users/favorites/${this.state.user}`).then(res => {
         this.setState({ filteredRecipes: res.data });
       });
     }
@@ -89,7 +92,8 @@ class Home extends Component {
 
 //calls for current users own input recipes    
   viewUserInputRecipes = () => {
-    axios.get(`/recipes/${this.state.uid}`).then(res => {
+    axios.get(`/recipes/${this.state.user}`).then(res => {
+      console.log(res.data)
       this.setState({ filteredRecipes: res.data });
     });
   };
@@ -98,7 +102,7 @@ class Home extends Component {
   //adds the current recipe id to the users favorites
   addToFavorites = id => {
     axios.put(`/users/favorites/${id}`, {
-      uid: firebase.auth().currentUser.uid
+      uid: this.state.user
     });
   };
 
@@ -203,9 +207,9 @@ submitPlan = () =>{
     // console.log(firebase.auth().currentUser);
     return (
       <div className='home-main'>
-
+      {/* <RecipeCreator/> */}
       <div>
-        {this.state.uid !== false ?
+        {this.state.user.length ?
         <div>
           <button onClick={this.viewUserFavRecipes}>View My Favorites</button>
           <button onClick={this.viewUserInputRecipes}>View My Own Recipes</button> 
@@ -227,7 +231,7 @@ submitPlan = () =>{
           )}
 
           <SmallRecipes
-            uid={this.state.uid}
+            user={this.state.user}
             recipes={this.state.filteredRecipes}
             showPlanner={this.state.showPlanner}
             setCurrentRecipe={this.setCurrentRecipe}

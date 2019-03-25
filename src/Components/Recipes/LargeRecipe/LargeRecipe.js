@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import RecipeCreator from '../../RecipeCreator/RecipeCreator';
-
+import RecipeCreator from '../../RecipeCreator/RecipeCreator'
 //this component is a modal over the small recipe cards 
 //which displays after a specific recipe has been chosen to inspect
 
@@ -13,6 +12,9 @@ class LargeRecipe extends Component {
         }
     }
 
+    toggleEdit = () => {
+        this.setState({edit: !this.state.edit})
+    }
 
     render(){
 
@@ -28,8 +30,13 @@ class LargeRecipe extends Component {
          
         return(
             <div className = {showHideLarge} onClick={this.props.toggleLarge} >
-
-                <div className='large-card'>
+            <div className='large-card'>
+            {this.state.edit ? 
+            <RecipeCreator
+            toggleEdit={this.toggleEdit}
+            recipe={this.props.recipe}/>
+            :
+             <div >
                     <h1>{this.props.recipe.recipeName}</h1>
                     <img src={this.props.recipe.imageURL} alt='recipe' className='lg-card-img'/>
                     <div>
@@ -56,9 +63,9 @@ class LargeRecipe extends Component {
                         <button onClick={this.props.addToMealPlan}>Add to meal plan</button>
                         <button onClick={()=>this.props.hideLarge()}>Close</button>
 
-                        {this.props.uid !== false && this.props.uid === this.props.recipe.user ? 
+                        {this.props.user !=='' && this.props.user === this.props.recipe.user ? 
                             <div>
-                            <button>Edit</button>
+                            <button onClick={this.toggleEdit}>Edit</button>
                             <button onClick={()=>this.props.deleteRecipe(this.props.recipe.id)}>Delete</button>
                             </div> 
                         : null
@@ -66,6 +73,9 @@ class LargeRecipe extends Component {
 
                     </div>  
                 </div>
+            }</div>
+
+               
             
             
             

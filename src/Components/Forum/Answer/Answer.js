@@ -22,6 +22,9 @@ class Answer extends Component {
             return(
                 <div key={i} >
                     <div>{e.content}</div>
+                    {this.props.replies.id === this.props.user ?
+                    <button onClick={()=>this.props.deleteReply(e.id)}>Delete</button>
+                    : null}
                 </div>
             )
         })

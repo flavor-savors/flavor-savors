@@ -49,6 +49,7 @@ class SmallRecipe extends Component {
 
     deleteRecipe = (id) => {
         axios.delete(`/recipes/${id}`)
+        axios.delete(`/users/favorites/${id}`, this.props.user)
         this.setState({showLarge: false})
         this.props.deleteRecipeFromCurrent(id)
     }
@@ -78,7 +79,7 @@ class SmallRecipe extends Component {
                 </div>
                 <div>
                     <LargeRecipe
-                    uid={this.props.uid}
+                    uid={this.props.user}
                     recipe={this.state.recipe}
                     addToFavorites={this.props.addToFavorites}
                     showLarge={this.state.showLarge}
