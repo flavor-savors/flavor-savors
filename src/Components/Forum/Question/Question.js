@@ -13,15 +13,32 @@ class Question extends Component {
         }
     }
 
-//on mouse over makes a call for a single recipe to prepare to render on the large recipe card component
+//on mouse over makes a call for a single question/answer to render on the answers component
     getQuestion = (i) => {
         axios.get(`/forum/${i}`).then(res=>{
         this.setState({question: res.data})
-        console.log(this.state.question)
-    })
-}
+        })
+    }
+
+//opens and closes the replies to a question    
     toggleReplies = () => {
         this.setState({showReplies: !this.state.showReplies})
+    }
+
+//allows users to submit a question
+    submitQuestion = () => {
+
+    }    
+
+//allows logged in users to delete their own posts
+    deletePost = () => {
+        axios.delete(`/forum/${this.state.question.id}`)
+    }
+
+//allows logged in users to delete their own replies
+
+    deleteReply = (id) => {
+        //needs endpoint
     }
 
     render(){
@@ -31,7 +48,9 @@ class Question extends Component {
                     <div>{e.content}</div>
                     <p>Posted by: {e.user}</p>
                     <button onClick={this.toggleReplies}>view replies</button>
-{/* /needs a conditional render of a delete button if the questions uid matches the user uid */}
+                    {this.props.uid === e.id ? 
+                    <button>Delete</button>
+                    : null}
                 </div>
             )
         })
@@ -42,10 +61,12 @@ class Question extends Component {
 
                 {!this.state.showReplies ? null
                     : <Answer
+                    user={this.props.uid}
                     showReplies={this.state.showReplies}
                     question={this.state.question.content}
                     replies={this.state.question.replies}
                     toggleReplies = {this.toggleReplies}
+                    deleteReply={this.deleteReply}
                 /> }
 
 

@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import Question from "../Question/Question";
 import axios from "axios";
 import firebase from "../../firebase/firebase";
+import AskQuestion from "../AskQuestion/AskQuestion";
 
 class ForumHome extends Component {
   constructor() {
@@ -11,7 +12,7 @@ class ForumHome extends Component {
       questions: [],
       filteredQuestions: [],
       currentQuestionId: "",
-      uid: false
+      uid: ''
     };
   }
 
@@ -27,10 +28,11 @@ class ForumHome extends Component {
     });
   }
 
-  //calls for current users questions
+  //calls for current users questions STILL NEEDS A FUNCTIONAL ENDPOINT
   viewUserQuestions = () => {
-    if (this.state.uid !== false) {
+    if (this.state.uid !== '') {
       axios.get(`/forum/user/${this.state.uid}`).then(res => {
+        console.log(res.data)
         this.setState({ filteredQuestions: res.data });
       });
     }
@@ -45,14 +47,17 @@ class ForumHome extends Component {
     return (
       <div className='forum-main'>
         <div>
-          {this.state.uid !== false ? (
+          {this.state.uid !== '' ? (
             <div>
               <button onClick={this.viewUserQuestions}>View My Posts</button>
               <button>View All Posts</button>
+              <AskQuestion
+              user={this.state.uid}/>
             </div>
           ) : null}
         </div>
         <Question
+          uid={this.state.uid}
           questions={this.state.questions}
           setCurrentQuestionId={this.setCurrentQuestionId}
         />
