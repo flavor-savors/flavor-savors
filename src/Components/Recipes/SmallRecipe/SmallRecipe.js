@@ -35,12 +35,22 @@ class SmallRecipe extends Component {
     }
 
 //hides the large version of the recipe
-    hideLarge = () => {
+    addToMealPlan = () => {
         this.setState({showLarge: false}) 
         console.log(this.props.showPlanner)
         if(this.props.showPlanner === false ){
             this.props.togglePlanner()
         }
+    }
+
+    hideLarge = () => {
+        this.setState({showLarge: false})
+    }
+
+    deleteRecipe = (id) => {
+        axios.delete(`/recipes/${id}`)
+        this.setState({showLarge: false})
+        this.props.deleteRecipeFromCurrent(id)
     }
 
     render(){
@@ -68,10 +78,13 @@ class SmallRecipe extends Component {
                 </div>
                 <div>
                     <LargeRecipe
+                    uid={this.props.uid}
                     recipe={this.state.recipe}
                     addToFavorites={this.props.addToFavorites}
                     showLarge={this.state.showLarge}
                     hideLarge={this.hideLarge}
+                    addToMealPlan={this.addToMealPlan}
+                    deleteRecipe={this.deleteRecipe}
                     togglePlanner={this.props.togglePlanner}
                     />
                 </div>
