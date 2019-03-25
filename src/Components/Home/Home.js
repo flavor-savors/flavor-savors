@@ -29,7 +29,35 @@ class Home extends Component {
       recipes: [],
       filters: [],
       filteredRecipes: [],
-      uid: false
+      uid: false,
+      b1: [],
+      b2: [],
+      b3: [],
+      b4: [],
+      b5: [],
+      b6: [],
+      b7: [],
+      l1: [],
+      l2: [],
+      l3: [],
+      l4: [],
+      l5: [],
+      l6: [],
+      l7: [],
+      d1: [],
+      d2: [],
+      d3: [],
+      d4: [],
+      d5: [],
+      d6: [],
+      d7: [],
+      s1: [],
+      s2: [],
+      s3: [],
+      s4: [],
+      s5: [],
+      s6: [],
+      s7: []
     };
   }
 
@@ -66,6 +94,14 @@ class Home extends Component {
     });
   };
 
+//Functionality for SmallRecipes
+  //adds the current recipe id to the users favorites
+  addToFavorites = id => {
+    axios.put(`/users/favorites/${id}`, {
+      uid: firebase.auth().currentUser.uid
+    });
+  };
+
   //open and closes the planner
   togglePlanner = add => {
     this.setState({ showPlanner: !this.state.showPlanner });
@@ -81,6 +117,18 @@ class Home extends Component {
     this.setState({ currentRecipeId: id, currentRecipeName: name });
   };
 
+//when a recipe is deleted from database this removes it from the filteredArray as well
+  deleteRecipeFromCurrent = (id) => {
+    let newRecipes = this.state.filteredRecipes
+    for(let i=0; i<newRecipes.length; i++){
+      if(id === newRecipes[i].id){
+        newRecipes.splice(i, 1)
+      }
+    }
+    this.setState({filteredRecipes: newRecipes})
+  }
+  
+//functionality for Filter component
   //set the array of filters on click of the checkbox on the filter component
   //deletes if it is already in the array, or adds if not currently in the array
   setFilters = tag => {
@@ -102,7 +150,7 @@ class Home extends Component {
     console.log(this.state);
   };
 
-  //filters the filtered array using the array of filter tags
+  //filters the filteredArray using the array of filter tags
   //if no tags will return all recipes
   filterSearch = () => {
     if (!this.state.filters.length) {
@@ -128,31 +176,33 @@ class Home extends Component {
     this.setState({ filteredRecipes: this.state.recipes, filters: [] });
   };
 
-  //adds the current recipe id to the users favorites
-  addToFavorites = id => {
-    axios.put(`/users/favorites/${id}`, {
-      uid: firebase.auth().currentUser.uid
-    });
-  };
+//functionality for the planner
+handleChange = meal => {
+  this.setState(prevState => ({
+    ...prevState,
+    [meal]: [
+      ...prevState[meal],
+      { name: this.state.currentRecipeName, id: this.state.currentRecipeId }
+    ]
+  }));
+};
 
-  deleteRecipeFromCurrent = (id) => {
-    
-    let newRecipes = this.state.filteredRecipes
-    console.log(id)
+removeRecipe = (meal, i) => {
+  let meals = [...this.state[meal]];
+  meals.splice(i, 1);
+  this.setState({ [meal]: meals });
+};
 
-    for(let i=0; i<newRecipes.length; i++){
-      if(id === newRecipes[i].id){
-        newRecipes.splice(i, 1)
-      }
-    }
-    this.setState({filteredRecipes: newRecipes})
-  }
+submitPlan = () =>{
+  
+}
+
+
 
   render() {
     // console.log(firebase.auth().currentUser);
     return (
       <div className='home-main'>
-      <RecipeCreator/>
 
       <div>
         {this.state.uid !== false ?
@@ -188,6 +238,36 @@ class Home extends Component {
 
           {!this.state.showPlanner ? null : (
             <Planner
+              b1={this.state.b1}
+              b2={this.state.b2}
+              b3={this.state.b3}
+              b4={this.state.b4}
+              b5={this.state.b5}
+              b6={this.state.b6}
+              b7={this.state.b7}
+              l1={this.state.l1}
+              l2={this.state.l2}
+              l3={this.state.l3}
+              l4={this.state.l4}
+              l5={this.state.l5}
+              l6={this.state.l6}
+              l7={this.state.l7}
+              d1={this.state.d1}
+              d2={this.state.d2}
+              d3={this.state.d3}
+              d4={this.state.d4}
+              d5={this.state.d5}
+              d6={this.state.d6}
+              d7={this.state.d7}
+              s1={this.state.s1}
+              s2={this.state.s2}
+              s3={this.state.s3}
+              s4={this.state.s4}
+              s5={this.state.s5}
+              s6={this.state.s6}
+              s7={this.state.s7}
+              handleChange={this.handleChange}
+              removeRecipe={this.removeRecipe}
               currentRecipeId={this.state.currentRecipeId}
               currentRecipeName={this.state.currentRecipeName}
             />
