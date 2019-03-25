@@ -102,7 +102,7 @@ module.exports = {
 			created: moment().format('MMMM Do YYYY, h:mm:ss a'),
 			id: '',
 			edited: false,
-			user: req.body.user, // should be pulled from the current user and sent in
+			user: req.body.uid, // should be pulled from the current user and sent in
 			public: true,
 			imageURL: req.body.imageURL,
 			directions: req.body.directions,

@@ -4,6 +4,7 @@ import Planner from "../PlannerDrawer/Planner/Planner";
 import Filter from "../FilterDrawer/Filter";
 import axios from "axios";
 import firebase from "../firebase/firebase";
+import RecipeCreator from "../RecipeCreator/RecipeCreator";
 
 //this component is the main home page for browsing/searching recipes and meal planning
 //it renders 5 views:
@@ -38,7 +39,7 @@ class Home extends Component {
   componentDidMount() {
     firebase.auth().onAuthStateChanged(user => {
       this.setState({ uid: user.uid });
-      console.log(this.state.uid);
+      // console.log(this.state.uid);
     });
     if (this.props.history.location.pathname === "/home/build") {
       this.togglePlanner();
@@ -134,10 +135,24 @@ class Home extends Component {
     });
   };
 
+  deleteRecipeFromCurrent = (id) => {
+    
+    let newRecipes = this.state.filteredRecipes
+    console.log(id)
+
+    for(let i=0; i<newRecipes.length; i++){
+      if(id === newRecipes[i].id){
+        newRecipes.splice(i, 1)
+      }
+    }
+    this.setState({filteredRecipes: newRecipes})
+  }
+
   render() {
-    console.log(firebase.auth().currentUser);
+    // console.log(firebase.auth().currentUser);
     return (
       <div className='home-main'>
+      <RecipeCreator/>
 
       <div>
         {this.state.uid !== false ?
@@ -162,11 +177,13 @@ class Home extends Component {
           )}
 
           <SmallRecipes
+            uid={this.state.uid}
             recipes={this.state.filteredRecipes}
             showPlanner={this.state.showPlanner}
             setCurrentRecipe={this.setCurrentRecipe}
             togglePlanner={this.togglePlanner}
             addToFavorites={this.addToFavorites}
+            deleteRecipeFromCurrent={this.deleteRecipeFromCurrent}
           />
 
           {!this.state.showPlanner ? null : (
