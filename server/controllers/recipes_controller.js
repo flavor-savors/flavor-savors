@@ -89,6 +89,7 @@ module.exports = {
 					}
 
 					recipes = snapshot.forEach((doc) => recipes.push(doc.data()))
+					// turn this into a fuzzy search
 					res.status(200).json(recipes.filter((recipe) => recipe.name === req.query.q))
 				})
 		} catch (err) {
@@ -96,7 +97,6 @@ module.exports = {
 		}
 	},
 
-	
 	add_recipe: (req, res) => {
 		let data = {
 			created: moment().format('MMMM Do YYYY, h:mm:ss a'),

@@ -10,6 +10,7 @@ module.exports = {
 			content: 'how to making the butter',
 			created: moment().format('MMMM Do YYYY, h:mm:ss a'),
 			edited: false,
+			uid: req.body.uid,
 			replies: [
 				{
 					content: 'nice. me too thanks',
@@ -159,6 +160,15 @@ module.exports = {
 				})
 		} catch (err) {
 			console.log(err)
+			res.status(500).json(err)
+		}
+	},
+
+	get_posts_by_user_id: (req, res) => {
+		// do it
+		try {
+			
+		} catch (err) {
 			res.status(500).json(err)
 		}
 	},
