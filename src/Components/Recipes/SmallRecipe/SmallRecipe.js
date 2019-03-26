@@ -24,7 +24,9 @@ class SmallRecipe extends Component {
 //on mouse over makes a call for a single recipe to prepare to render on the large recipe card component
     getRecipe = (i) => {
             axios.get(`/recipes/id/${i}`).then(res=>{
-            this.setState({recipe: res.data})
+            // this.setState({recipe: res.data})
+            console.log(res.data)
+
         })
     }
 
@@ -64,7 +66,11 @@ class SmallRecipe extends Component {
                         </div>
                         <div>   
                             <h1>{e.recipeName}</h1>
+                            {this.props.user !== '' ?
                             <button onClick={()=>this.props.addToFavorites(e.id)}>Add to favs</button>
+                            : null
+                            }
+                            
                             <button onClick={()=>this.toggleLarge(e.id, e.recipeName)}>View this recipe</button>
                         </div>
                     </div>  

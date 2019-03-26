@@ -77,14 +77,12 @@ class Home extends Component {
       this.setState({ filteredRecipes: res.data });
     });
    
-
-    
   }
 
 //calls for current users favorites  
   viewUserFavRecipes = () => {
     if (this.state.user !=="") {
-      axios.get(`/users/favorites/${this.state.user}`).then(res => {
+      axios.get(`/users/favorites/recipes/${this.state.user}`).then(res => {
         this.setState({ filteredRecipes: res.data });
       });
     }

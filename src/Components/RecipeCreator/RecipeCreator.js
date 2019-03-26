@@ -29,8 +29,9 @@ class RecipeCreator extends Component {
   componentDidMount() {
     firebase.auth().onAuthStateChanged(user => {
       this.setState({ user: user.uid });
+      console.log(user.uid)
     });
-    console.log(this.props.recipe)
+    
 
     if(this.props.recipe){
     let recipe = this.props.recipe
@@ -50,7 +51,7 @@ class RecipeCreator extends Component {
 //submits the new recipe or submits an update to current recipe and resets the form by resetting state
   handleSubmit = (e) => {
     e.preventDefault()
-   
+   console.log(this.state)
 const state = this.state
    if(this.props.recipe){
     this.props.toggleEdit()
