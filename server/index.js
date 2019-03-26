@@ -31,10 +31,15 @@ app.set('client', client)
 app.use(json())
 app.use(cors())
 app.use((req, res, next) => {
-	console.log(req.method)
-	console.log('\x1b[36m%s\x1b[0m', '\t[ - ] updating cache....')
-	init()
-	console.log('\x1b[32m', '\t[ + ] cache updated!')
+	if (req.method === 'POST' || req.method === 'PUT' || req.method === 'DELETE') {
+		console.log('\x1b[36m%s\x1b[0m', '\t[ - ] updating cache....')
+		init()
+		console.log('\x1b[32m', '\t[ + ] cache updated!')
+	} else {
+		console.log('\x1b[31m', 'Not updating the cache')
+	}
+
+	console.log('hit next')
 	next()
 })
 
@@ -83,7 +88,7 @@ app.post('/forum', fc.create_post) // create a new post
 app.post('/forum/reply/:id', fc.add_reply) // add a reply to the post
 app.put('/forum/:id', fc.update_post) // change the content of the post
 app.delete('/forum/:id', fc.delete_post) // delete a post
-app.delete('/forum/reply/:id', fc.delete_reply)
+app.delete('/forum/reply/:id', fc.delete_reply) // post id in params, reply id in body
 app.put('/forum/reply/:id', fc.upvote_reply) // upvote a reply, postIDthrough params and reply id through body
 app.get('/forum/user/:uid', fc.get_posts_by_user_id) // get posts by user id
 
