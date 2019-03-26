@@ -36,10 +36,13 @@ module.exports = {
 	delete_post: (req, res) => {
 		try {
 			const db = req.app.get('db')
+			const client = req.app.get('client')
 			db.collection('forum')
 				.doc(req.params.id)
 				.delete()
 			res.status(200).json('Post deleted')
+
+			client.hdel('forum', req.params.id)
 		} catch (err) {
 			res.status(500).json(err)
 		}
@@ -61,12 +64,22 @@ module.exports = {
 
 	get_post: (req, res) => {
 		try {
-			const db = req.app.get('db')
-			db.collection('forum')
-				.doc(req.params.id)
-				.get()
-				.then((snapshot) => res.status(200).json(snapshot.data()))
-				.catch((err) => res.status(500).json(err))
+			// const db = req.app.get('db')
+			// db.collection('forum')
+			// 	.doc(req.params.id)
+			// 	.get()
+			// 	.then((snapshot) => res.status(200).json(snapshot.data()))
+			// 	.catch((err) => res.status(500).json(err))
+
+			const client = req.app.get('client')
+			client.hmget('forum', req.params.id, (err, result) => {
+				if (err) {
+					console.log(err)
+					res.status(404).json('Post not found')
+				}
+
+				res.json(JSON.parse(result))
+			})
 		} catch (err) {
 			res.status(500).json(err)
 		}
@@ -74,15 +87,29 @@ module.exports = {
 
 	get_all_posts: (req, res) => {
 		try {
-			const db = req.app.get('db')
+			// const db = req.app.get('db')
 			let posts = []
-			db.collection('forum')
-				.get()
-				.then((snapshot) => {
-					snapshot.forEach((doc) => posts.push(doc.data()))
-					res.status(200).json(posts)
-				})
-				.catch((err) => res.status(500).json(err))
+			// db.collection('forum')
+			// 	.get()
+			// 	.then((snapshot) => {
+			// 		snapshot.forEach((doc) => posts.push(doc.data()))
+			// 		res.status(200).json(posts)
+			// 	})
+			// 	.catch((err) => res.status(500).json(err))
+
+			const client = req.app.get('client')
+			client.hgetall('forum', (err, result) => {
+				if (err) {
+					console.log(err)
+					res.status(500).json(err)
+				}
+
+				for (let key in result) {
+					posts.push(JSON.parse(result[key]))
+				}
+
+				res.status(200).json(posts)
+			})
 		} catch (err) {
 			res.status(500).json(err)
 		}
@@ -101,7 +128,7 @@ module.exports = {
 						created: moment().format('MMMM Do YYYY, h:mm:ss a'),
 						upvotes: 0,
 						uid: req.body.uid,
-						username: req.body.username
+						username: req.body.username,
 					}),
 				})
 			res.status(200).json('Reply added')

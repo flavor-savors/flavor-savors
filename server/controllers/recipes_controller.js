@@ -176,7 +176,6 @@ module.exports = {
 				}
 
 				for (let key in result) {
-					console.log('key ::', key)
 					all_recipes.push(JSON.parse(result[key]))
 				}
 

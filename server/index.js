@@ -31,8 +31,9 @@ app.set('client', client)
 app.use(json())
 app.use(cors())
 app.use((req, res, next) => {
-	console.log('middleware triggered')
+	console.log('\x1b[36m%s\x1b[0m', '\t[ - ] updating cache....')
 	init()
+	console.log('\x1b[32m', '\t[ + ] cache updated!')
 	next()
 })
 
@@ -89,7 +90,6 @@ app.get('/forum/user/:uid', fc.get_posts_by_user_id) // get posts by user id
 // it initializes the cache in redis by storing all of the data
 const init = () => {
 	try {
-		console.log('caching db')
 		db.collection('recipes')
 			.get()
 			.then((snapshot) => {
@@ -131,6 +131,7 @@ const init = () => {
 
 const port = 4000
 app.listen(port, () => {
+	console.log('\x1b[35m', '\t[ - ] initializing redis cache')
 	init()
 	console.log(`Listening on localhost:${port}`)
 })
