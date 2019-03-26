@@ -31,9 +31,11 @@ app.set('client', client)
 app.use(json())
 app.use(cors())
 app.use((req, res, next) => {
-	console.log('\x1b[36m%s\x1b[0m', '\t[ - ] updating cache....')
-	init()
-	console.log('\x1b[32m', '\t[ + ] cache updated!')
+	if (req.method === 'PUT' || req.method === 'POST' || req.method === 'DELETE') {
+		console.log('\x1b[36m%s\x1b[0m', '\t[ - ] updating cache....')
+		init()
+		console.log('\x1b[32m', '\t[ + ] cache updated!')
+	}
 	next()
 })
 
@@ -86,8 +88,6 @@ app.delete('/forum/reply/:id', fc.delete_reply)
 app.put('/forum/reply/:id', fc.upvote_reply) // upvote a reply, postIDthrough params and reply id through body
 app.get('/forum/user/:uid', fc.get_posts_by_user_id) // get posts by user id
 
-// this function is purely for development, remove this in production
-// it initializes the cache in redis by storing all of the data
 const init = () => {
 	try {
 		db.collection('recipes')
@@ -131,7 +131,7 @@ const init = () => {
 
 const port = 4000
 app.listen(port, () => {
-	console.log('\x1b[35m', '\t[ - ] initializing redis cache')
+	console.log('\x1b[35m', '\t[ - ] initializing redis cache....')
 	init()
-	console.log(`Listening on localhost:${port}`)
+	console.log('\x1b[33m', `\t[ * ] Listening on localhost:${port}`)
 })

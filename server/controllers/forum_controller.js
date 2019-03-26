@@ -9,6 +9,7 @@ module.exports = {
 			id: '',
 			content: req.body.content,
 			created: moment().format('MMMM Do YYYY, h:mm:ss a'),
+			unix: new Date().getTime(),
 			edited: false,
 			uid: req.body.uid,
 			username: req.body.username,
@@ -108,7 +109,7 @@ module.exports = {
 					posts.push(JSON.parse(result[key]))
 				}
 
-				res.status(200).json(posts)
+				res.status(200).json(posts.sort((a, b) => a.unix - b.unix))
 			})
 		} catch (err) {
 			res.status(500).json(err)
