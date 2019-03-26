@@ -42,17 +42,37 @@ class Question extends Component {
     }
 
     render(){
+        const replyCondition= this.props.uid !== '' 
+        ? 'reply-button' 
+        : 'tool-tip'
         const question = this.props.questions.map((e, i)=>{
             return(
                 <div key={i} onMouseEnter={()=>this.getQuestion(e.id)} className='question-card'>
                     <div className='question-title'>
                     <button onClick={this.toggleReplies}>view replies</button>
+                    
+                    {/* {this.props.uid !=='' ? 
+                        <button>Reply</button>
+                        : <div>
+                            <button>Reply</button>
+                            <p className="">You must be logged in to reply to questions!</p>
+                        </div>
+                    } */}
+
+                {this.props.uid !=='' ?
+                    <button className='reply-button'>Reply</button>
+                    :<div className="reply-modal">
+                    <button className='reply-modal'>Reply</button>
+                    <p className="reply-text">Must be Signed in to reply</p>
+                    </div> }  
+
+
                     <h1>{e.content}</h1>
                     </div>
                     {e.user}
                     <p>Posted by: {e.user}</p>
                     {this.props.uid === e.id ? 
-                    <button>Delete</button>
+                    <button onClick={this.deletePost}>Delete</button>
                     : null}
                 </div>
             )
