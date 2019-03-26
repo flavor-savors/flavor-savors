@@ -39,7 +39,6 @@ app.use((req, res, next) => {
 		console.log('\x1b[31m', 'Not updating the cache')
 	}
 
-	console.log('hit next')
 	next()
 })
 
@@ -92,6 +91,7 @@ app.delete('/forum/reply/:id', fc.delete_reply) // post id in params, reply id i
 app.put('/forum/reply/:id', fc.upvote_reply) // upvote a reply, postIDthrough params and reply id through body
 app.get('/forum/user/:uid', fc.get_posts_by_user_id) // get posts by user id
 
+// purely for development purposes
 const init = () => {
 	try {
 		db.collection('recipes')

@@ -99,6 +99,10 @@ module.exports = {
 		// store it in an array
 		// return it
 	},
+
+	create_plan: (req, res) => {
+		// create a plan from data sent in
+	},
 }
 
 //      GROCERY LIST STRUCTURE

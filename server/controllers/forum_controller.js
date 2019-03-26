@@ -143,14 +143,7 @@ module.exports = {
 	delete_reply: (req, res) => {
 		try {
 			const db = req.app.get('db')
-			const admin = req.app.get('admin')
 			const client = req.app.get('client')
-
-			// get post id
-			// get reply id
-			// delete from cache
-			// update cache
-			// update db
 
 			client.hmget('forum', req.params.id, (err, result) => {
 				if (err) {
@@ -161,18 +154,17 @@ module.exports = {
 				let parsed = JSON.parse(result)
 				let replyIndex = parsed.replies.findIndex((rep) => rep.id === req.body.id)
 				if (replyIndex === -1) {
-					res.status(404).json('Reply not found')
+					console.log('Reply not found')
 				}
 
 				parsed.replies.splice(replyIndex, 1)
-
 				res.status(200).json(parsed)
 
+				client.hmset('forum', req.params.id, JSON.stringify(parsed))
 				db.collection('forum')
 					.doc(req.params.id)
 					.set(parsed)
-
-				client.hmset('forum', req.params.id, JSON.stringify(parsed))
+					.catch((err) => res.status(500).json('Error editing document'))
 			})
 		} catch (err) {
 			res.status(500).json(err)
@@ -180,10 +172,6 @@ module.exports = {
 	},
 
 	upvote_reply: (req, res) => {
-		// get post id
-		// get reply id
-		// increment fieldvalue
-
 		try {
 			const db = req.app.get('db')
 			let replies
