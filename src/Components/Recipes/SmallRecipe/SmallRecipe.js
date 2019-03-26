@@ -24,9 +24,7 @@ class SmallRecipe extends Component {
 //on mouse over makes a call for a single recipe to prepare to render on the large recipe card component
     getRecipe = (i) => {
             axios.get(`/recipes/id/${i}`).then(res=>{
-            // this.setState({recipe: res.data})
-            console.log(res.data)
-
+            this.setState({recipe: res.data})
         })
     }
 

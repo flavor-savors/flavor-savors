@@ -18,8 +18,9 @@ class ForumHome extends Component {
 
   componentDidMount() {
     firebase.auth().onAuthStateChanged(user => {
-      this.setState({ uid: user.uid });
-      console.log(this.state.uid);
+      if(user !== null){
+        this.setState({ user: user.uid });
+      }
     });
 
     axios.get(`/forum`).then(res => {

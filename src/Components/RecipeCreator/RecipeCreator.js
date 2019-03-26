@@ -28,8 +28,9 @@ class RecipeCreator extends Component {
 //sets up for user verification
   componentDidMount() {
     firebase.auth().onAuthStateChanged(user => {
-      this.setState({ user: user.uid });
-      console.log(user.uid)
+      if(user !== null){
+        this.setState({ user: user.uid });
+      }
     });
     
 

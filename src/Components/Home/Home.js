@@ -66,8 +66,9 @@ class Home extends Component {
   //
   componentDidMount() {
     firebase.auth().onAuthStateChanged(user => {
-      this.setState({ user: user.uid });
-      console.log(this.state.user);
+      if(user !== null){
+        this.setState({ user: user.uid });
+      }
     });
     if (this.props.history.location.pathname === "/home/build") {
       this.togglePlanner();
