@@ -9,7 +9,10 @@ class Question extends Component {
 
         this.state = {
             showReplies: false,
-            question: []
+            question: [],
+            newQuestion:{
+                content:''
+            }
         }
     }
 
@@ -51,13 +54,6 @@ class Question extends Component {
                     <div className='question-title'>
                     <button onClick={this.toggleReplies}>view replies</button>
                     
-                    {/* {this.props.uid !=='' ? 
-                        <button>Reply</button>
-                        : <div>
-                            <button>Reply</button>
-                            <p className="">You must be logged in to reply to questions!</p>
-                        </div>
-                    } */}
 
                 {this.props.uid !=='' ?
                     <button className='reply-button'>Reply</button>
@@ -70,7 +66,7 @@ class Question extends Component {
                     <h1>{e.content}</h1>
                     </div>
                     {e.user}
-                    <p>Posted by: {e.user}</p>
+                    <div className='username'><p>Posted by: {e.username}</p></div>
                     {this.props.uid === e.id ? 
                     <button onClick={this.deletePost}>Delete</button>
                     : null}
