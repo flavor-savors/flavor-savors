@@ -31,6 +31,7 @@ class Register extends Component {
   render() {
     return (
       <form onSubmit={(e) =>this.handleRegister(e)} className='reg-form'>
+        <h3 className='reg-h3'>Register</h3>
           <input
             placeholder='Username'
             name='displayName'
