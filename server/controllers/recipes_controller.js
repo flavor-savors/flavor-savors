@@ -206,9 +206,9 @@ module.exports = {
 			created: moment().format('MMMM Do YYYY, h:mm:ss a'),
 			id: '',
 			edited: false,
-			user: req.body.uid, // should be pulled from the current user and sent in
-			public: true,
-			imageURL: req.body.imageURL || 'https://image.flaticon.com/icons/png/512/45/45332.png',
+			user: req.body.user, // should be pulled from the current user and sent in
+			public: req.body.public,
+			imageURL: req.body.imageURL,
 			directions: req.body.directions,
 			upvotes: 0,
 			recipeName: req.body.recipeName,

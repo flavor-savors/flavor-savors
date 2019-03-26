@@ -1,0 +1,11 @@
+.question-main {
+    width: 50%;
+    margin: auto;
+    .question-card{
+        display: flex;
+        justify-content: space-between;
+        .question-title{
+            display: flex;
+        }
+    }
+}
