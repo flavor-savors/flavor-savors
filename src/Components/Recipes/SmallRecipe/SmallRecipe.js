@@ -64,7 +64,11 @@ class SmallRecipe extends Component {
                         </div>
                         <div>   
                             <h1>{e.recipeName}</h1>
+                            {this.props.user !== '' ?
                             <button onClick={()=>this.props.addToFavorites(e.id)}>Add to favs</button>
+                            : null
+                            }
+                            
                             <button onClick={()=>this.toggleLarge(e.id, e.recipeName)}>View this recipe</button>
                         </div>
                     </div>  

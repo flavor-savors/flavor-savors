@@ -44,10 +44,13 @@ class Question extends Component {
     render(){
         const question = this.props.questions.map((e, i)=>{
             return(
-                <div key={i} onMouseEnter={()=>this.getQuestion(e.id)}>
-                    <div>{e.content}</div>
-                    <p>Posted by: {e.user}</p>
+                <div key={i} onMouseEnter={()=>this.getQuestion(e.id)} className='question-card'>
+                    <div className='question-title'>
                     <button onClick={this.toggleReplies}>view replies</button>
+                    <h1>{e.content}</h1>
+                    </div>
+                    {e.user}
+                    <p>Posted by: {e.user}</p>
                     {this.props.uid === e.id ? 
                     <button>Delete</button>
                     : null}
