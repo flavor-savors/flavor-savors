@@ -15,13 +15,28 @@
 .dp{
     position: absolute;
     z-index: 2; 
-    top: 9%;
+    top: 8%;
     background-color: whitesmoke;
     color: black;
+    width: 10%;
+    left: 82.5%;
+    height: 20vh;
+}
+
+.dp-items{
+    // border: solid 1px red;
     display: flex;
     flex-direction: column;
-    width: 7vw;
-    left: 84%;
-    height: 10vh;
-    
+    justify-content: space-around;
+    height: 9vh;
+    font-size: 20px;
+}
+
+.pro-link{
+    text-decoration: none;
+    border: solid black 1px;
+}
+
+.logout{
+    height: 3vh;
 }

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import firebase from '../../firebase/firebase';
-import {NavLink} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 
 class DropDown extends Component {
     constructor(){
@@ -29,8 +29,10 @@ class DropDown extends Component {
         <div className='downArrow'/>
         {this.state.showDrop ? 
         <div className='dp'>
-        <NavLink onClick={this.displayDrop} to='/profile'>Profile</NavLink>
-        <button onClick={() => firebase.auth().signOut()}> sign out</button>
+        <div className='dp-items'>
+        <Link className='pro-link' onClick={this.displayDrop} to='/profile'>Profile</Link>
+        <button className='logout' onClick={() => firebase.auth().signOut()}> sign out</button>
+        </div>
         </div> : null}
       </div>
     )

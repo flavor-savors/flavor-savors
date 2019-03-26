@@ -4,6 +4,7 @@
 	"private": true,
 	"dependencies": {
 		"@google-cloud/firestore": "^1.1.0",
+		"@sweetalert/with-react": "^0.1.1",
 		"aws-sdk": "^2.425.0",
 		"axios": "^0.18.0",
 		"cors": "^2.8.5",
@@ -29,7 +30,9 @@
 		"redux": "^4.0.1",
 		"redux-logger": "^3.0.6",
 		"redux-promise-middleware": "^6.1.0",
-		"short-uuid": "^3.1.0"
+		"short-uuid": "^3.1.0",
+		"sweetalert": "^2.1.2",
+		"sweetalert-react": "^0.4.11"
 	},
 	"scripts": {
 		"start": "react-scripts start",

@@ -23,7 +23,7 @@ class Toggle extends Component {
   
     return (
       <div>
-      <div div className='sign-cont' onClick={this.props.x}/>
+      <div className='sign-cont' onClick={this.props.x}/>
         <div className='sign-form'>
           <div className='tog'>
           <button className='btn-1' onClick={this.handleLog}>Login</button>
