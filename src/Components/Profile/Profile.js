@@ -3,7 +3,9 @@ import './_profile.scss'
 import firebase from '../firebase/firebase';
 import ChangeImage from './ChangeImage/ChangeImage';
 import { Redirect} from 'react-router-dom';
-import RecipeCreator from '../RecipeCreator/RecipeCreator'
+import RecipeCreator from '../RecipeCreator/RecipeCreator';
+import swal from '@sweetalert/with-react';
+
  
 class Profile extends Component {
     constructor(){
@@ -46,22 +48,38 @@ class Profile extends Component {
       
       auth.sendPasswordResetEmail(firebase.auth().currentUser.email)
       .then(() => {
-        alert('Password Rest has been sent to your email.')
+        swal({
+          title: "Email Sent",
+          text: "you will an recive email to rest your password!",
+          icon: "success"
+        });
       }).catch(err => {
         console.log(err)
       })
     }
 
 
-    // deleteAcc = () => {
-    //   var user = firebase.auth().currentUser
-    //   user.delete()
-    //   .then(() => {
-    //     console.log('deleted succsessfully')
-    //   }).catch(err => {
-    //     console.log(err)
-    //   })
-    // }
+    deleteAcc = () => {
+      console.log('deleted')
+        swal({
+          title: "Are you sure?",
+          text: "Once deleted, you will not be able to recover your profile",
+          icon: "warning",
+          buttons: true,
+          dangerMode: true
+        })
+        .then(user1 => {
+          if(user1){
+            var user = firebase.auth().currentUser
+            user.delete()
+            swal("Poof! Your account has been deleted!",{
+              icon: "success",
+            })
+          } else {
+            swal("Your account is safe!");
+          }
+        })
+    }
 
 
   render() {
