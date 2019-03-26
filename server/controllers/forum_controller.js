@@ -133,7 +133,7 @@ module.exports = {
 				let parsed = JSON.parse(result)
 				let replyIndex = parsed.replies.findIndex((rep) => rep.id === req.body.id)
 				if (replyIndex === -1) {
-					res.status(404).json('Reply not found')
+					console.log('reply not found')
 				}
 
 				parsed.replies.splice(replyIndex, 1)

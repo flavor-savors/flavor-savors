@@ -15,7 +15,10 @@ class AskQuestion extends Component {
       }
 
     submitQuestion = () => {
-       axios.post(`/forum`,{uid: this.props.user, content:this.state.content})
+       axios.post(`/forum`,{uid: this.props.uid, content:this.state.content, username:this.props.username}).then(()=>
+          this.props.getAll() 
+       )
+       this.setState({content: ''})
     }  
 
     render(){
@@ -23,7 +26,7 @@ class AskQuestion extends Component {
             <div className="ask-question-main">
                 <div>
                     <h1>Ask a Question:</h1>
-                    <input type="text" name='content' value={this.state.content} onChange={this.handleChange}></input>
+                    <input type="text" name='content' value={this.state.content} onChange={this.handleChange}/>
                     <button onClick={this.submitQuestion}>Submit</button>
                 </div>
             </div>

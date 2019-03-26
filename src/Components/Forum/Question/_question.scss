@@ -1,62 +1,35 @@
 .question-main {
-    width: 50%;
+    width: 70%;
     margin: auto;
     .question-card{
         display: flex;
         justify-content: space-between;
+        width: 100%;
+        height: 100px;
+        margin: 20px 0;
         .question-title{
             display: flex;
+            width: 70%;
+
         }
+        .user-buttons-name{
+          display: flex;
+          width: 25%;
+        
+          .username{
+          width: 90%;
+          display: flex;
+          align-items: flex-end;
+          justify-content: space-between;
+          }
+          button{
+            height:50px;
+          }
+
+        }
+          .user-buttons{
+            height: 50px;
+            margin-right: 10px;
+          }
     }
 }
-
-.username{
-  width: 30%;
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-}
-
-
-.reply-modal {
-    position: relative;
-    display: inline-block;
-    cursor: pointer;
-    button{
-        height:100%;
-    }
-
-  }
-  
-  .reply-modal .reply-text {
-    visibility: hidden;
-    width: 120px;
-    background-color: whitesmoke;
-    color: black;
-    text-align: center;
-    border-radius: 6px;
-    padding: 5px 0;
-    position: absolute;
-    z-index: 2;
-    top: 150%;
-    left: 50%;
-    margin-left: -60px;
-    font-size: 15px;
-
-  }
-  
-  .reply-modal .reply-text::after {
-    content: "";
-    position: absolute;
-    bottom: 100%;
-    left: 50%;
-    font-size: 2px;
-    margin-left: -5px;
-    border-width: 5px;
-    border-style: solid;
-    border-color: transparent transparent whitesmoke transparent;
-  }
-  
-  .reply-modal:hover .reply-text {
-    visibility: visible;
-  }
