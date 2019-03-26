@@ -39,9 +39,11 @@ const update_cache = (req, res, next) => {
 
 //
 //  TODO:
-//      + When a user creates a recipe it should go into their recipes array
 //		+ Finish query search
 //		+ Have get_user_recipes return the full recipe
+//		+ TEST:
+//			- delete reply
+//			- upvote reply/recipe
 //
 
 // auth routes
@@ -67,9 +69,8 @@ app.delete('/users/favorites/:id', update_cache, uc.remove_from_favorites) // re
 
 // meal plan routes
 app.get('/plans/pdf', pc.create_pdf)
-// add plan to db *
-// save pdf to user account
 app.get('/plans/:id', pc.get_plan_list) // return a list of plan links
+// save pdf to user account
 
 app.get('/plans/pdf/:id', pc.get_plan) // return link to single plan using ?plan=<filename>
 app.post('/upload', upload.single('file'), pc.upload_pdf)
@@ -79,16 +80,17 @@ app.get('/forum/:id', fc.get_post) // get a specific post
 app.get('/forum', fc.get_all_posts) // get all posts
 app.post('/forum', fc.create_post) // create a new post
 app.post('/forum/reply/:id', fc.add_reply) // add a reply to the post
-app.put('/forum/:id', fc.update_post) // change the content of the post
-app.delete('/forum/:id', fc.delete_post) // delete a post
-app.put('/forum/reply/:id', fc.upvote_reply) // upvote a reply, send postID in through params and reply id through body
-app.get('/forum/user/:id', fc.get_posts_by_user_id) // get posts by user id
+app.put('/forum/:id', update_cache, fc.update_post) // change the content of the post
+app.delete('/forum/:id', update_cache, fc.delete_post) // delete a post
+app.delete('/forum/reply/:id', update_cache, fc.delete_reply)
+app.put('/forum/reply/:id', update_cache, fc.upvote_reply) // upvote a reply, postIDthrough params and reply id through body
+app.get('/forum/user/:uid', fc.get_posts_by_user_id) // get posts by user id
 
 // this function is purely for development, remove this in production
 // it initializes the cache in redis by storing all of the data
 const init = () => {
 	try {
-		console.log('latest build caching db')
+		console.log('caching db')
 		db.collection('recipes')
 			.get()
 			.then((snapshot) => {

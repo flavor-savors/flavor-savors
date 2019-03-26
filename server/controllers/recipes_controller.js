@@ -163,23 +163,10 @@ module.exports = {
 	// array-contains apparently doesn't work when it's an array of maps, so filter will have to do for now
 	get_recipe_by_query_search: (req, res) => {
 		try {
-			// const db = req.app.get('db')
-			// let recipes = []
-
-			// db.collection('db')
-			// 	.get()
-			// 	.then((snapshot) => {
-			// 		if (snapshot.empty) {
-			// 			res.status(404).json('No results found')
-			// 		}
-
-			// 		recipes = snapshot.forEach((doc) => recipes.push(doc.data()))
-			// 		res.status(200).json(recipes.filter((recipe) => recipe.name === req.query.q))
-			// 	})
-
 			// search through recipe names and ingredients
 			const client = req.app.get('client')
 			let all_recipes = []
+			let results = []
 
 			console.log(req.query.q)
 			client.hgetall('recipes', (err, result) => {
@@ -190,9 +177,24 @@ module.exports = {
 
 				for (let key in result) {
 					console.log('key ::', key)
-					console.log()
 					all_recipes.push(JSON.parse(result[key]))
 				}
+
+				all_recipes.forEach((recipe) => {
+					if (recipe.recipeName.includes(req.query.q)) {
+						console.log(recipe)
+						results.push(recipe)
+					}
+
+					recipe.ingredient.forEach((rec) => {
+						if (rec.name.includes(req.query.q)) {
+							console.log(rec)
+							results.push(recipe)
+						}
+					})
+				})
+
+				res.json(results)
 			})
 		} catch (err) {
 			res.status(500).json(err)
@@ -206,7 +208,7 @@ module.exports = {
 			edited: false,
 			user: req.body.uid, // should be pulled from the current user and sent in
 			public: true,
-			imageURL: req.body.imageURL,
+			imageURL: req.body.imageURL || 'https://image.flaticon.com/icons/png/512/45/45332.png',
 			directions: req.body.directions,
 			upvotes: 0,
 			recipeName: req.body.recipeName,
@@ -236,9 +238,6 @@ module.exports = {
 							snapshot.forEach((doc) => {
 								userdoc = doc.id
 							})
-
-							console.log('userdoc:: ', userdoc)
-							console.log('refid:: ', refid)
 
 							db.collection('users')
 								.doc(userdoc)
@@ -341,7 +340,7 @@ module.exports = {
 
 				db.collection('recipes')
 					.doc(req.params.id)
-					.set({ parsed })
+					.set(parsed)
 					.catch((err) => console.log(err))
 			})
 		} catch (err) {
