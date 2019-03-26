@@ -41,9 +41,15 @@ class Header extends Component {
         </div>
         <div className='header-div-2'>
             <ul className='header-ul'>
-                {/* {this.state.showSearch ?( <Search/>):(null)} */}
-                <Link to='home'><li className='searchModal'>SEARCH</li></Link>
-                <Link className='view-favs' to='/home/favorites'><li>VIEW FAVS</li></Link>
+
+              {!this.state.signedIn?<div className="tooltip">FORUM
+                <li className="tooltiptext">You need to be Signed in</li>
+              </div>: <Link to='/forum'><li className='searchModal'>Forum</li></Link>}  
+
+              {!this.state.signedIn? <div className="tooltip"> VIEW FAVS
+                <li className="tooltiptext">You need to be signed in</li>
+              </div> : <Link className='view-favs' to='/home/favorites'><li>VIEW FAVS</li></Link>}
+
                 {/* {!this.state.signedIn ? <SignIn/> : <Link className='view-favs' to='/home/favorites'><li>VIEW FAVS</li></Link>} */}
               {!this.state.signedIn? <li className='signInModal' onClick={this.displaySignIn}>SIGN IN</li>: <DropDown/>}  
                 {this.state.showSignIn ?( <Toggle x={this.displaySignIn}/>):(null)}

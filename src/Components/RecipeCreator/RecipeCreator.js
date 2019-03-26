@@ -3,7 +3,8 @@ import axios from 'axios'
 import firebase from "../firebase/firebase";
 
 
-//this component is a modal over the user admin page to input a new recipe.
+//this component is a modal over the user admin page to input a new recipe 
+//and rendered in LargeRecipe as an edit component
 
 class RecipeCreator extends Component {
   constructor() {
@@ -19,26 +20,49 @@ class RecipeCreator extends Component {
       directions: "",
       dietTags: [],
       public: true,
-      user:'',
       addons: [],
-      uid: false
+      user: ""
      };
   }
 
 //sets up for user verification
   componentDidMount() {
     firebase.auth().onAuthStateChanged(user => {
-      this.setState({ uid: user.uid });
+      this.setState({ user: user.uid });
     });
+    console.log(this.props.recipe)
+
+    if(this.props.recipe){
+    let recipe = this.props.recipe
+
+    this.setState({
+      recipeName: recipe.recipeName,
+      imageURL: JSON.stringify(recipe.imageURL),
+      ingredient: recipe.ingredient,
+      directions: recipe.directions,
+      dietTags: recipe.dietTags,
+      public: recipe.public,
+      user: recipe.user
+    })
+  }
   }
 
-//submits the new recipe and resets the form by resetting state
+//submits the new recipe or submits an update to current recipe and resets the form by resetting state
   handleSubmit = (e) => {
     e.preventDefault()
-   const state = this.state
-  axios.post(`/recipes`, state).then(res=>{
-    console.log(res)
+   
+const state = this.state
+   if(this.props.recipe){
+    this.props.toggleEdit()
+    axios.put(`recipes/${this.props.recipe.id}`, state).then(res=>{
+      console.log(res)
     })
+   }else{
+    axios.post(`/recipes`, state).then(res=>{
+      console.log(res)
+      })  
+   }
+  
     this.setState({
       recipeName: "",
       imageURL: "",
@@ -49,8 +73,7 @@ class RecipeCreator extends Component {
       directions: "",
       dietTags: [],
       public: true,
-      user:'',
-      addons: [],
+      user:''
     })
   };
 
@@ -101,7 +124,7 @@ class RecipeCreator extends Component {
       <div >
         <form onSubmit={this.handleSubmit} className="recipeForm">
           <fieldset className=''>
-            <legend>Create A Recipe</legend>
+            <legend>Edit Your Recipe</legend>
 
             <fieldset className=''>
               <small>Recipe Name:</small>
@@ -193,15 +216,20 @@ class RecipeCreator extends Component {
 
             <fieldset>
               <legend>Make this recipe private?</legend>
-              <input type="checkbox" name="public" value="false" onChange={this.makePrivate}/>
+              <input type="checkbox" name="public" value={this.state.public ? "true" : "false"} onChange={this.makePrivate}/>
             </fieldset>
           </fieldset>
-          <input type='submit' value = 'Submit'/>
+          {this.props.recipe ? 
+          <button onClick={this.props.toggleEdit}>Close</button>
+          : null}
+          <input type='submit' value = 'Submit'/> 
+          
         </form>
       </div>
     );
   }
 }
+
 
 export default RecipeCreator;
 

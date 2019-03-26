@@ -2,7 +2,7 @@
 .prof-cont{
     display: flex;
     border: solid 1px red;
-    justify-content: space-around;
+    justify-content: space-between;
     height: 90vh;
 }
 
@@ -30,10 +30,15 @@
     width: 70%;
    display: flex;
    flex-direction: column;
+   justify-content: space-around
+}
+
+.pro-btns{
+    height: 5vh;
 }
 
 .recCrtr{
-    width: 50%;
+    width: 70%;
     border: solid 1px blue;
     display: flex;
     flex-direction: column;

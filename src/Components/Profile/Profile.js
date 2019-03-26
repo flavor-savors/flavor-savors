@@ -9,7 +9,6 @@ class Profile extends Component {
     constructor(){
       super();
       this.state ={
-        isSignedin: false,
         changeImg: false,
         cr8Rec: false,
         user: {}
@@ -54,25 +53,19 @@ class Profile extends Component {
     }
 
 
-    deleteAcc = () => {
-      var user = firebase.auth().currentUser
-      user.delete(firebase.auth().currentUser)
-      .then(() => {
-
-      }).catch(err => {
-        console.log(err)
-      })
-    }
-
-  componentDidUpdate(prevState){
-    if(this.state.user !== prevState.user){
-      this.authListener();
-    }
-  }
+    // deleteAcc = () => {
+    //   var user = firebase.auth().currentUser
+    //   user.delete()
+    //   .then(() => {
+    //     console.log('deleted succsessfully')
+    //   }).catch(err => {
+    //     console.log(err)
+    //   })
+    // }
 
 
   render() {
-    console.log(this.state.user)
+    // console.log(this.state.user)
     if(!firebase.auth().currentUser){
       return <Redirect push to='/'/>
     }
@@ -83,17 +76,19 @@ class Profile extends Component {
         <div className='pro-info'>
           <img className='pro-img' src={firebase.auth().currentUser.photoURL} alt='profile'/>
           <div className='user-info'>
-            <p>{firebase.auth().currentUser.displayName}</p>
-            <button onClick={this.resetPass}>Change Password</button>
-            <button onClick={this.showChangeImg}>change Img</button>
+            <h3>{firebase.auth().currentUser.displayName}</h3>
+            <button className='pro-btns' onClick={this.resetPass}>Change Password</button>
+            <button className='pro-btns' onClick={this.deleteAcc}>acc Delete</button>
+            <button className='pro-btns' onClick={this.showChangeImg}>change Img</button>
             {this.state.changeImg ?( <ChangeImage/>):(null)}
           </div>
         </div>
 
         <div className='recCrtr'>
           <div className='pro-recipe-input'>
-            <button onClick={this.showRec}>input recipe</button>
-    {this.state.cr8Rec ?<RecipeCreator/>: null}
+            {/* <button onClick={this.showRec}>input recipe</button>
+    {this.state.cr8Rec ?<RecipeCreator/>: null} */}
+            <RecipeCreator/>
           </div>
         </div>
       </div>     

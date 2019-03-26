@@ -1,22 +1,27 @@
 
 
 .drop-img{
-    height: 5vh;
-    // padding: 20px;
+    height: 50px;
+    width: 50px;
     cursor: pointer;
-    border-radius: 50%;
-    background-color: white;
+    border-radius: 100%;
+    // x-color: white;
+    object-fit: contain;
     position: absolute;
     z-index: 2;
-    top: 3%;
+    top: 2%;
 }
 
 .dp{
     position: absolute;
     z-index: 2; 
-    top: 8%;
+    top: 9%;
     background-color: whitesmoke;
     color: black;
     display: flex;
     flex-direction: column;
+    width: 7vw;
+    left: 84%;
+    height: 10vh;
+    
 }

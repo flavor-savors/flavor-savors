@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import firebase from '../../firebase/firebase';
-import {NavLink, Redirect} from 'react-router-dom';
+import {NavLink} from 'react-router-dom';
 
 class DropDown extends Component {
     constructor(){
@@ -23,10 +23,6 @@ class DropDown extends Component {
 
 
   render() {
-    //   if(this.state.inUse){
-    //     return <Redirect push to='/'/>
-    //   }
-    //   console.log(firebase.auth())
     return (
       <div>
         <img onClick={this.displayDrop} className='drop-img' src={firebase.auth().currentUser.photoURL} alt='profile'/>

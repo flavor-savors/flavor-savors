@@ -12,22 +12,23 @@ class Toggle extends Component {
 
     handleLog = () => {
       this.setState({showSign: true})
-      console.log('its true')
+      
     }
     
     handleReg = () => {
       this.setState({showSign: false})
-      console.log('its false')
     }
 
   render() {
   
     return (
-      <div className='sign-cont'>
+      <div>
+      <div div className='sign-cont' onClick={this.props.x}/>
         <div className='sign-form'>
-          <button onClick={this.props.x}>X</button>
-          <button onClick={this.handleLog}>Login</button>
-          <button onClick={this.handleReg}>Register</button>
+          <div className='tog'>
+          <button className='btn-1' onClick={this.handleLog}>Login</button>
+          <button className='btn-1' onClick={this.handleReg}>Register</button>
+          </div>
           {this.state.showSign === true ? <SignIn/> : <Register/>}
         </div>
       </div>
