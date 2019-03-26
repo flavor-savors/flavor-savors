@@ -208,7 +208,7 @@ module.exports = {
 			edited: false,
 			user: req.body.user, // should be pulled from the current user and sent in
 			public: req.body.public,
-			imageURL: req.body.imageURL,
+			imageURL: req.body.imageURL || 'https://image.flaticon.com/icons/png/512/45/45332.png',
 			directions: req.body.directions,
 			upvotes: 0,
 			recipeName: req.body.recipeName,
