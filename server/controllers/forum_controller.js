@@ -12,14 +12,7 @@ module.exports = {
 			edited: false,
 			uid: req.body.uid,
 			username: req.body.username,
-			replies: [
-				{
-					content: 'nice. me too thanks',
-					created: moment().format('MMMM Do YYYY, h:mm:ss a'),
-					upvotes: 0,
-					user: 'garth',
-				},
-			],
+			replies: [],
 		}
 
 		try {
@@ -108,6 +101,7 @@ module.exports = {
 						created: moment().format('MMMM Do YYYY, h:mm:ss a'),
 						upvotes: 0,
 						uid: req.body.uid,
+						username: req.body.username
 					}),
 				})
 			res.status(200).json('Reply added')
