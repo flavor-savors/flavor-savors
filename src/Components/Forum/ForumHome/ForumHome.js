@@ -19,10 +19,12 @@ class ForumHome extends Component {
   componentDidMount() {
     firebase.auth().onAuthStateChanged(user => {
       if(user !== null){
-        this.setState({ user: user.uid });
+        console.log(user.uid)
+        this.setState({ uid: user.uid });
       }
     });
 
+   
     axios.get(`/forum`).then(res => {
       this.setState({ questions: res.data });
       console.log(res.data);
@@ -45,6 +47,7 @@ class ForumHome extends Component {
   };
 
   render() {
+    console.log(this.state.uid)
     return (
       <div className='forum-main'>
         <div>
