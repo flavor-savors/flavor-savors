@@ -101,7 +101,7 @@ module.exports = {
 							res.status(200).json(snapshot.data())
 						})
 				} else {
-					res.status(200).json(results)
+					res.status(200).json(JSON.parse(results))
 				}
 			})
 		} catch (err) {
