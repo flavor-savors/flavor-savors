@@ -181,7 +181,6 @@ module.exports = {
 
 				all_recipes.forEach((recipe) => {
 					if (recipe.recipeName.toLowerCase().includes(req.query.q.toLowerCase())) {
-						console.log(recipe)
 						results.push(recipe)
 					}
 

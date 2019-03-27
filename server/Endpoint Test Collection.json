@@ -1,0 +1,481 @@
+{
+	"info": {
+		"_postman_id": "abfb4dd1-4fd5-4491-bd79-0eea5689f118",
+		"name": "Flavor-Savors",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "http://localhost:4000/recipes",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "64200066-4395-4884-ab04-5299ca77526b",
+						"exec": [
+							"const response = pm.response.json()",
+							"",
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"All recipes should be public\", function() {",
+							"    response.forEach(recipe => {",
+							"        pm.expect(recipe.public).to.eql(true)",
+							"    })",
+							"})",
+							"",
+							"pm.test(\"All recipes should have a UID\", function() {",
+							"    response.forEach(recipe => {",
+							"        pm.expect(recipe.user !== null || recipe.user !== \"\").to.eql(true)",
+							"    })",
+							"})",
+							"",
+							"pm.test(\"All recipes should have an ID\", function() {",
+							"    response.forEach(recipe => {",
+							"        pm.expect(recipe.id !== null || recipe.id !== \"\").to.eql(true)",
+							"    })",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:4000/recipes",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"recipes"
+					]
+				},
+				"description": "Make sure the status code is 200, the response time is under 200ms and that the response comes back as an array."
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:4000/users/favorites/S10nsqQxBUb1IsW8nscN",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "5ac693ea-cdbb-4c7d-9376-bc66d98bcb83",
+						"exec": [
+							"pm.test(\"Status code is 404\", function() {",
+							"    pm.response.to.have.status(404)",
+							"})",
+							"",
+							"pm.test(\"Response time is less than 200ms\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:4000/users/favorites/error",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"users",
+						"favorites",
+						"error"
+					]
+				},
+				"description": "Response should be an array\n"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:4000/recipes/search/general?q=cole",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "4de9cd01-3fb6-4868-a5db-919188bc1629",
+						"exec": [
+							"const response = pm.response.json()",
+							"",
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Response time is less than 200ms\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);",
+							"});",
+							"",
+							"pm.test(\"Response is an array\", function() {",
+							"    pm.expect(Array.isArray(response)).to.eql(true)",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:4000/recipes/search/general?q=cole",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"recipes",
+						"search",
+						"general"
+					],
+					"query": [
+						{
+							"key": "q",
+							"value": "cole"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:4000/forum",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "0939ece6-a794-4e81-ad6c-82da21ef5721",
+						"exec": [
+							"const response = pm.response.json()",
+							"",
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Response time is less than 200ms\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);",
+							"});",
+							"",
+							"pm.test(\"Response should be an array\", function() {",
+							"    pm.expect(Array.isArray(response)).to.eql(true)  ",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:4000/forum",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"forum"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:4000/forum/user/nkDCS5Ufu1TbhDstboMwvyIirPi2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "9cea2c5c-54e1-4bf9-93e4-c516236b75ba",
+						"exec": [
+							"const response = pm.response.json()",
+							"",
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Response time is less than 200ms\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);",
+							"});",
+							"",
+							"pm.test(\"Each object should have the same UID\", function() {",
+							"    response.forEach(post => {",
+							"        pm.expect(post.uid).to.eql(\"nkDCS5Ufu1TbhDstboMwvyIirPi2\")",
+							"    })",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:4000/forum/user/nkDCS5Ufu1TbhDstboMwvyIirPi2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"forum",
+						"user",
+						"nkDCS5Ufu1TbhDstboMwvyIirPi2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:4000/recipes/DyKyg9A00yKonXqrtl01",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "815d5fa3-84ca-4773-ab23-2faa28f66294",
+						"exec": [
+							"",
+							"",
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Response time is less than 200ms\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);",
+							"});",
+							"",
+							"pm.test(\"Response text should be Recipe deleted\", function() {",
+							"    pm.expect(pm.response.json()).to.eql(\"Recipe deleted\")",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:4000/recipes/error",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"recipes",
+						"error"
+					]
+				},
+				"description": "Delete a recipe and check for response"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:4000/users/favorites/recipes/nkDCS5Ufu1TbhDstboMwvyIirPi2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "36362ca8-2d69-4632-8112-2610f103cdb0",
+						"exec": [
+							"const response = pm.response.json()",
+							"",
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Response time is less than 200ms\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);",
+							"});",
+							"",
+							"pm.test(\"Response should be an array\", function() {",
+							"    pm.expect(Array.isArray(response)).to.eql(true)",
+							"})",
+							"",
+							"pm.test(\"Each index should have the same UID\", function() {",
+							"    response.forEach(recipe => {",
+							"        pm.expect(recipe.uid).to.eql(\"nkDCS5Ufu1TbhDstboMwvyIirPi2\")",
+							"    })",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:4000/users/favorites/recipes/nkDCS5Ufu1TbhDstboMwvyIirPi2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"users",
+						"favorites",
+						"recipes",
+						"nkDCS5Ufu1TbhDstboMwvyIirPi2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:4000/recipes/id/k8u5cGrTqntdeOX9whaj",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "0fc9f48e-ce5e-4b06-bbe0-1d8b2628f67c",
+						"exec": [
+							"const response = pm.response.json()",
+							"",
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Response time is less than 200ms\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);",
+							"});",
+							"",
+							"pm.test(\"Response should be an object\", function() {",
+							"    pm.expect(Object.isObject(response)).to.eql(true)",
+							"})",
+							"",
+							"pm.test(\"Response ingredients should be an array\", function() {",
+							"    pm.expect(Array.isArray(response.ingredient)).to.eql(true)",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:4000/recipes/id/k8u5cGrTqntdeOX9whaj",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"recipes",
+						"id",
+						"k8u5cGrTqntdeOX9whaj"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:4000/forum/sVIkJiExYGyq9ldquR5Q",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "74975229-85f9-4b04-a84f-6d16231cc895",
+						"exec": [
+							"const response = pm.response.json()",
+							"",
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Response time is less than 200ms\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);",
+							"});",
+							"",
+							"pm.test(\"Response ID should be the same\", function() {",
+							"   pm.expect(response.id).to.eql(\"sVIkJiExYGyq9ldquR5Q\") ",
+							"});",
+							"",
+							"pm.test(\"Resonse should be an object\", function() {",
+							"    pm.expect(Object.isObject(response)).to.eql(true)",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:4000/forum/sVIkJiExYGyq9ldquR5Q",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"forum",
+						"sVIkJiExYGyq9ldquR5Q"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
