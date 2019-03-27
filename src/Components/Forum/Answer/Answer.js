@@ -19,8 +19,11 @@ class Answer extends Component {
       content: this.state.newReplyContent,
       uid: this.props.uid,
       username: this.props.question.username
+    }).then(()=>{
+      this.props.getAll()
     });
     this.props.toggleReplies()
+
   };
 
   render() {

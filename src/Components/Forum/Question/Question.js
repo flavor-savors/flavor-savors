@@ -73,6 +73,7 @@ class Question extends Component {
                     toggleReplies = {this.toggleReplies}
                     deletePost={this.props.deletePost}
                     deleteReply={this.deleteReply}
+                    getAll={this.props.getAll}
                 /> }
 
 

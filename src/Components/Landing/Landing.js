@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import RecipeCreator from '../RecipeCreator/RecipeCreator';
 import Carousel from '../Carousel/Carousel';
 
 
@@ -43,7 +42,6 @@ class Landing extends Component {
                     </div>
                     </Link>
                 </div>
-                <RecipeCreator/>
            </div> 
         )
     }
