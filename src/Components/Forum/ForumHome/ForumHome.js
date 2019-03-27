@@ -65,10 +65,10 @@ handleQuery = (e) => {
 }
 
 querySubmit = () => {
-  // axios.get(`?q=${this.state.queryContent}`).then((res)=>{
-  //   this.setState({filteredRecipes:res.data})
-  //   this.setState({queryContent: ''})
-  // })
+  axios.get(`/forum/search/general?q=${this.state.queryContent}`).then((res)=>{
+    this.setState({questions:res.data})
+    this.setState({queryContent: ''})
+  })
 }
 
   render() {
