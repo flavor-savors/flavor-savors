@@ -31,12 +31,9 @@ app.set('client', client)
 app.use(json())
 app.use(cors())
 app.use((req, res, next) => {
-	if (req.method === 'POST' || req.method === 'PUT' || req.method === 'DELETE') {
-		console.log('\x1b[36m%s\x1b[0m', '\t[ - ] updating cache....')
-		init()
-		console.log('\x1b[32m', '\t[ + ] cache updated!')
-	}
-
+	console.log('\x1b[36m%s\x1b[0m', '\t[ - ] updating cache....')
+	init()
+	console.log('\x1b[32m', '\t[ + ] cache updated!')
 	next()
 })
 
