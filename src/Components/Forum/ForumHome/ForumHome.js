@@ -9,6 +9,7 @@ class ForumHome extends Component {
     super();
 
     this.state = {
+      queryContent:'',
       questions: [],
       filteredQuestions: [],
       currentQuestionId: "",
@@ -59,6 +60,17 @@ class ForumHome extends Component {
     console.log(id)
 }
 
+handleQuery = (e) => {
+  this.setState({[e.target.name]: e.target.value})
+}
+
+querySubmit = () => {
+  // axios.get(`?q=${this.state.queryContent}`).then((res)=>{
+  //   this.setState({filteredRecipes:res.data})
+  //   this.setState({queryContent: ''})
+  // })
+}
+
   render() {
     console.log(this.state.uid)
     return (
@@ -74,6 +86,12 @@ class ForumHome extends Component {
               getAll={this.getAll}/>
             </div>
           ) : null}
+        </div>
+
+        <div>
+          <h1>Search Forum:</h1>
+        <input type="text" name='queryContent' value={this.state.content} onChange={this.handleQuery}/>
+        <button onClick={this.querySubmit}>Search</button>
         </div>
 
         <Question

@@ -33,7 +33,7 @@ class RecipeCreator extends Component {
       }
     });
     
-
+    console.log(this.props.recipe)
     if(this.props.recipe){
     let recipe = this.props.recipe
 
@@ -44,7 +44,7 @@ class RecipeCreator extends Component {
       directions: recipe.directions,
       dietTags: recipe.dietTags,
       public: recipe.public,
-      user: recipe.user
+      uid: recipe.user
     })
   }
   }
@@ -56,7 +56,7 @@ class RecipeCreator extends Component {
 const state = this.state
    if(this.props.recipe){
     this.props.toggleEdit()
-    axios.put(`recipes/${this.props.recipe.id}`, state).then(res=>{
+    axios.put(`/recipes/${this.props.recipe.id}`, state).then(res=>{
       console.log(res)
     })
    }else{
