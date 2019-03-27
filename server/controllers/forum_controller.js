@@ -255,4 +255,33 @@ module.exports = {
 			res.status(500).json(err)
 		}
 	},
+
+	query_post: (req, res) => {
+		try {
+			const client = req.app.get('client')
+			let all_posts = []
+			let results = []
+
+			client.hgetall('forum', (err, result) => {
+				if (err) {
+					console.log(err)
+					res.status(500).json(error)
+				}
+
+				for (let key in result) {
+					all_posts.push(JSON.parse(result[key]))
+				}
+
+				all_posts.forEach((post) => {
+					if (post.content.toLowerCase().includes(req.query.q.toLowerCase())) {
+						results.push(post)
+					}
+				})
+
+				res.status(200).json(results)
+			})
+		} catch (err) {
+			res.status(500).json(err)
+		}
+	},
 }

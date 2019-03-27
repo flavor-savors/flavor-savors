@@ -35,8 +35,6 @@ app.use((req, res, next) => {
 		console.log('\x1b[36m%s\x1b[0m', '\t[ - ] updating cache....')
 		init()
 		console.log('\x1b[32m', '\t[ + ] cache updated!')
-	} else {
-		console.log('\x1b[31m', 'Not updating the cache')
 	}
 
 	next()
@@ -90,6 +88,7 @@ app.delete('/forum/:id', fc.delete_post) // delete a post
 app.delete('/forum/reply/:id', fc.delete_reply) // post id in params, reply id in body
 app.put('/forum/reply/:id', fc.upvote_reply) // upvote a reply, postIDthrough params and reply id through body
 app.get('/forum/user/:uid', fc.get_posts_by_user_id) // get posts by user id
+app.get('/forum/search/general', fc.query_post)
 
 // purely for development purposes
 const init = () => {
