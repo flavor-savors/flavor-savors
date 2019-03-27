@@ -1,57 +1,57 @@
 {
-  "name": "flavor-savors",
-  "version": "0.1.0",
-  "private": true,
-  "dependencies": {
-    "@google-cloud/firestore": "^1.1.0",
-    "@sweetalert/with-react": "^0.1.1",
-    "aws-sdk": "^2.425.0",
-    "axios": "^0.18.0",
-    "cors": "^2.8.5",
-    "dotenv": "^7.0.0",
-    "express": "^4.16.4",
-    "firebase": "^5.9.0",
-    "firebase-admin": "^7.1.0",
-    "moment": "^2.24.0",
-    "momentjs": "^2.0.0",
-    "morgan": "^1.9.1",
-    "multer": "^1.4.1",
-    "node-sass": "^4.11.0",
-    "pdfkit": "^0.9.0",
-    "react": "^16.8.4",
-    "react-dom": "^16.8.4",
-    "react-firebaseui": "^3.1.2",
-    "react-modals": "0.0.1",
-    "react-redux": "^6.0.1",
-    "react-router-dom": "^4.4.0-beta.6",
-    "react-scripts": "2.1.8",
-    "react-slick": "^0.23.2",
-    "redis": "^2.8.0",
-    "redux": "^4.0.1",
-    "redux-logger": "^3.0.6",
-    "redux-promise-middleware": "^6.1.0",
-    "short-uuid": "^3.1.0",
-    "supertest": "^4.0.2",
-    "sweetalert": "^2.1.2",
-    "sweetalert-react": "^0.4.11"
-  },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
-  },
-  "eslintConfig": {
-    "extends": "react-app"
-  },
-  "browserslist": [
-    ">0.2%",
-    "not dead",
-    "not ie <= 11",
-    "not op_mini all"
-  ],
-  "proxy": "http://localhost:4000",
-  "devDependencies": {
-    "react-to-print": "^2.0.0-alpha.7"
-  }
+	"name": "flavor-savors",
+	"version": "0.1.0",
+	"private": true,
+	"dependencies": {
+		"@google-cloud/firestore": "^1.1.0",
+		"@sweetalert/with-react": "^0.1.1",
+		"aws-sdk": "^2.425.0",
+		"axios": "^0.18.0",
+		"cors": "^2.8.5",
+		"dotenv": "^7.0.0",
+		"express": "^4.16.4",
+		"firebase": "^5.9.0",
+		"firebase-admin": "^7.1.0",
+		"moment": "^2.24.0",
+		"momentjs": "^2.0.0",
+		"morgan": "^1.9.1",
+		"multer": "^1.4.1",
+		"node-sass": "^4.11.0",
+		"pdfkit": "^0.9.0",
+		"react": "^16.8.4",
+		"react-dom": "^16.8.4",
+		"react-firebaseui": "^3.1.2",
+		"react-modals": "0.0.1",
+		"react-redux": "^6.0.1",
+		"react-router-dom": "^4.4.0-beta.6",
+		"react-scripts": "2.1.8",
+		"react-slick": "^0.23.2",
+		"redis": "^2.8.0",
+		"redux": "^4.0.1",
+		"redux-logger": "^3.0.6",
+		"redux-promise-middleware": "^6.1.0",
+		"short-uuid": "^3.1.0",
+		"supertest": "^4.0.2",
+		"sweetalert": "^2.1.2",
+		"sweetalert-react": "^0.4.11"
+	},
+	"scripts": {
+		"start": "react-scripts start",
+		"build": "react-scripts build",
+		"test": "react-scripts test",
+		"eject": "react-scripts eject"
+	},
+	"eslintConfig": {
+		"extends": "react-app"
+	},
+	"browserslist": [
+		">0.2%",
+		"not dead",
+		"not ie <= 11",
+		"not op_mini all"
+	],
+	"proxy": "http://localhost:4000",
+	"devDependencies": {
+		"react-to-print": "^2.0.0-alpha.7"
+	}
 }

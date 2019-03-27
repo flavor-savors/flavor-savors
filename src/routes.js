@@ -5,7 +5,7 @@ import Home from './Components/Home/Home';
 import Profile from './Components/Profile/Profile';
 import Tutorial from './Components/Tutorial/Tutorial';
 import ForumHome from './Components/Forum/ForumHome/ForumHome';
-import Format from './Components/Format/Format'
+import MealPlanner from './Components/Format/MealPlanner'
 
 export default (
     <Switch>
@@ -17,6 +17,6 @@ export default (
         <Route path='/profile' component={Profile}/>
         <Route path='/tutorial' component={Tutorial}/>
         <Route path='/forum' component={ForumHome}/>
-        <Route path='/format' component={Format}/>
+        <Route path='/mealplanner' component={MealPlanner}/>
     </Switch>
 )
