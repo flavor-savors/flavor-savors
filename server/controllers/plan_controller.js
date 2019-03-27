@@ -210,13 +210,4 @@ module.exports = {
 			res.json(filtered)
 		})
 	},
-
-
-	switch(recipe.meal) {
-		case 'b1':
-			do this
-		case 'b2':
-			do this
-		
-	}
 }
