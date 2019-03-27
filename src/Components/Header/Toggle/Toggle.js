@@ -29,7 +29,7 @@ class Toggle extends Component {
           <button className='btn-1' onClick={this.handleLog}>Login</button>
           <button className='btn-1' onClick={this.handleReg}>Register</button>
           </div>
-          {this.state.showSign === true ? <SignIn/> : <Register/>}
+          {this.state.showSign === true ? <SignIn/> : <Register t={this.handleLog}/>}
         </div>
       </div>
     )

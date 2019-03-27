@@ -60,7 +60,6 @@ class Profile extends Component {
 
 
     deleteAcc = () => {
-      console.log('deleted')
         swal({
           title: "Are you sure?",
           text: "Once deleted, you will not be able to recover your profile",
