@@ -81,8 +81,8 @@ app.get('/forum', fc.get_all_posts) // get all posts
 app.post('/forum', fc.create_post) // create a new post
 app.post('/forum/reply/:id', fc.add_reply) // add a reply to the post
 app.put('/forum/:id', fc.update_post) // change the content of the post
-app.delete('/forum/:id', fc.delete_post) // delete a post
 app.delete('/forum/reply/:id', fc.delete_reply) // post id in params, reply id in body
+app.delete('/forum/post/:id', fc.delete_post) // delete a post
 app.put('/forum/reply/:id', fc.upvote_reply) // upvote a reply, postIDthrough params and reply id through body
 app.get('/forum/user/:uid', fc.get_posts_by_user_id) // get posts by user id
 app.get('/forum/search/general', fc.query_post)
