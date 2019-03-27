@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import ReactToPrint from 'react-to-print';
 
-class Format extends Component {
+class MealPlaner extends Component {
   render() {
     return (
       <div className='format'>
@@ -45,16 +45,18 @@ class Format extends Component {
 
 class Example extends Component {
   render(){
+    console.log(ReactToPrint)
     return(
       <div>
         <ReactToPrint
-          trigger={() => <a href="#">Print this out!</a>}
+          trigger={() => <button href="#">Print this out!</button>}
           content={() => this.componentRef}
           pageStyle={{
             padding: "20px",
           }}
+          bodyClass={{ height: '50vh'}}
         />
-        <Format ref={el => (this.componentRef = el)} />
+        <MealPlaner ref={el => (this.componentRef = el)} />
       </div>
     )
   }
