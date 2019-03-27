@@ -122,6 +122,7 @@ module.exports = {
 				id: uuid.generate(),
 				content: req.body.content,
 				created: moment().format('MMMM Do YYYY, h:mm:ss a'),
+				unix: new Date().getTime(),
 				upvotes: 0,
 				uid: req.body.uid,
 				username: req.body.username,
@@ -130,7 +131,7 @@ module.exports = {
 			const db = req.app.get('db')
 			const admin = req.app.get('admin')
 			const client = req.app.get('client')
-			
+
 			db.collection('forum')
 				.doc(req.params.id)
 				.update({
