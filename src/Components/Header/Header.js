@@ -42,10 +42,8 @@ class Header extends Component {
         <div className='header-div-2'>
             <ul className='header-ul'>
 
-              {!this.state.signedIn?<div className="tooltip">FORUM
-                <li className="tooltiptext">You need to be Signed in</li>
-              </div>: <Link to='/forum'><li className='searchModal'>Forum</li></Link>}  
-
+              <Link to='/forum'><li className='searchModal'>FORUM</li></Link> 
+              <Link to='/home' className='l-browse'><li>BROWSE</li></Link>
               {!this.state.signedIn? <div className="tooltip"> VIEW FAVS
                 <li className="tooltiptext">You need to be signed in</li>
               </div> : <Link className='view-favs' to='/home/favorites'><li>VIEW FAVS</li></Link>}

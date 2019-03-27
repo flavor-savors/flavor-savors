@@ -16,15 +16,16 @@
 .header-ul{
     display: flex;
     // border: solid 1px red;
-    justify-content:space-around;
+    justify-content:space-around
+    ;
     list-style-type: none;
 }
 
-.signInModal, .searchModal, .view-favs{
+.signInModal, .searchModal, .view-favs, .l-browse{
     cursor: pointer;
 }
 
-.home-link, .searchModal, .view-favs{
+.home-link, .searchModal, .view-favs, .l-browse{
     color: white;
     text-decoration: none;
 }
