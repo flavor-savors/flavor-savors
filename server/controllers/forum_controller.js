@@ -13,7 +13,7 @@ module.exports = {
 			edited: false,
 			uid: req.body.uid,
 			username: req.body.username,
-			replies: [],
+			replies: []
 		}
 
 		try {

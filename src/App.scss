@@ -4,6 +4,7 @@
 @import './Components/Forum/Answer/answer';
 @import './Components/Forum/ForumHome/forumHome';
 @import './Components/Forum/Question/question';
+@import './Components/Forum/AskQuestion/ask-question';
 @import './Components/Header/header';
 @import './Components/Home/home';
 @import './Components/Landing/landing';
@@ -23,7 +24,6 @@
 @import './Components/Header/Register/register';
 @import './Components/Profile/ChangeImage/changepassword';
 @import './Components/Header/DropDown/dropdown';
-@import './Components/Forum/AskQuestion/ask-question';
 
 .App {
   text-align: center;

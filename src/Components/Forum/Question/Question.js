@@ -9,7 +9,8 @@ class Question extends Component {
 
         this.state = {
             showReplies: false,
-            question: []
+            question: [],
+            newQuestionContent:''
         }
     }
 
@@ -23,37 +24,38 @@ class Question extends Component {
 //opens and closes the replies to a question    
     toggleReplies = () => {
         this.setState({showReplies: !this.state.showReplies})
-    }
-
-//allows users to submit a question
-    submitQuestion = () => {
-
     }    
 
-//allows logged in users to delete their own posts
-    deletePost = () => {
-        axios.delete(`/forum/${this.state.question.id}`)
-    }
 
 //allows logged in users to delete their own replies
-
     deleteReply = (id) => {
-        //needs endpoint
+        console.log(id)
+        console.log(this.state.question.id)
+        this.setState({showReplies: false})
+        axios.delete(`/forum/reply/${this.state.question.id}`, id)
+        .then(()=>
+          this.getQuestion()
+       )
     }
 
     render(){
+
         const question = this.props.questions.map((e, i)=>{
             return(
                 <div key={i} onMouseEnter={()=>this.getQuestion(e.id)} className='question-card'>
-                    <div className='question-title'>
-                    <button onClick={this.toggleReplies}>view replies</button>
-                    <h1>{e.content}</h1>
-                    </div>
-                    {e.user}
-                    <p>Posted by: {e.user}</p>
-                    {this.props.uid === e.id ? 
-                    <button>Delete</button>
-                    : null}
+                    
+                        <div className='question-title'>
+                            <button className='user-buttons' onClick={this.toggleReplies}>View replies</button>
+                            <div>
+                                <h2>{e.content}</h2>
+                            </div>
+                        </div>
+                        <div className='user-buttons-name'>
+                            <div className='username'>
+                                <p>Posted by: {e.username}</p>
+                            </div>
+                            <button onClick={()=>this.props.deletePost(e.id)}>Delete</button>
+                        </div>
                 </div>
             )
         })
@@ -64,11 +66,12 @@ class Question extends Component {
 
                 {!this.state.showReplies ? null
                     : <Answer
-                    user={this.props.uid}
+                    uid={this.props.uid}
                     showReplies={this.state.showReplies}
-                    question={this.state.question.content}
+                    question={this.state.question}
                     replies={this.state.question.replies}
                     toggleReplies = {this.toggleReplies}
+                    deletePost={this.props.deletePost}
                     deleteReply={this.deleteReply}
                 /> }
 

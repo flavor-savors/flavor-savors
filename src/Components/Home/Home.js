@@ -4,7 +4,7 @@ import Planner from "../PlannerDrawer/Planner/Planner";
 import Filter from "../FilterDrawer/Filter";
 import axios from "axios";
 import firebase from "../firebase/firebase";
-import RecipeCreator from "../RecipeCreator/RecipeCreator";
+// import RecipeCreator from "../RecipeCreator/RecipeCreator";
 
 //this component is the main home page for browsing/searching recipes and meal planning
 //it renders 5 views:
@@ -22,6 +22,7 @@ class Home extends Component {
     super();
 
     this.state = {
+      queryContent:'',
       showPlanner: false,
       showFilter: false,
       currentRecipeId: "",
@@ -66,38 +67,52 @@ class Home extends Component {
   //
   componentDidMount() {
     firebase.auth().onAuthStateChanged(user => {
-      if(user !== null){
-        this.setState({ user: user.uid });
+      if (user !== null) {
+        this.setState({ user: user.uid }, () => {
+          if (this.props.history.location.pathname === "/home/favorites") {
+            axios
+              .get(`/users/favorites/recipes/${user.uid}`)
+              .then(res => this.setState({ filteredRecipes: res.data }));
+          }
+        });
       }
     });
+
     if (this.props.history.location.pathname === "/home/build") {
       this.togglePlanner();
     }
+
     axios.get(`/recipes/all`).then(res => {
-      this.setState({ recipes: res.data });
-      this.setState({ filteredRecipes: res.data });
+      this.setState({ recipes: res.data });;
+    }).then(()=>{
+      if (this.props.history.location.pathname === "/home"){
+        axios.get(`/recipes/all`).then(res => {
+          this.setState({ filteredRecipes: res.data });;
+        });
+      }
+
     });
-   
+
   }
 
-//calls for current users favorites  
+  //calls for current users favorites
   viewUserFavRecipes = () => {
-    if (this.state.user !=="") {
+    if (this.state.user !== "") {
       axios.get(`/users/favorites/recipes/${this.state.user}`).then(res => {
         this.setState({ filteredRecipes: res.data });
       });
     }
   };
 
-//calls for current users own input recipes    
+  //calls for current users own input recipes
   viewUserInputRecipes = () => {
     axios.get(`/recipes/${this.state.user}`).then(res => {
-      console.log(res.data)
+      console.log(res.data);
       this.setState({ filteredRecipes: res.data });
     });
   };
 
-//Functionality for SmallRecipes
+  //Functionality for SmallRecipes
   //adds the current recipe id to the users favorites
   addToFavorites = id => {
     axios.put(`/users/favorites/${id}`, {
@@ -120,18 +135,18 @@ class Home extends Component {
     this.setState({ currentRecipeId: id, currentRecipeName: name });
   };
 
-//when a recipe is deleted from database this removes it from the filteredArray as well
-  deleteRecipeFromCurrent = (id) => {
-    let newRecipes = this.state.filteredRecipes
-    for(let i=0; i<newRecipes.length; i++){
-      if(id === newRecipes[i].id){
-        newRecipes.splice(i, 1)
+  //when a recipe is deleted from database this removes it from the filteredArray as well
+  deleteRecipeFromCurrent = id => {
+    let newRecipes = this.state.filteredRecipes;
+    for (let i = 0; i < newRecipes.length; i++) {
+      if (id === newRecipes[i].id) {
+        newRecipes.splice(i, 1);
       }
     }
-    this.setState({filteredRecipes: newRecipes})
-  }
-  
-//functionality for Filter component
+    this.setState({ filteredRecipes: newRecipes });
+  };
+
+  //functionality for Filter component
   //set the array of filters on click of the checkbox on the filter component
   //deletes if it is already in the array, or adds if not currently in the array
   setFilters = tag => {
@@ -179,46 +194,60 @@ class Home extends Component {
     this.setState({ filteredRecipes: this.state.recipes, filters: [] });
   };
 
-//functionality for the planner
-handleChange = meal => {
-  this.setState(prevState => ({
-    ...prevState,
-    [meal]: [
-      ...prevState[meal],
-      { name: this.state.currentRecipeName, id: this.state.currentRecipeId }
-    ]
-  }));
-};
+  handleQuery = (e) => {
+    this.setState({[e.target.name]: e.target.value})
+  }
 
-removeRecipe = (meal, i) => {
-  let meals = [...this.state[meal]];
-  meals.splice(i, 1);
-  this.setState({ [meal]: meals });
-};
+  querySubmit = () => {
+    axios.get(`/recipes/search/general?q=${this.state.queryContent}`).then((res)=>{
+      this.setState({filteredRecipes:res.data})
+      this.setState({queryContent: ''})
+    })
+    
+  }
+  //functionality for the planner
+  handleChange = meal => {
+    this.setState(prevState => ({
+      ...prevState,
+      [meal]: [
+        ...prevState[meal],
+        { name: this.state.currentRecipeName, id: this.state.currentRecipeId }
+      ]
+    }));
+  };
+//removes recipe from planner
+  removeRecipe = (meal, i) => {
+    let meals = [...this.state[meal]];
+    meals.splice(i, 1);
+    this.setState({ [meal]: meals });
+  };
 
-submitPlan = () =>{
-  
-}
-
-
+  submitPlan = () => {};
 
   render() {
     // console.log(firebase.auth().currentUser);
     return (
       <div className='home-main'>
-      {/* <RecipeCreator/> */}
-      <div>
-        {this.state.user.length ?
+        {/* <RecipeCreator/> */}
         <div>
-          <button onClick={this.viewUserFavRecipes}>View My Favorites</button>
-          <button onClick={this.viewUserInputRecipes}>View My Own Recipes</button> 
+        <input type="text" name='queryContent' value={this.state.content} onChange={this.handleQuery}/>
+        <button onClick={this.querySubmit}>Search</button>
         </div>
-        : null}
-        <button onClick={this.resetFilters}>View All Recipes</button>
-        <button onClick={this.toggleFilter}>filter search</button>
-        <button onClick={this.togglePlanner}>planner</button>
-      </div>
-
+        <div>
+          {this.state.user.length ? (
+            <div>
+              <button onClick={this.viewUserFavRecipes}>
+                View My Favorites
+              </button>
+              <button onClick={this.viewUserInputRecipes}>
+                View My Own Recipes
+              </button>
+            </div>
+          ) : null}
+          <button onClick={this.resetFilters}>View All Recipes</button>
+          <button onClick={this.toggleFilter}>filter search</button>
+          <button onClick={this.togglePlanner}>planner</button>
+        </div>
 
         <div className='home-components'>
           {!this.state.showFilter ? null : (

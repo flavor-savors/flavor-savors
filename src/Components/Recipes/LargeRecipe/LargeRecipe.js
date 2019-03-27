@@ -59,12 +59,13 @@ class LargeRecipe extends Component {
 
 {/* button bar with conditional to show edit button if the logged in user is the creator of the recipe */}
                     <div>   
-                        <button onClick={()=>this.props.addToFavorites(this.props.recipe.id)}>add to favs</button>
+
                         <button onClick={this.props.addToMealPlan}>Add to meal plan</button>
                         <button onClick={()=>this.props.hideLarge()}>Close</button>
 
-                        {this.props.user !=='' && this.props.user === this.props.recipe.user ? 
+                        {this.props.user !=='' && this.props.uid === this.props.recipe.user ? 
                             <div>
+                            <button onClick={()=>this.props.addToFavorites(this.props.recipe.id)}>add to favs</button>                                
                             <button onClick={this.toggleEdit}>Edit</button>
                             <button onClick={()=>this.props.deleteRecipe(this.props.recipe.id)}>Delete</button>
                             </div> 
