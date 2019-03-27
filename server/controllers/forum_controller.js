@@ -13,7 +13,7 @@ module.exports = {
 			edited: false,
 			uid: req.body.uid,
 			username: req.body.username,
-			replies: []
+			replies: [],
 		}
 
 		try {
@@ -118,21 +118,35 @@ module.exports = {
 
 	add_reply: (req, res) => {
 		try {
+			let data = {
+				id: uuid.generate(),
+				content: req.body.content,
+				created: moment().format('MMMM Do YYYY, h:mm:ss a'),
+				upvotes: 0,
+				uid: req.body.uid,
+				username: req.body.username,
+			}
+
 			const db = req.app.get('db')
 			const admin = req.app.get('admin')
+			const client = req.app.get('client')
+			
 			db.collection('forum')
 				.doc(req.params.id)
 				.update({
-					replies: admin.firestore.FieldValue.arrayUnion({
-						id: uuid.generate(),
-						content: req.body.content,
-						created: moment().format('MMMM Do YYYY, h:mm:ss a'),
-						upvotes: 0,
-						uid: req.body.uid,
-						username: req.body.username,
-					}),
+					replies: admin.firestore.FieldValue.arrayUnion(data),
 				})
-			res.status(200).json('Reply added')
+			client.hmget('forum', req.params.id, (err, result) => {
+				if (err) {
+					console.log(error)
+					res.status(500).json(err)
+				}
+
+				let parsed = JSON.parse(result)
+				parsed.replies.push(data)
+				console.log(parsed)
+				res.status(200).json('Reply added')
+			})
 		} catch (err) {
 			console.log(err)
 			res.status(500).json(err)
@@ -160,7 +174,7 @@ module.exports = {
 				parsed.replies.splice(replyIndex, 1)
 				res.status(200).json(parsed)
 
-				client.hmset('forum', req.params.id, JSON.stringify(parsed))
+				// client.hmset('forum', req.params.id, JSON.stringify(parsed))
 				db.collection('forum')
 					.doc(req.params.id)
 					.set(parsed)
