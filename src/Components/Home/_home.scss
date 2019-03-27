@@ -1,5 +1,25 @@
-.home-main{
-    .home-components{
-        display: flex;
-    }
+.home-main {
+  .home-components {
+    display: flex;
+  }
+}
+
+.meal-plan {
+}
+
+.main-cond {
+}
+
+.show-meal-plan {
+  display: block;
+}
+.hide-meal-plan {
+  display: none;
+}
+.hide-home-main {
+  display: none;
+  background-color: $orange;
+}
+.show-home-main {
+  display: block;
 }

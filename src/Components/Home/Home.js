@@ -4,7 +4,6 @@ import Planner from "../PlannerDrawer/Planner/Planner";
 import Filter from "../FilterDrawer/Filter";
 import axios from "axios";
 import firebase from "../firebase/firebase";
-// import RecipeCreator from "../RecipeCreator/RecipeCreator";
 
 //this component is the main home page for browsing/searching recipes and meal planning
 //it renders 5 views:
@@ -22,7 +21,8 @@ class Home extends Component {
     super();
 
     this.state = {
-      queryContent:'',
+      showMealPlan: true,
+      queryContent: "",
       showPlanner: false,
       showFilter: false,
       currentRecipeId: "",
@@ -82,17 +82,18 @@ class Home extends Component {
       this.togglePlanner();
     }
 
-    axios.get(`/recipes/all`).then(res => {
-      this.setState({ recipes: res.data });;
-    }).then(()=>{
-      if (this.props.history.location.pathname === "/home"){
-        axios.get(`/recipes/all`).then(res => {
-          this.setState({ filteredRecipes: res.data });;
-        });
-      }
-
-    });
-
+    axios
+      .get(`/recipes/all`)
+      .then(res => {
+        this.setState({ recipes: res.data });
+      })
+      .then(() => {
+        if (this.props.history.location.pathname === "/home") {
+          axios.get(`/recipes/all`).then(res => {
+            this.setState({ filteredRecipes: res.data });
+          });
+        }
+      });
   }
 
   //calls for current users favorites
@@ -194,17 +195,18 @@ class Home extends Component {
     this.setState({ filteredRecipes: this.state.recipes, filters: [] });
   };
 
-  handleQuery = (e) => {
-    this.setState({[e.target.name]: e.target.value})
-  }
+  handleQuery = e => {
+    this.setState({ [e.target.name]: e.target.value });
+  };
 
   querySubmit = () => {
-    axios.get(`/recipes/search/general?q=${this.state.queryContent}`).then((res)=>{
-      this.setState({filteredRecipes:res.data})
-      this.setState({queryContent: ''})
-    })
-    
-  }
+    axios
+      .get(`/recipes/search/general?q=${this.state.queryContent}`)
+      .then(res => {
+        this.setState({ filteredRecipes: res.data });
+        this.setState({ queryContent: "" });
+      });
+  };
   //functionality for the planner
   handleChange = meal => {
     this.setState(prevState => ({
@@ -215,7 +217,7 @@ class Home extends Component {
       ]
     }));
   };
-//removes recipe from planner
+  //removes recipe from planner
   removeRecipe = (meal, i) => {
     let meals = [...this.state[meal]];
     meals.splice(i, 1);
@@ -225,85 +227,105 @@ class Home extends Component {
   submitPlan = () => {};
 
   render() {
-    // console.log(firebase.auth().currentUser);
+    console.log(this.state.filteredRecipes);
+
+    const showHideMealPlan = this.state.showMealPlan
+      ? "meal-plan show-meal-plan"
+      : "meal-plan hide-meal-plan";
+
+    const showHideMain = this.state.showMealPlan
+      ? "main-cond hide-home-main"
+      : "main-cond show-home-main";
+
     return (
       <div className='home-main'>
-        {/* <RecipeCreator/> */}
-        <div>
-        <input type="text" name='queryContent' value={this.state.content} onChange={this.handleQuery}/>
-        <button onClick={this.querySubmit}>Search</button>
-        </div>
-        <div>
-          {this.state.user.length ? (
-            <div>
-              <button onClick={this.viewUserFavRecipes}>
-                View My Favorites
-              </button>
-              <button onClick={this.viewUserInputRecipes}>
-                View My Own Recipes
-              </button>
-            </div>
-          ) : null}
-          <button onClick={this.resetFilters}>View All Recipes</button>
-          <button onClick={this.toggleFilter}>filter search</button>
-          <button onClick={this.togglePlanner}>planner</button>
+        <div className={showHideMealPlan}>
+          {/* this is where the completed meal plan component will render */}
+          testing
         </div>
 
-        <div className='home-components'>
-          {!this.state.showFilter ? null : (
-            <Filter
-              filterSearch={this.filterSearch}
-              setFilters={this.setFilters}
-              resetFilters={this.resetFilters}
+        <div className={showHideMain}>
+          <div>
+            <input
+              type='text'
+              name='queryContent'
+              value={this.state.content}
+              onChange={this.handleQuery}
             />
-          )}
+            <button onClick={this.querySubmit}>Search</button>
+          </div>
+          <div>
+            {this.state.user.length ? (
+              <div>
+                <button onClick={this.viewUserFavRecipes}>
+                  View My Favorites
+                </button>
+                <button onClick={this.viewUserInputRecipes}>
+                  View My Own Recipes
+                </button>
+              </div>
+            ) : null}
+            <button onClick={this.resetFilters}>View All Recipes</button>
+            <button onClick={this.toggleFilter}>filter search</button>
+            <button onClick={this.togglePlanner}>planner</button>
+          </div>
 
-          <SmallRecipes
-            user={this.state.user}
-            recipes={this.state.filteredRecipes}
-            showPlanner={this.state.showPlanner}
-            setCurrentRecipe={this.setCurrentRecipe}
-            togglePlanner={this.togglePlanner}
-            addToFavorites={this.addToFavorites}
-            deleteRecipeFromCurrent={this.deleteRecipeFromCurrent}
-          />
+          <div className='home-components'>
+            {!this.state.showFilter ? null : (
+              <Filter
+                filterSearch={this.filterSearch}
+                setFilters={this.setFilters}
+                resetFilters={this.resetFilters}
+              />
+            )}
 
-          {!this.state.showPlanner ? null : (
-            <Planner
-              b1={this.state.b1}
-              b2={this.state.b2}
-              b3={this.state.b3}
-              b4={this.state.b4}
-              b5={this.state.b5}
-              b6={this.state.b6}
-              b7={this.state.b7}
-              l1={this.state.l1}
-              l2={this.state.l2}
-              l3={this.state.l3}
-              l4={this.state.l4}
-              l5={this.state.l5}
-              l6={this.state.l6}
-              l7={this.state.l7}
-              d1={this.state.d1}
-              d2={this.state.d2}
-              d3={this.state.d3}
-              d4={this.state.d4}
-              d5={this.state.d5}
-              d6={this.state.d6}
-              d7={this.state.d7}
-              s1={this.state.s1}
-              s2={this.state.s2}
-              s3={this.state.s3}
-              s4={this.state.s4}
-              s5={this.state.s5}
-              s6={this.state.s6}
-              s7={this.state.s7}
-              handleChange={this.handleChange}
-              removeRecipe={this.removeRecipe}
-              currentRecipeId={this.state.currentRecipeId}
-              currentRecipeName={this.state.currentRecipeName}
+            <SmallRecipes
+              user={this.state.user}
+              recipes={this.state.filteredRecipes}
+              showPlanner={this.state.showPlanner}
+              setCurrentRecipe={this.setCurrentRecipe}
+              togglePlanner={this.togglePlanner}
+              addToFavorites={this.addToFavorites}
+              deleteRecipeFromCurrent={this.deleteRecipeFromCurrent}
             />
-          )}
+
+            {!this.state.showPlanner ? null : (
+              <Planner
+                b1={this.state.b1}
+                b2={this.state.b2}
+                b3={this.state.b3}
+                b4={this.state.b4}
+                b5={this.state.b5}
+                b6={this.state.b6}
+                b7={this.state.b7}
+                l1={this.state.l1}
+                l2={this.state.l2}
+                l3={this.state.l3}
+                l4={this.state.l4}
+                l5={this.state.l5}
+                l6={this.state.l6}
+                l7={this.state.l7}
+                d1={this.state.d1}
+                d2={this.state.d2}
+                d3={this.state.d3}
+                d4={this.state.d4}
+                d5={this.state.d5}
+                d6={this.state.d6}
+                d7={this.state.d7}
+                s1={this.state.s1}
+                s2={this.state.s2}
+                s3={this.state.s3}
+                s4={this.state.s4}
+                s5={this.state.s5}
+                s6={this.state.s6}
+                s7={this.state.s7}
+                handleChange={this.handleChange}
+                removeRecipe={this.removeRecipe}
+                currentRecipeId={this.state.currentRecipeId}
+                currentRecipeName={this.state.currentRecipeName}
+              />
+            )}
+          </div>
         </div>
       </div>
     );
