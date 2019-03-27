@@ -31,8 +31,12 @@ app.set('client', client)
 app.use(json())
 app.use(cors())
 app.use((req, res, next) => {
-	console.log('middleware triggered')
-	init()
+	if (req.method === 'POST' || req.method === 'PUT' || req.method === 'DELETE') {
+		console.log('\x1b[36m%s\x1b[0m', '\t[ - ] updating cache....')
+		init()
+		console.log('\x1b[32m', '\t[ + ] cache updated!')
+	}
+
 	next()
 })
 
@@ -81,15 +85,14 @@ app.post('/forum', fc.create_post) // create a new post
 app.post('/forum/reply/:id', fc.add_reply) // add a reply to the post
 app.put('/forum/:id', fc.update_post) // change the content of the post
 app.delete('/forum/:id', fc.delete_post) // delete a post
-app.delete('/forum/reply/:id', fc.delete_reply)
+app.delete('/forum/reply/:id', fc.delete_reply) // post id in params, reply id in body
 app.put('/forum/reply/:id', fc.upvote_reply) // upvote a reply, postIDthrough params and reply id through body
 app.get('/forum/user/:uid', fc.get_posts_by_user_id) // get posts by user id
+app.get('/forum/search/general', fc.query_post)
 
-// this function is purely for development, remove this in production
-// it initializes the cache in redis by storing all of the data
+// purely for development purposes
 const init = () => {
 	try {
-		console.log('caching db')
 		db.collection('recipes')
 			.get()
 			.then((snapshot) => {
@@ -131,6 +134,7 @@ const init = () => {
 
 const port = 4000
 app.listen(port, () => {
+	console.log('\x1b[35m', '\t[ - ] initializing redis cache....')
 	init()
-	console.log(`Listening on localhost:${port}`)
+	console.log('\x1b[33m', `\t[ * ] Listening on localhost:${port}`)
 })

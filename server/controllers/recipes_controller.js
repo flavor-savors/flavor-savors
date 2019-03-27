@@ -176,25 +176,23 @@ module.exports = {
 				}
 
 				for (let key in result) {
-					console.log('key ::', key)
 					all_recipes.push(JSON.parse(result[key]))
 				}
 
 				all_recipes.forEach((recipe) => {
-					if (recipe.recipeName.includes(req.query.q)) {
+					if (recipe.recipeName.toLowerCase().includes(req.query.q.toLowerCase())) {
 						console.log(recipe)
 						results.push(recipe)
 					}
 
 					recipe.ingredient.forEach((rec) => {
-						if (rec.name.includes(req.query.q)) {
-							console.log(rec)
+						if (rec.name.toLowerCase().includes(req.query.q.toLowerCase())) {
 							results.push(recipe)
 						}
 					})
 				})
 
-				res.json(results)
+				res.status(200).json(results)
 			})
 		} catch (err) {
 			res.status(500).json(err)

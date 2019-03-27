@@ -12,6 +12,7 @@
 		"express": "^4.16.4",
 		"firebase": "^5.9.0",
 		"firebase-admin": "^7.1.0",
+		"jest": "^24.5.0",
 		"moment": "^2.24.0",
 		"momentjs": "^2.0.0",
 		"morgan": "^1.9.1",
@@ -31,6 +32,7 @@
 		"redux-logger": "^3.0.6",
 		"redux-promise-middleware": "^6.1.0",
 		"short-uuid": "^3.1.0",
+		"supertest": "^4.0.2",
 		"sweetalert": "^2.1.2",
 		"sweetalert-react": "^0.4.11"
 	},
