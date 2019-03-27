@@ -34,7 +34,7 @@ class Question extends Component {
         this.setState({showReplies: false})
         axios.delete(`/forum/reply/${this.state.question.id}`, id)
         .then(()=>
-          this.getQuestion()
+          this.getQuestion(this.state.question.id)
        )
     }
 
