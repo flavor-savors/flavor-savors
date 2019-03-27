@@ -4,17 +4,6 @@ moment.locale()
 module.exports = {
 	get_all_recipes: (req, res) => {
 		try {
-			// const db = req.app.get('db')
-			// let recipes = []
-
-			// db.collection('recipes')
-			// 	.get()
-			// 	.then((snapshot) => {
-			// 		snapshot.forEach((doc) => recipes.push(doc.data()))
-			// 		res.status(200).json(recipes)
-			// 	})
-			// 	.catch((err) => res.status(500).json(err))
-
 			const client = req.app.get('client')
 			let all_recipes = []
 
@@ -37,18 +26,6 @@ module.exports = {
 
 	get_public_recipes: (req, res) => {
 		try {
-			// const db = req.app.get('db')
-			// let recipes = []
-
-			// db.collection('recipes')
-			// 	.where('public', '==', true)
-			// 	.get()
-			// 	.then((snapshot) => {
-			// 		snapshot.forEach((doc) => recipes.push(doc.data()))
-			// 		res.status(200).json(recipes)
-			// 	})
-			// 	.catch((err) => res.status(500).json(err))
-
 			const client = req.app.get('client')
 			let recipes = []
 
@@ -71,13 +48,6 @@ module.exports = {
 
 	get_recipe_by_id: (req, res) => {
 		try {
-			// const db = req.app.get('db')
-			// db.collection('recipes')
-			// 	.doc(req.params.id)
-			// 	.get()
-			// 	.then((snapshot) => {
-			// 		res.status(200).json(snapshot.data())
-			// 	})
 			const client = req.app.get('client')
 			const db = req.app.get('db')
 			client.hmget('recipes', req.params.id, (err, results) => {

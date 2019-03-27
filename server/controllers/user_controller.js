@@ -193,26 +193,54 @@ module.exports = {
 
 	remove_from_favorites: (req, res) => {
 		try {
+			// const db = req.app.get('db')
+			// const admin = req.app.get('admin')
+
+			// db.collection('users')
+			// 	.where('uid', '==', req.body.uid)
+			// 	.get()
+			// 	.then((snapshot) => {
+			// 		let id
+			// 		snapshot.forEach((doc) => {
+			// 			id = doc.data().id
+			// 		})
+
+			// 		db.collection('users')
+			// 			.doc(id)
+			// 			.update({
+			// 				favorites: admin.firestore.FieldValue.arrayUnion(req.params.id),
+			// 			})
+			// 		res.status(200).json('Added to favorites')
+			// 	})
+			// 	.catch((err) => res.status(500).json(err))
+
+			const client = req.app.get('client')
 			const db = req.app.get('db')
-			const admin = req.app.get('admin')
+			client.hgetall('users', (err, result) => {
+				if (err) {
+					console.log(err)
+					res.status(500).json(err)
+				}
 
-			db.collection('users')
-				.where('uid', '==', req.body.uid)
-				.get()
-				.then((snapshot) => {
-					let id
-					snapshot.forEach((doc) => {
-						id = doc.data().id
-					})
+				let all_users = []
 
-					db.collection('users')
-						.doc(id)
-						.update({
-							favorites: admin.firestore.FieldValue.arrayUnion(req.params.id),
-						})
-					res.status(200).json('Added to favorites')
-				})
-				.catch((err) => res.status(500).json(err))
+				for (let key in result) {
+					all_users.push(JSON.parse(result[key]))
+				}
+
+				let user = all_users.filter((user) => user.uid === req.body.uid)
+				let index = user[0].favorites.findIndex((id) => id === req.params.id)
+				if (index === -1) {
+					res.status(404).json('Recipe not found in favorites')
+				}
+
+				user[0].favorites.splice(index, 1)
+				res.status(200).json(user[0])
+
+				db.collection('users')
+					.doc(user[0].id)
+					.set(user[0])
+			})
 		} catch (err) {
 			res.status(500).json(err)
 		}

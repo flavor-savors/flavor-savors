@@ -74,6 +74,7 @@ app.get('/plans/:id', pc.get_plan_list) // return a list of plan links
 
 app.get('/plans/pdf/:id', pc.get_plan) // return link to single plan using ?plan=<filename>
 app.post('/upload', upload.single('file'), pc.upload_pdf)
+app.get('/plans/create/clean', pc.create_plan)
 
 // forum routes
 app.get('/forum/:id', fc.get_post) // get a specific post
