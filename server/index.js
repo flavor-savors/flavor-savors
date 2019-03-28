@@ -71,6 +71,8 @@ app.get('/plans/:id', pc.get_plan_list) // return a list of plan links
 // save pdf to user account
 
 app.get('/plans/pdf/:id', pc.get_plan) // return link to single plan using ?plan=<filename>
+app.post('/plans/create/clean', pc.create_plan)
+
 // forum routes
 app.get('/forum/:id', fc.get_post) // get a specific post
 app.get('/forum', fc.get_all_posts) // get all posts
