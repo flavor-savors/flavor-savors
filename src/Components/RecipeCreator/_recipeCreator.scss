@@ -1,13 +1,92 @@
 .recipeForm{
-    width: 40%;
-    // height: 40vh;
-    // border: solid red 1px;
-    height: 70vh;
-   
+    width: 100%;
+    height: 80%;
+    border: solid red 1px;
+    // height: 85vh;
+   display: flex;
+   flex-direction: row;
+   height: 100%;;
 }
 
-.directions{
-    width: 400px;
-    height: 150px;
+
+
+fieldset{
+    border: none;
 }
 
+.rec-out{
+    border: solid 1px blue;
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    height: 100%;
+}
+
+.Cr8-1{
+    // border: 1px solid red;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    margin: 0vh auto 2vh auto;
+    height: 15vh;
+    width: 80%;
+}
+
+.recipe-name, .recipe-img{
+    height: 4vh;
+    font-size: 15px;
+    outline: none;
+}
+
+.Cr8-2{
+    // border: solid 1px darkmagenta;
+    margin: 0vh auto 2vh auto;
+    width: 80%;
+}
+
+.cr8-2-area{
+    width: 90%;
+    height: 20vh;
+    font-size: 15px;
+    text-indent: 5px;
+    padding: 5px;
+    outline: none;
+}
+
+.rec-tags{
+    // border: solid 1px darkslategray;
+    margin: 0vh auto 2vh auto;
+    width: 80%;
+}
+
+.tag{
+    margin-left: 2px;
+}
+
+.two{
+    width: 100%;
+    height: 100%;
+    border: solid 1px green;
+}
+
+.rec-add, .sub-rec{
+    margin: 2vh 0 2vh 0;
+}
+
+.add-ing{
+    // border: solid 1px tomato;
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 1vh;
+}
+
+.rec-ing-delete{
+    border-radius: 50%;
+    width: 4%;
+    text-align: center;
+}
+
+.rec-ing-input{
+    // margin-bottom: 3vh;
+}
