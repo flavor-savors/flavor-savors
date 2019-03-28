@@ -24,7 +24,7 @@ class Home extends Component {
 
     this.state = {
       plannedRecipes: [],
-      showMealPlan: false,
+      showMealPlan: true,
       queryContent: "",
       showPlanner: false,
       showFilter: false,
