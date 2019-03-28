@@ -1,66 +1,66 @@
-@import "./variables";
+@import './variables';
 
-@import "./Components/Footer/footer";
-@import "./Components/Forum/Answer/answer";
-@import "./Components/Forum/ForumHome/forumHome";
-@import "./Components/Forum/Question/question";
-@import "./Components/Forum/AskQuestion/ask-question";
-@import "./Components/Header/header";
-@import "./Components/Home/home";
-@import "./Components/Landing/landing";
-@import "./Components/Format/format";
-@import "./Components/PlannerDrawer/Planner/planner";
-@import "./Components/PlannerDrawer/PlanDayTemplate/plan-day";
-@import "./Components/Profile/profile";
-@import "./Components/RecipeCreator/recipeCreator";
-@import "./Components/Recipes/LargeRecipe/largeRecipe";
-@import "./Components/Recipes/SmallRecipe/smallRecipe";
-@import "./Components/Tutorial/tutorial";
-@import "./Components/FilterDrawer/filter";
-@import "./Components/Carousel/carousel";
-@import "./Components/Header/Toggle/toggle";
-@import "./Components/Header/Search/search";
-@import "./Components/Header/SignIn/signin";
-@import "./Components/Header/Register/register";
-@import "./Components/Profile/ChangeImage/changepassword";
-@import "./Components/Header/DropDown/dropdown";
+@import './Components/Footer/footer';
+@import './Components/Forum/Answer/answer';
+@import './Components/Forum/ForumHome/forumHome';
+@import './Components/Forum/Question/question';
+@import './Components/Forum/AskQuestion/ask-question';
+@import './Components/Header/header';
+@import './Components/Home/home';
+@import './Components/Landing/landing';
+@import './Components/Format/format';
+@import './Components/PlannerDrawer/Planner/planner';
+@import './Components/PlannerDrawer/PlanDayTemplate/plan-day';
+@import './Components/Profile/profile';
+@import './Components/RecipeCreator/recipeCreator';
+@import './Components/Recipes/LargeRecipe/largeRecipe';
+@import './Components/Recipes/SmallRecipe/smallRecipe';
+@import './Components/Tutorial/tutorial';
+@import './Components/FilterDrawer/filter';
+@import './Components/Carousel/carousel';
+@import './Components/Header/Toggle/toggle';
+@import './Components/Header/Search/search';
+@import './Components/Header/SignIn/signin';
+@import './Components/Header/Register/register';
+@import './Components/Profile/ChangeImage/changepassword';
+@import './Components/Header/DropDown/dropdown';
 
 .App {
-  text-align: center;
-  display: flex;
-  flex-direction: column;
+	text-align: center;
+	display: flex;
+	flex-direction: column;
 }
 
 * {
-  margin: 0;
-  padding: 0;
+	margin: 0;
+	padding: 0;
 }
 
 body {
-  display: flex;
-  flex-direction: column;
-  height: 100vh;
+	display: flex;
+	flex-direction: column;
+	height: 100vh;
 }
 
 .footer {
-  flex-shrink: 0;
-  background-color: tomato;
-  height: 7vh;
-  color: white;
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+	flex-shrink: 0;
+	background-color: tomato;
+	height: 7vh;
+	color: white;
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
 
 .footer-ul {
-  list-style-type: none;
-  width: 50%;
-  display: flex;
-  justify-content: center;
-  justify-content: space-around;
-  height: 4vh;
-  align-items: center;
+	list-style-type: none;
+	width: 50%;
+	display: flex;
+	justify-content: center;
+	justify-content: space-around;
+	height: 4vh;
+	align-items: center;
 }

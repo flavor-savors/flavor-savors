@@ -18,8 +18,7 @@ const pc = require('./controllers/plan_controller')
 
 admin.initializeApp({
 	credential: admin.credential.cert(serviceAccount),
-	databaseURL: 'https://flavor-savor.firebaseio.com', // move to env
-	storageBucket: 'gs://flavor-savor.appspot.com/',
+	databaseURL: 'https://flavor-savor.firebaseio.com',
 })
 
 const db = admin.firestore()
@@ -68,12 +67,11 @@ app.put('/users/favorites/:id', uc.add_to_favorites) // add a recipe to user fav
 app.delete('/users/favorites/:id', uc.remove_from_favorites) // remove recipe from favorites
 
 // meal plan routes
-app.get('/plans/pdf', pc.create_pdf)
 app.get('/plans/:id', pc.get_plan_list) // return a list of plan links
 // save pdf to user account
 
 app.get('/plans/pdf/:id', pc.get_plan) // return link to single plan using ?plan=<filename>
-app.post('/upload', upload.single('file'), pc.upload_pdf)
+app.post('/plans/create/clean', pc.create_plan)
 
 // forum routes
 app.get('/forum/:id', fc.get_post) // get a specific post
