@@ -22,7 +22,7 @@ class MealPlaner extends Component {
 
 	componentDidUpdate(prevProps) {
 		if (prevProps.plannerProps.length < this.props.plannerProps) {
-			for (let i = 1; i < 7; i++) {
+			for (let i = 1; i < 8; i++) {
 				this.props.plannerProps.map((recipe) => {
 					if (recipe.code.includes(i)) {
 						this.setState({
@@ -35,7 +35,7 @@ class MealPlaner extends Component {
 	}
 
 	render() {
-		console.log('this.props.plannerProps', this.props.plannerProps)
+		console.log('state', this.state)
 
 		return (
 			<div className='format'>
@@ -56,6 +56,10 @@ class MealPlaner extends Component {
 							<Section plan={this.props.plannerProps} day={1} />
 							<Section plan={this.props.plannerProps} day={2} />
 							<Section plan={this.props.plannerProps} day={3} />
+							<Section plan={this.props.plannerProps} day={4} />
+							<Section plan={this.props.plannerProps} day={5} />
+							<Section plan={this.props.plannerProps} day={6} />
+							<Section plan={this.props.plannerProps} day={7} />
 							{/* <section className='sec-2'>
                 <div className='meal'>
                   <p>breakfast</p>
