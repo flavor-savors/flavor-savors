@@ -103,8 +103,6 @@ class Profile extends Component {
 
         <div className='recCrtr'>
           <div className='pro-recipe-input'>
-            {/* <button onClick={this.showRec}>input recipe</button>
-    {this.state.cr8Rec ?<RecipeCreator/>: null} */}
             <RecipeCreator/>
           </div>
         </div>
