@@ -25,9 +25,9 @@ class Section extends Component {
 												<p>what did you do</p>
 											)}
 											{this.props.plan[index].recipe.recipeName}
+											<h1>ingredients</h1>
 											{this.props.plan[index].recipe.ingredient.map((ing) => (
 												<div>
-													<h1>ingredients</h1>
 													<div>{ing.name}</div>
 													<div>{ing.amount}</div>
 												</div>
@@ -48,9 +48,9 @@ class Section extends Component {
 												<p>what did you do</p>
 											)}
 											{this.props.plan[index].recipe.recipeName}
+											<h1>ingredients</h1>
 											{this.props.plan[index].recipe.ingredient.map((ing) => (
 												<div>
-													<h1>ingredients</h1>
 													<div>{ing.name}</div>
 													<div>{ing.amount}</div>
 												</div>
@@ -71,9 +71,9 @@ class Section extends Component {
 												<p>what did you do</p>
 											)}
 											{this.props.plan[index].recipe.recipeName}
+											<h1>ingredients</h1>
 											{this.props.plan[index].recipe.ingredient.map((ing) => (
 												<div>
-													<h1>ingredients</h1>
 													<div>{ing.name}</div>
 													<div>{ing.amount}</div>
 												</div>
@@ -94,9 +94,9 @@ class Section extends Component {
 												<p>what did you do</p>
 											)}
 											{this.props.plan[index].recipe.recipeName}
+											<h1>ingredients</h1>
 											{this.props.plan[index].recipe.ingredient.map((ing) => (
 												<div>
-													<h1>ingredients</h1>
 													<div>{ing.name}</div>
 													<div>{ing.amount}</div>
 												</div>
