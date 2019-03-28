@@ -171,6 +171,7 @@ module.exports = {
 	add_recipe: (req, res) => {
 		let data = {
 			created: moment().format('MMMM Do YYYY, h:mm:ss a'),
+			unix: new Date().getTime(),
 			id: '',
 			edited: false,
 			user: req.body.user, // should be pulled from the current user and sent in
@@ -228,8 +229,9 @@ module.exports = {
 	edit_recipe: (req, res) => {
 		let data = {
 			created: moment().format('MMMM Do YYYY, h:mm:ss a'),
+			unix: new Date().getTime(),
 			id: req.params.id,
-			edited: false,
+			edited: true,
 			user: req.body.uid, // should be pulled from the current user and sent in
 			public: true,
 			imageURL: req.body.imageURL,
