@@ -24,7 +24,7 @@ class Home extends Component {
 
     this.state = {
       plannedRecipes: [],
-      showMealPlan: true,
+      showMealPlan: false,
       queryContent: "",
       showPlanner: false,
       showFilter: false,
@@ -91,7 +91,10 @@ class Home extends Component {
         this.setState({ recipes: res.data });
       })
       .then(() => {
-        if (this.props.history.location.pathname === "/home") {
+        if (
+          this.props.history.location.pathname === "/home" ||
+          this.props.history.location.pathname === "/home/build"
+        ) {
           axios.get(`/recipes/all`).then(res => {
             this.setState({ filteredRecipes: res.data });
           });
@@ -217,13 +220,17 @@ class Home extends Component {
   };
   //functionality for the planner
   handleChange = meal => {
-    this.setState(prevState => ({
-      ...prevState,
-      [meal]: [
-        ...prevState[meal],
-        { name: this.state.currentRecipeName, id: this.state.currentRecipeId }
-      ]
-    }));
+    if (this.state.currentRecipeId === "") {
+      return null;
+    } else {
+      this.setState(prevState => ({
+        ...prevState,
+        [meal]: [
+          ...prevState[meal],
+          { name: this.state.currentRecipeName, id: this.state.currentRecipeId }
+        ]
+      }));
+    }
   };
   //removes recipe from planner
   removeRecipe = (meal, i) => {
@@ -238,7 +245,7 @@ class Home extends Component {
   };
 
   render() {
-    console.log(this.state.filteredRecipes);
+    // console.log(this.state.filteredRecipes);
 
     const showHideMealPlan = this.state.showMealPlan
       ? "meal-plan show-meal-plan"
@@ -258,29 +265,36 @@ class Home extends Component {
         </div>
 
         <div className={showHideMain}>
-          <div>
-            <input
-              type='text'
-              name='queryContent'
-              value={this.state.content}
-              onChange={this.handleQuery}
-            />
-            <button onClick={this.querySubmit}>Search</button>
-          </div>
-          <div>
+          <div className='home-header'>
+            <div>
+              <button onClick={this.toggleFilter}>filter search</button>
+            </div>
             {this.state.user.length ? (
               <div>
                 <button onClick={this.viewUserFavRecipes}>
                   View My Favorites
                 </button>
                 <button onClick={this.viewUserInputRecipes}>
-                  View My Own Recipes
+                  View My Recipes
                 </button>
               </div>
             ) : null}
-            <button onClick={this.resetFilters}>View All Recipes</button>
-            <button onClick={this.toggleFilter}>filter search</button>
-            <button onClick={this.togglePlanner}>planner</button>
+            <div>
+              <button onClick={this.resetFilters}>View All Recipes</button>
+            </div>
+            <div>
+              <input
+                type='text'
+                name='queryContent'
+                value={this.state.content}
+                onChange={this.handleQuery}
+              />
+              <button onClick={this.querySubmit}>Search</button>
+            </div>
+
+            <div>
+              <button onClick={this.togglePlanner}>planner</button>
+            </div>
           </div>
 
           <div className='home-components'>

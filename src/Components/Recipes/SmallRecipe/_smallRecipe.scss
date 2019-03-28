@@ -8,14 +8,41 @@
   .small-recipe-card-holder {
     display: flex;
     flex-wrap: wrap;
-    align-items: baseline;
-    .small-recipe-card {
-      width: 300px;
-      height: 300px;
-      margin: 20px auto;
-      .small-recipe-card-image {
-        width: 200px;
-        height: 200px;
+    justify-content: center;
+    // align-items: baseline;
+
+    .small-recipe-card-polaroid {
+      margin: 20px;
+      background-color: whitesmoke;
+      border: 1px solid darken(whitesmoke, 20%);
+      border-radius: 3px;
+      .small-recipe-card {
+        width: 250px;
+        height: 300px;
+        padding-top: 10px;
+        .small-recipe-card-image {
+          border: 2px solid darken(whitesmoke, 20%);
+          background-color: white;
+          width: 220px;
+          height: 220px;
+          cursor: pointer;
+        }
+        .sm-recipe-buttons {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          height: 24.5%;
+          padding: 0 10px 0 10px;
+          h3 {
+            max-width: 80%;
+          }
+          .icons {
+            position: relative;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+          }
+        }
       }
     }
   }

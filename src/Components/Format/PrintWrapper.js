@@ -12,8 +12,12 @@ class PlanWrapper extends Component {
     return (
       <div>
         <ReactToPrint
-          trigger={() => <button href='#'>Print this out!</button>}
-          // master:src/Components/Format/MealPlanner.js
+          trigger={() => (
+            <div>
+              <p>Best printed in landscape!</p>
+              <button href='#'>Print this out!</button>
+            </div>
+          )}
           content={() => this.componentRef}
           pageStyle={{
             padding: "20px"
