@@ -1,5 +1,43 @@
-.home-main{
-    .home-components{
-        display: flex;
+.home-main {
+  background-image: radial-gradient(
+    $light-blue,
+    darken($blue, 20%),
+    $black 100%
+  );
+  .home-components {
+    display: flex;
+  }
+  .home-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    height: 50px;
+    background-color: $gray;
+    button {
+      cursor: pointer;
+      border: 1px solid $blue;
+      border-radius: 5px;
+      background-image: linear-gradient(to right, $blue, $light-blue, $blue);
+      padding: 3px;
     }
+  }
+}
+
+.meal-plan {
+}
+
+.main-cond {
+}
+
+.show-meal-plan {
+  display: block;
+}
+.hide-meal-plan {
+  display: none;
+}
+.hide-home-main {
+  display: none;
+}
+.show-home-main {
+  display: block;
 }

@@ -1,9 +1,8 @@
 import React, { Component } from "react";
-import axios from 'axios'
+import axios from "axios";
 import firebase from "../firebase/firebase";
 
-
-//this component is a modal over the user admin page to input a new recipe 
+//this component is a modal over the user admin page to input a new recipe
 //and rendered in LargeRecipe as an edit component
 
 class RecipeCreator extends Component {
@@ -13,100 +12,104 @@ class RecipeCreator extends Component {
     this.state = {
       recipeName: "",
       imageURL: "",
-      ingredient: [{
-        name: "",
-        amount: ""
-      }],
+      ingredient: [
+        {
+          name: "",
+          amount: ""
+        }
+      ],
       directions: "",
       dietTags: [],
       public: true,
       addons: [],
       user: ""
-     };
+    };
   }
 
-//sets up for user verification
+  //sets up for user verification
   componentDidMount() {
     firebase.auth().onAuthStateChanged(user => {
-      if(user !== null){
+      if (user !== null) {
         this.setState({ user: user.uid });
       }
     });
-    
-    console.log(this.props.recipe)
-    if(this.props.recipe){
-    let recipe = this.props.recipe
 
-    this.setState({
-      recipeName: recipe.recipeName,
-      imageURL: JSON.stringify(recipe.imageURL),
-      ingredient: recipe.ingredient,
-      directions: recipe.directions,
-      dietTags: recipe.dietTags,
-      public: recipe.public,
-      uid: recipe.user
-    })
-  }
+    console.log(this.props.recipe);
+    if (this.props.recipe) {
+      let recipe = this.props.recipe;
+
+      this.setState({
+        recipeName: recipe.recipeName,
+        imageURL: JSON.stringify(recipe.imageURL),
+        ingredient: recipe.ingredient,
+        directions: recipe.directions,
+        dietTags: recipe.dietTags,
+        public: recipe.public,
+        uid: recipe.user
+      });
+    }
   }
 
-//submits the new recipe or submits an update to current recipe and resets the form by resetting state
-  handleSubmit = (e) => {
-    e.preventDefault()
-   console.log(this.state)
-const state = this.state
-   if(this.props.recipe){
-    this.props.toggleEdit()
-    axios.put(`/recipes/${this.props.recipe.id}`, state).then(res=>{
-      console.log(res)
-    })
-   }else{
-    axios.post(`/recipes`, state).then(res=>{
-      console.log(res)
-      })  
-   }
-  
+  //submits the new recipe or submits an update to current recipe and resets the form by resetting state
+  handleSubmit = e => {
+    e.preventDefault();
+    console.log(this.state);
+    const state = this.state;
+    if (this.props.recipe) {
+      this.props.toggleEdit();
+      axios.put(`/recipes/${this.props.recipe.id}`, state).then(res => {
+        console.log(res);
+      });
+    } else {
+      axios.post(`/recipes`, state).then(res => {
+        console.log(res);
+      });
+    }
+
     this.setState({
       recipeName: "",
       imageURL: "",
-      ingredient: [{
-        name: "",
-        amount: ""
-      }],
+      ingredient: [
+        {
+          name: "",
+          amount: ""
+        }
+      ],
       directions: "",
       dietTags: [],
       public: true,
-      user:''
-    })
+      user: ""
+    });
   };
 
-//handles all input changes
-  handleChange = (e) => {
-      if(['name', 'amount'].includes(e.target.className)){
-          let ingredient = [...this.state.ingredient]
-          ingredient[e.target.dataset.id][e.target.className] = e.target.value
-          this.setState({ingredient})
-      }else{
-          this.setState({ [e.target.name]: e.target.value });
-        }
+  //handles all input changes
+  handleChange = e => {
+    if (["name", "amount"].includes(e.target.className)) {
+      let ingredient = [...this.state.ingredient];
+      ingredient[e.target.dataset.id][e.target.className] = e.target.value;
+      this.setState({ ingredient });
+    } else {
+      this.setState({ [e.target.name]: e.target.value });
+    }
   };
 
-//adds another ingredient object to state
-  addIngredient = (e) => {
-    e.preventDefault()
-      this.setState((prevState)=>({
-          ingredient: [...prevState.ingredient, {name:"", amount:""}]
-      }))
-  }
+  //adds another ingredient object to state
+  addIngredient = e => {
+    e.preventDefault();
+    this.setState(prevState => ({
+      ingredient: [...prevState.ingredient, { name: "", amount: "" }]
+    }));
+  };
 
-//removes an ingredient object
-  deleteIngredient = (id) => {
-    let ingredients = this.state.ingredient
+  //removes an ingredient object
+  deleteIngredient = id => {
+    let ingredients = this.state.ingredient;
     ingredients.splice(id, 1);
-    this.setState({ingredient: ingredients})
-    console.log(id)
-  }
+    this.setState({ ingredient: ingredients });
+    console.log(id);
+  };
 
-//adds tags to the recipe 
+  //adds tags to the recipe
   handleTags = e => {
     this.setState({
       ...this.state,
@@ -114,36 +117,42 @@ const state = this.state
     });
   };
 
-//allows user to make a recipe private  
+  //allows user to make a recipe private
   makePrivate = () => {
-      this.setState({public: !this.state.public})
-      console.log(this.state)
-  }
+    this.setState({ public: !this.state.public });
+    console.log(this.state);
+  };
 
   render() {
-      let {ingredient} = this.state
+    let { ingredient } = this.state;
     return (
+
      
         <form onSubmit={this.handleSubmit} className="recipeForm">
 
           <main className='rec-out'>
             <legend>Edit Your Recipe</legend>
 
+
             <div className='Cr8-1'>
             <small>Recipe Name:</small>
               <input
+
                 type="text"
                 name="recipeName"
                 className='recipe-name'
+
                 value={this.state.recipeName}
                 onChange={this.handleChange}
                 required
               />
               <small>Recipe Image:</small>
               <input
+
                 type="text"
                 className='recipe-img'
                 name="imageURL"
+
                 value={this.state.imageURL}
                 onChange={this.handleChange}
                 required
@@ -190,6 +199,7 @@ const state = this.state
 
             <fieldset className='two'>
               <legend>Ingredients:</legend>
+
               <button className='rec-add' onClick={this.addIngredient}>Add another ingredient</button>
 
               {
@@ -239,15 +249,10 @@ const state = this.state
           <button  onClick={this.props.toggleEdit}>Close</button>
           : null}
           
+
         </form>
     );
   }
 }
 
-
 export default RecipeCreator;
-
-
-
-
-
