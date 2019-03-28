@@ -9,15 +9,19 @@ class MealPlaner extends Component {
 
     return (
       <div className='format'>
-        <button onClick={this.props.toggleMealPlan}>Close Plan</button>
-        <main>
+        <button onClick={this.props.plannerProps.toggleMealPlan}>
+          Close Plan
+        </button>
+        <main className='meal-planner-main'>
           <nav>
             <h1>Meal Plan</h1>
           </nav>
 
           <div className='box'>
             <div className='container-1'>
-              <section className='col-1' />
+              <section className='col-1'>
+                <p>Grocery list</p>
+              </section>
             </div>
 
             <div className='container-2'>
