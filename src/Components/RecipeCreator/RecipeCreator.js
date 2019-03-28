@@ -126,169 +126,131 @@ class RecipeCreator extends Component {
   render() {
     let { ingredient } = this.state;
     return (
-      <div>
-        <form onSubmit={this.handleSubmit} className='recipeForm'>
-          <fieldset className=''>
-            <legend>Recipe Input</legend>
 
-            <fieldset className=''>
-              <small>Recipe Name:</small>
+     
+        <form onSubmit={this.handleSubmit} className="recipeForm">
+
+          <main className='rec-out'>
+            <legend>Edit Your Recipe</legend>
+
+
+            <div className='Cr8-1'>
+            <small>Recipe Name:</small>
               <input
-                type='text'
-                name='recipeName'
+
+                type="text"
+                name="recipeName"
+                className='recipe-name'
+
                 value={this.state.recipeName}
                 onChange={this.handleChange}
+                required
               />
-              Recipe Image:
+              <small>Recipe Image:</small>
               <input
-                type='text'
-                name='imageURL'
+
+                type="text"
+                className='recipe-img'
+                name="imageURL"
+
                 value={this.state.imageURL}
                 onChange={this.handleChange}
+                required
               />
-            </fieldset>
-
-            <fieldset>
-              <legend>Ingredients:</legend>
-              <button onClick={this.addIngredient}>
-                Add another ingredient
-              </button>
-
-              {ingredient.map((val, id) => {
-                let nameId = `ingredient${id}`,
-                  amtId = `amount${id}`;
-                return (
-                  <div key={id}>
-                    <label htmlFor={nameId}>
-                      Name:
-                      <input
-                        type='text'
-                        name={nameId}
-                        data-id={id}
-                        id={nameId}
-                        className='name'
-                        value={ingredient[id].name}
-                        onChange={this.handleChange}
-                      />
-                    </label>
-
-                    <label htmlFor={amtId}>
-                      Amount:
-                      <input
-                        type='text'
-                        name={amtId}
-                        data-id={id}
-                        id={amtId}
-                        className='amount'
-                        value={ingredient[id].amount}
-                        onChange={this.handleChange}
-                      />
-                    </label>
-                    <button
-                      type='button'
-                      onClick={() => this.deleteIngredient(id)}>
-                      X
-                    </button>
-                  </div>
-                );
-              })}
-            </fieldset>
-
-            <fieldset>
+            </div>
+          
+            <div className='Cr8-2'>
               <legend>Directions:</legend>
-              <textarea
-                className='directions'
-                type='text'
-                name='directions'
+              <textarea 
+                className='cr8-2-area'
+                type="text"
+                name="directions"
                 value={this.state.directions}
                 onChange={this.handleChange}
+                required
               />
-            </fieldset>
+            </div>
 
-            <fieldset>
+            <fieldset className='rec-tags'>
               <legend>Tags:</legend>
-              <input
-                type='checkbox'
-                name='dietTags'
-                value='breakfast'
-                id='breakfast'
-                onClick={this.handleTags}
-              />
-              <label htmlFor='breakfast'>Breakfast</label>
-              <input
-                type='checkbox'
-                name='dietTags'
-                value='lunch'
-                id='lunch'
-                onClick={this.handleTags}
-              />
-              <label htmlFor='lunch'>Lunch</label>
-              <input
-                type='checkbox'
-                name='dietTags'
-                value='dinner'
-                id='dinner'
-                onClick={this.handleTags}
-              />
-              <label htmlFor='dinner'>Dinner</label>
-              <input
-                type='checkbox'
-                name='dietTags'
-                value='dessert'
-                id='dessert'
-                onClick={this.handleTags}
-              />
-              <label htmlFor='dessert'>Dessert</label>
-              <input
-                type='checkbox'
-                name='dietTags'
-                value='snack'
-                id='snack'
-                onClick={this.handleTags}
-              />
-              <label htmlFor='snack'>Snack</label>
-              <input
-                type='checkbox'
-                name='dietTags'
-                value='vegetarian'
-                id='vegetarian'
-                onClick={this.handleTags}
-              />
-              <label htmlFor='vegetarian'>Vegetarian</label>
-              <input
-                type='checkbox'
-                name='dietTags'
-                value='vegan'
-                id='vegan'
-                onClick={this.handleTags}
-              />
-              <label htmlFor='vegan'>Vegan</label>
-              <input
-                type='checkbox'
-                name='dietTags'
-                value='paleo'
-                id='paleo'
-                onClick={this.handleTags}
-              />
-              <label htmlFor='paleo'>Paleo</label>
+              <input className='tag' type="checkbox" name="dietTags" value="breakfast" id="breakfast" onClick={this.handleTags}/>
+              <label className='tag' htmlFor="breakfast">Breakfast</label>
+              <input className='tag' type="checkbox" name="dietTags" value="lunch" id='lunch' onClick={this.handleTags}/>
+              <label className='tag' htmlFor="lunch">Lunch</label>
+              <input className='tag' type="checkbox" name="dietTags" value="dinner" id='dinner' onClick={this.handleTags}/>
+              <label className='tag' htmlFor="dinner">Dinner</label>
+              <input className='tag' type="checkbox" name="dietTags" value="dessert" id='dessert' onClick={this.handleTags}/>
+              <label className='tag' htmlFor="dessert">Dessert</label>
+              <input className='tag' type="checkbox" name="dietTags" value="snack" id='snack' onClick={this.handleTags}/>
+              <label className='tag' htmlFor="snack">Snack</label>
+              <input className='tag' type="checkbox" name="dietTags" value="vegetarian" id='vegetarian' onClick={this.handleTags}/>
+              <label className='tag' htmlFor="vegetarian">Vegetarian</label>
+              <input className='tag' type="checkbox" name="dietTags" value="vegan" id='vegan' onClick={this.handleTags}/>
+              <label className='tag' htmlFor="vegan">Vegan</label>
+              <input className='tag' type="checkbox" name="dietTags" value="paleo" id='paleo' onClick={this.handleTags}/>
+              <label className='tag' htmlFor="paleo">Paleo</label>
             </fieldset>
 
             <fieldset>
               <legend>Make this recipe private?</legend>
-              <input
-                type='checkbox'
-                name='public'
-                value={this.state.public ? "true" : "false"}
-                onChange={this.makePrivate}
-              />
+              <input type="checkbox" name="public" value={this.state.public ? "true" : "false"} onChange={this.makePrivate}/>
             </fieldset>
-          </fieldset>
-          {this.props.recipe ? (
-            <button onClick={this.props.toggleEdit}>Close</button>
-          ) : null}
-          <input type='submit' value='Submit' />
+              </main>
+
+            <fieldset className='two'>
+              <legend>Ingredients:</legend>
+
+              <button className='rec-add' onClick={this.addIngredient}>Add another ingredient</button>
+
+              {
+                  ingredient.map((val, id)=>{
+                      let nameId = `ingredient${id}`, amtId = `amount${id}`
+                      return(
+                          <div className='add-ing' key = {id}>
+                            <label htmlFor={nameId}>
+                            Name:
+                            <input
+                                className='rec-ing-input'
+                                type='text'
+                                name={nameId}
+                                data-id={id}
+                                id = {nameId}
+                                className='name'
+                                value={ingredient[id].name}
+                                onChange={this.handleChange}
+                                required
+                            />
+                            </label>
+
+                            <label htmlFor={amtId}>
+                            Amount:
+                            <input
+                                className='rec-ing-input'
+                                type='text'
+                                name={amtId}
+                                data-id={id}
+                                id={amtId}
+                                className='amount'
+                                value={ingredient[id].amount}
+                                onChange={this.handleChange}
+                                required
+                            />
+                            </label>
+                            <button className='rec-ing-delete' type='button' onClick={()=>this.deleteIngredient(id)}>X</button>
+                          </div>
+                      )
+                  })
+              }
+            <input  className='sub-rec'type='submit' value = 'Submit'/> 
+            </fieldset>
+
+
+          {this.props.recipe ? 
+          <button  onClick={this.props.toggleEdit}>Close</button>
+          : null}
+          
+
         </form>
-      </div>
     );
   }
 }

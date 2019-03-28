@@ -24,7 +24,7 @@ class Home extends Component {
 
     this.state = {
       plannedRecipes: [],
-      showMealPlan: true,
+      showMealPlan: false,
       queryContent: "",
       showPlanner: false,
       showFilter: false,
@@ -227,7 +227,11 @@ class Home extends Component {
         ...prevState,
         [meal]: [
           ...prevState[meal],
-          { name: this.state.currentRecipeName, id: this.state.currentRecipeId }
+          {
+            name: this.state.currentRecipeName,
+            id: this.state.currentRecipeId,
+            code: meal
+          }
         ]
       }));
     }
@@ -240,8 +244,48 @@ class Home extends Component {
   };
 
   submitPlan = () => {
-    //when fired will call for recipes using this.state.(all meals)
-    //set state of planned recipes to results wich are passed into the print wrapper
+    this.setState({
+      showMealPlan: !this.state.showMealPlan
+    });
+    let plan = {
+      b1: this.state.b1,
+      b2: this.state.b2,
+      b3: this.state.b3,
+      b4: this.state.b4,
+      b5: this.state.b5,
+      b6: this.state.b6,
+      b7: this.state.b7,
+      l1: this.state.l1,
+      l2: this.state.l2,
+      l3: this.state.l3,
+      l4: this.state.l4,
+      l5: this.state.l5,
+      l6: this.state.l6,
+      l7: this.state.l7,
+      d1: this.state.d1,
+      d2: this.state.d2,
+      d3: this.state.d3,
+      d4: this.state.d4,
+      d5: this.state.d5,
+      d6: this.state.d6,
+      d7: this.state.d7,
+      s1: this.state.s1,
+      s2: this.state.s2,
+      s3: this.state.s3,
+      s4: this.state.s4,
+      s5: this.state.s5,
+      s6: this.state.s6,
+      s7: this.state.s7
+    };
+    axios
+      .post("/plans/create/clean", { plan: plan })
+      .then(res => {
+        // console.log('response: ', res.data)
+        this.setState({
+          plannedRecipes: res.data
+        });
+      })
+      .catch(err => console.error(err));
   };
 
   render() {
@@ -351,6 +395,7 @@ class Home extends Component {
                 currentRecipeId={this.state.currentRecipeId}
                 currentRecipeName={this.state.currentRecipeName}
                 toggleMealPlan={this.toggleMealPlan}
+                submitPlan={this.submitPlan}
               />
             )}
           </div>
