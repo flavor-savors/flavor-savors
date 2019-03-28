@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import axios from "axios";
 import LargeRecipe from "../LargeRecipe/LargeRecipe";
+import heart from "../../../Assets/heart.png";
+import eye from "../../../Assets/eye.png";
 
 //this component is the map for rendering the small recipe cards after a specific call is made for:
 //all recipes public
@@ -59,26 +61,33 @@ class SmallRecipe extends Component {
         <div
           key={i}
           onMouseEnter={() => this.getRecipe(e.id)}
-          className='small-recipe-card'>
-          <div>
+          className='small-recipe-card-polaroid'>
+          <div className='small-recipe-card'>
             <div>
               <img
                 src={e.imageURL}
                 alt='recipe'
                 className='small-recipe-card-image'
+                onClick={() => this.toggleLarge(e.id, e.recipeName)}
               />
             </div>
-            <div>
-              <h1>{e.recipeName}</h1>
+            <div className='sm-recipe-buttons'>
               {this.props.user !== "" ? (
-                <button onClick={() => this.props.addToFavorites(e.id)}>
-                  Add to favs
-                </button>
+                <img
+                  className='icons'
+                  src={heart}
+                  alt='Favorite'
+                  onClick={() => this.props.addToFavorites(e.id)}
+                />
               ) : null}
+              <h3>{e.recipeName}</h3>
 
-              <button onClick={() => this.toggleLarge(e.id, e.recipeName)}>
-                View this recipe
-              </button>
+              <img
+                className='icons'
+                src={eye}
+                alt='view recipe'
+                onClick={() => this.toggleLarge(e.id, e.recipeName)}
+              />
             </div>
           </div>
         </div>

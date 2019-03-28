@@ -1,19 +1,22 @@
-.format {
-  margin-top: 2vh;
-  margin-bottom: 3vh;
+// .format {
+//   margin-top: 2vh;
+//   margin-bottom: 3vh;
+// }
+.planner-main {
+  width: 100%;
 }
 
-main {
+.meal-planner-main {
   border: solid 1px black;
   // height: 100%;
-  width: 80%;
+  // width: 80%;
   margin: auto;
   // padding-top: 2vh;
 }
 
 nav {
   border: solid 1px green;
-  height: 8vh;
+  height: 4vh;
   text-align: center;
 }
 
@@ -27,7 +30,7 @@ nav {
   display: flex;
   justify-content: space-between;
   border: solid 1px red;
-  width: 25%;
+  width: 15%;
   // height: 100%;
 }
 
@@ -67,7 +70,7 @@ nav {
 
 .container-2 {
   border: solid darkgoldenrod 1px;
-  width: 80%;
+  width: 85%;
   display: flex;
   flex-direction: column;
   height: 90%;

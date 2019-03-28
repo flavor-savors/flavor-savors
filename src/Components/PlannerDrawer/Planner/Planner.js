@@ -6,13 +6,16 @@ import PlanDay from "../PlanDayTemplate/PlanDay";
 class Planner extends Component {
   render() {
     return (
-      <div>
-        <div className='planner-main'>
-          <button onClick={this.props.toggleMealPlan}>
-            Generate Printable Plan
-          </button>
+      <div className='planner-main'>
+        <button onClick={this.props.toggleMealPlan}>
+          Generate Printable Plan
+        </button>
+        <div>
           <h1>Planner</h1>
           <p>View a recipe to add it to the plan</p>
+          <p>Leaving this page will reset your plan!</p>
+        </div>
+        <div className='two-plan-boxes'>
           <div className='planner-top-section'>
             {/* day one plan */}
             <PlanDay
