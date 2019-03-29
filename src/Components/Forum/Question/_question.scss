@@ -10,6 +10,14 @@
     margin: 20px 0;
     background-color: $gray;
     border-radius: 10px;
+    button {
+      border: 3px solid $orange;
+      background-color: $yellow;
+      cursor: pointer;
+      border-radius: 20px;
+      padding: 3px;
+      height: 20px;
+    }
     .question-title-view {
       display: flex;
       width: 70%;
@@ -19,6 +27,7 @@
         display: flex;
         width: 90%;
         align-items: left;
+        margin-left: 2%;
       }
     }
     .user-buttons-name {
@@ -32,11 +41,11 @@
         justify-content: space-between;
       }
       button {
-        height: 50px;
+        height: 30px;
       }
     }
     .user-buttons {
-      height: 50px;
+      height: 30px;
       margin: 10px;
     }
   }

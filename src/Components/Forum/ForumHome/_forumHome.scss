@@ -4,6 +4,7 @@
     darken($blue, 20%),
     $black 100%
   );
+
   min-height: 100vh;
   .forum-nav {
     display: flex;
@@ -11,6 +12,7 @@
     align-items: center;
     background-color: $blue;
     height: 8vh;
+
     .forum-button {
       height: 40px;
     }

@@ -85,7 +85,7 @@ class ForumHome extends Component {
           ) : null}
 
           <div>
-            <h1>SEARCH FORUM:</h1>
+            <h2>SEARCH FORUM:</h2>
             <input
               type='text'
               name='queryContent'

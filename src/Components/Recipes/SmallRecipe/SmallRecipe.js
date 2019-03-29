@@ -83,7 +83,10 @@ class SmallRecipe extends Component {
                   onClick={() => this.props.addToFavorites(e.id)}
                 />
               ) : null}
-              <h3 className='recipe-name'>{e.recipeName}</h3>
+
+              <div className='recipe-name'>
+                <h3>{e.recipeName.toUpperCase()}</h3>
+              </div>
 
               <img
                 className='icons'
