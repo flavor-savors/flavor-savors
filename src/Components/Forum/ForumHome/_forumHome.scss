@@ -1,0 +1,31 @@
+.forum-main {
+  background-image: radial-gradient(
+    $light-blue,
+    darken($blue, 20%),
+    $black 100%
+  );
+  min-height: 100vh;
+  .forum-nav {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: $blue;
+    height: 8vh;
+    .forum-button {
+      height: 40px;
+    }
+    .forum-nav-user {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 35%;
+    }
+    button {
+      border: 3px solid $orange;
+      background-color: $yellow;
+      cursor: pointer;
+      border-radius: 20px;
+      padding: 3px;
+    }
+  }
+}
