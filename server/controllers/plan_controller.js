@@ -42,7 +42,6 @@ module.exports = {
 		let data = req.body.plan
 		// slow (130ms on avg) but it works
 		const client = req.app.get('client')
-		console.log('req.body.plan ::', req.body.plan)
 
 		let recipes = []
 		let fixed = []
@@ -57,8 +56,7 @@ module.exports = {
 			for (let j = 0; j < recipes[i].length; j++) {
 				if (recipes[i] !== []) {
 					fixed.push({
-						id: recipes[i][j].id,
-						code: recipes[i][j].code,
+						id: recipes[i][j].id,						code: recipes[i][j].code,
 					})
 				}
 			}
@@ -75,12 +73,12 @@ module.exports = {
 			}
 
 			for (let i = 0; i < all_recipes.length; i++) {
-				console.log('hit outer loop')
 				for (let j = 0; j < fixed.length; j++) {
 					if (all_recipes[i].id === fixed[j].id) {
 						full_plan.push({
 							code: fixed[j].code,
 							recipe: all_recipes[i],
+							ingredients: all_recipes[i].ingredient,
 						})
 					}
 				}

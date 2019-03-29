@@ -36,13 +36,9 @@ app.use((req, res, next) => {
 	next()
 })
 
-//
+//////////////////////////
 //  TODO:
-//		+ Finish query search
-//		+ Have get_user_recipes return the full recipe
-//		+ TEST:
-//			- delete reply
-//			- upvote reply/recipe
+//		+ Get Grocery list
 //
 
 // auth routes
