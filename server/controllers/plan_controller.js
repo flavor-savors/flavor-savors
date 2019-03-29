@@ -56,7 +56,8 @@ module.exports = {
 			for (let j = 0; j < recipes[i].length; j++) {
 				if (recipes[i] !== []) {
 					fixed.push({
-						id: recipes[i][j].id,						code: recipes[i][j].code,
+						id: recipes[i][j].id,
+						code: recipes[i][j].code,
 					})
 				}
 			}

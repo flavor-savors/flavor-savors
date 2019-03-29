@@ -228,33 +228,70 @@ module.exports = {
 			// 	})
 			// 	.catch((err) => res.status(500).json(err))
 
-			const client = req.app.get('client')
+			// const client = req.app.get('client')
+			// const db = req.app.get('db')
+			// client.hgetall('users', (err, result) => {
+			// 	if (err) {
+			// 		console.log(err)
+			// 		res.status(500).json(err)
+			// 	}
+
+			// 	let all_users = []
+
+			// 	for (let key in result) {
+			// 		all_users.push(JSON.parse(result[key]))
+			// 	}
+
+			// 	let user = all_users.filter((user) => user.uid === req.body.uid)
+			// 	if (user !== [] || !user) {
+			// 		let index = user[0].favorites.findIndex((id) => id === req.params.id)
+			// 		if (index === -1) {
+			// 			res.status(404).json('Recipe not found in favorites')
+			// 		} else {
+			// 			user[0].favorites.splice(index, 1)
+			// 			res.status(200).json(user[0])
+
+			// 			db.collection('users')
+			// 				.doc(user[0].id)
+			// 				.set(user[0])
+			// 		}
+			// 	} else {
+			// 		res.status(404).json('User not found')
+			// 	}
+			// })
+
 			const db = req.app.get('db')
+			const client = req.app.get('client')
+
+			let all_users = []
+
+			console.log('req.body.uid: ', req.body.uid)
+			console.log('req.params.id: ', req.params.if)
+
 			client.hgetall('users', (err, result) => {
 				if (err) {
 					console.log(err)
 					res.status(500).json(err)
 				}
 
-				let all_users = []
-
 				for (let key in result) {
 					all_users.push(JSON.parse(result[key]))
 				}
 
 				let user = all_users.filter((user) => user.uid === req.body.uid)
-				let index = user[0].favorites.findIndex((id) => id === req.params.id)
-				if (index === -1) {
-					res.status(404).json('Recipe not found in favorites')
+				if (user) {
+					console.log(user)
+					user[0].favorites.splice(user[0].favorites.indexOf(req.params.id), 1)
+
+					db.collection('users')
+						.doc(user[0].id)
+						.set(user[0])
+				} else {
+					res.status(404).json('user not found')
 				}
-
-				user[0].favorites.splice(index, 1)
-				res.status(200).json(user[0])
-
-				db.collection('users')
-					.doc(user[0].id)
-					.set(user[0])
 			})
+
+			res.status(200).json('Recipe deleted')
 		} catch (err) {
 			res.status(500).json(err)
 		}
