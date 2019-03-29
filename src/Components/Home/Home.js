@@ -274,7 +274,7 @@ class Home extends Component {
 		axios
 			.post('/plans/create/clean', { plan: plan })
 			.then((res) => {
-				// console.log('response: ', res.data)
+				console.log('response: ', res.data)
 				this.setState({
 					plannedRecipes: res.data,
 				})
