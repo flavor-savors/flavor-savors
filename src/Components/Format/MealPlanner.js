@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 // import ReactToPrint from "react-to-print";
 import Section from './Section'
-import _ from 'lodash'
 
 class MealPlaner extends Component {
 	//recieves this.props.plannerProps which is an array of objects

@@ -22,6 +22,9 @@ class SmallRecipe extends Component {
     };
   }
 
+  componentDidUpdate() {
+    console.log(this.props);
+  }
   //on mouse over makes a call for a single recipe to prepare to render on the large recipe card component
   getRecipe = i => {
     axios.get(`/recipes/id/${i}`).then(res => {
@@ -80,7 +83,7 @@ class SmallRecipe extends Component {
                   onClick={() => this.props.addToFavorites(e.id)}
                 />
               ) : null}
-              <h3>{e.recipeName}</h3>
+              <h3 className='recipe-name'>{e.recipeName}</h3>
 
               <img
                 className='icons'

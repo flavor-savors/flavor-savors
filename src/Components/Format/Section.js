@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component } from "react";
 
 class Section extends Component {
 	render() {
@@ -112,4 +112,4 @@ class Section extends Component {
 	}
 }
 
-export default Section
+export default Section;
