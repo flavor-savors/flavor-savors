@@ -107,7 +107,7 @@ class Home extends Component {
     if (this.state.user !== "") {
       axios.get(`/users/favorites/recipes/${this.state.user}`).then(res => {
         this.setState({ filteredRecipes: res.data });
-        // console.log(res.data);
+        console.log(res.data);
       });
     }
   };
@@ -126,7 +126,7 @@ class Home extends Component {
     axios.put(`/users/favorites/${id}`, {
       uid: this.state.user
     });
-    // console.log(this.state.user);
+    console.log(this.state.user);
     // console.log("added to favs");
   };
 

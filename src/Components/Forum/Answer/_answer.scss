@@ -13,6 +13,7 @@
     width: 60%;
     height: 60%;
     background-color: $light-blue;
+    border-radius: 20px;
     .close-button {
       display: flex;
       justify-content: flex-end;
@@ -40,18 +41,20 @@
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
+  height: 30%;
 }
 
 .replies-buttons {
   display: flex;
   flex-direction: column;
   margin: 20px 0 20px 0;
-  height: 100px;
+  height: 100%;
   width: 50%;
   display: flex;
   align-items: center;
   textarea {
     height: 50%;
+    margin: 5px 0 10px 0;
   }
   button {
     border: 3px solid $orange;
@@ -60,6 +63,7 @@
     border-radius: 20px;
     padding: 3px;
     height: 30px;
+    font-family: $text-font;
   }
 }
 

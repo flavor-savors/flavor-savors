@@ -1,6 +1,7 @@
 .question-main {
   width: 70%;
   margin: auto;
+  font-family: $text-font;
   .question-card {
     display: flex;
     justify-content: space-between;
@@ -17,6 +18,7 @@
       border-radius: 20px;
       padding: 3px;
       height: 20px;
+      font-family: $text-font;
     }
     .question-title-view {
       display: flex;

@@ -52,8 +52,8 @@ class SmallRecipe extends Component {
   };
 
   deleteRecipe = id => {
+    // axios.delete(`/users/favorites/${id}`, this.props.user);
     axios.delete(`/recipes/${id}`);
-    axios.delete(`/users/favorites/${id}`, this.props.user);
     this.setState({ showLarge: false });
     this.props.deleteRecipeFromCurrent(id);
   };

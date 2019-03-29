@@ -10,7 +10,18 @@
   // max-height: 110vh;
   background-color: $light-blue;
   // overflow: auto;
-
+  font-family: $text-font;
+  border: 2px solid $orange;
+  border-top: none;
+  button {
+    border: 2px solid $orange;
+    background-color: $yellow;
+    cursor: pointer;
+    border-radius: 20px;
+    padding: 3px;
+    font-family: $text-font;
+    margin: 10px;
+  }
   .two-plan-boxes {
     display: inline-block;
 
