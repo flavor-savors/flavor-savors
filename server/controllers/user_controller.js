@@ -71,97 +71,97 @@ module.exports = {
 	// theres probably a much much much much much better way to do this
 	get_user_favorites: (req, res) => {
 		try {
-			// const db = req.app.get('db')
+			const db = req.app.get('db')
 
-			// let recipes = []
-			// let docs = []
-			// let id = ''
+			let recipes = []
+			let docs = []
+			let id = ''
 
-			// db.collection('users')
-			// 	.where('uid', '==', req.params.uid)
-			// 	.get()
-			// 	.then((snapshot) => {
-			// 		snapshot.forEach((doc) => (id = doc.data().id))
-			// 		// console.log(id)
-			// 		db.collection('users')
-			// 			.doc(id)
-			// 			.get()
-			// 			.then((snapshot) => {
-			// 				recipes = snapshot.data().favorites
-			// 			})
-			// 			.then(async () => {
-			// 				for (let i = 0; i < recipes.length; i++) {
-			// 					console.log('recipeid', recipes)
-			// 					let x = await db
-			// 						.collection('recipes')
-			// 						.doc(recipes[i])
-			// 						.get()
-			// 						.then((snapshot) => {
-			// 							return snapshot.data()
-			// 						})
-			// 						.catch((err) => {
-			// 							console.log('error on 71', err)
-			// 							res.status(500).json(err)
-			// 						})
-			// 					docs.push(x)
-			// 				}
-			// 			})
-			// 			.then(() => {
-			// 				res.json(docs)
-			// 			})
-			// 			.catch((err) => {
-			// 				console.log('error on 81', err)
-			// 				res.status(500).json(err)
-			// 			})
-			// 	})
+			db.collection('users')
+				.where('uid', '==', req.params.uid)
+				.get()
+				.then((snapshot) => {
+					snapshot.forEach((doc) => (id = doc.data().id))
+					// console.log(id)
+					db.collection('users')
+						.doc(id)
+						.get()
+						.then((snapshot) => {
+							recipes = snapshot.data().favorites
+						})
+						.then(async () => {
+							for (let i = 0; i < recipes.length; i++) {
+								console.log('recipeid', recipes)
+								let x = await db
+									.collection('recipes')
+									.doc(recipes[i])
+									.get()
+									.then((snapshot) => {
+										return snapshot.data()
+									})
+									.catch((err) => {
+										console.log('error on 71', err)
+										res.status(500).json(err)
+									})
+								docs.push(x)
+							}
+						})
+						.then(() => {
+							res.json(docs)
+						})
+						.catch((err) => {
+							console.log('error on 81', err)
+							res.status(500).json(err)
+						})
+				})
 
 			// I'll come back to this
 
-			const client = req.app.get('client')
-			let all_users = []
-			let user_recipes = []
+			// const client = req.app.get('client')
+			// let all_users = []
+			// let user_recipes = []
 
-			client.hgetall('users', (err, result) => {
-				if (err) {
-					console.log(err)
-				}
+			// client.hgetall('users', (err, result) => {
+			// 	if (err) {
+			// 		console.log(err)
+			// 	}
 
-				for (let key in result) {
-					all_users.push(JSON.parse(result[key]))
-				}
+			// 	for (let key in result) {
+			// 		all_users.push(JSON.parse(result[key]))
+			// 	}
 
-				user_recipes = all_users.filter((user) => {
-					if (user.uid === req.params.uid) {
-						if (user.favorites.length > 0) {
-							return user.favorites
-						}
-					}
-				})
+			// 	user_recipes = all_users.filter((user) => {
+			// 		if (user.uid === req.params.uid) {
+			// 			if (user.favorites.length > 0) {
+			// 				return user.favorites
+			// 			}
+			// 		}
+			// 	})
 
-				client.hgetall('recipes', (err, result) => {
-					if (err) {
-						console.log(err)
-						res.status(500).json(err)
-					}
+			// 	client.hgetall('recipes', (err, result) => {
+			// 		if (err) {
+			// 			console.log(err)
+			// 			res.status(500).json(err)
+			// 		}
 
-					let all_recipes = []
-					for (let key in result) {
-						all_recipes.push(JSON.parse(result[key]))
-					}
+			// 		let all_recipes = []
+			// 		for (let key in result) {
+			// 			all_recipes.push(JSON.parse(result[key]))
+			// 		}
 
-					let response = all_recipes.filter((recipe) => {
-						user_recipes.filter((match, index) => {
-							console.log('index', index)
-							if (recipe.id === match.favorites[index]) {
-								console.log(recipe)
-								return recipe
-							}
-						})
-					})
+			// 		let response = all_recipes.filter((recipe) => {
+			// 			user_recipes.filter((match, index) => {
+			// 				console.log('index', index)
+			// 				if (recipe.id === match.favorites[index]) {
+			// 					console.log(recipe)
+			// 					return recipe
+			// 				}
+			// 			})
+			// 		})
 
-					res.json(response)
-				})
-			})
+			// 		res.json(response)
+			// 	})
+			// })
 		} catch (err) {
 			console.log('error in catch block', err)
 			res.json(500).json(err)
