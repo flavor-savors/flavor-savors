@@ -314,33 +314,35 @@ class Home extends Component {
         <div className={showHideMain}>
           <div className='home-header'>
             <div>
-              <button onClick={this.toggleFilter}>filter search</button>
+              <button onClick={this.toggleFilter} className='toggle-buttons'>
+                OPEN FILTERS
+              </button>
             </div>
             {this.state.user.length ? (
-              <div>
-                <button onClick={this.viewUserFavRecipes}>
-                  View My Favorites
-                </button>
-                <button onClick={this.viewUserInputRecipes}>
-                  View My Recipes
-                </button>
+              <div className='home-user-buttons'>
+                <button onClick={this.viewUserFavRecipes}>MY FAVORITES</button>
+                <button onClick={this.viewUserInputRecipes}>MY RECIPES</button>
               </div>
             ) : null}
             <div>
-              <button onClick={this.resetFilters}>View All Recipes</button>
+              <button onClick={this.resetFilters} className='home-button'>
+                ALL RECIPES
+              </button>
             </div>
-            <div>
+            <div className='search-bar'>
               <input
                 type='text'
                 name='queryContent'
                 value={this.state.content}
                 onChange={this.handleQuery}
               />
-              <button onClick={this.querySubmit}>Search</button>
+              <button onClick={this.querySubmit}>SEARCH</button>
             </div>
 
             <div>
-              <button onClick={this.togglePlanner}>planner</button>
+              <button onClick={this.togglePlanner} className='toggle-buttons'>
+                OPEN PLANNER
+              </button>
             </div>
           </div>
 

@@ -15,15 +15,16 @@ class Answer extends Component {
   };
 
   submitReply = () => {
-    axios.post(`/forum/reply/${this.props.question.id}`, {
-      content: this.state.newReplyContent,
-      uid: this.props.uid,
-      username: this.props.question.username
-    }).then(()=>{
-      this.props.getAll()
-    });
-    this.props.toggleReplies()
-
+    axios
+      .post(`/forum/reply/${this.props.question.id}`, {
+        content: this.state.newReplyContent,
+        uid: this.props.uid,
+        username: this.props.question.username
+      })
+      .then(() => {
+        this.props.getAll();
+      });
+    this.props.toggleReplies();
   };
 
   render() {
@@ -38,7 +39,7 @@ class Answer extends Component {
     const replies = this.props.replies.map((e, i) => {
       return (
         <div key={i}>
-          <div>{e.content}</div>
+          <div>{e.content.toUpperCase()}</div>
           {this.props.replies.id === this.props.user ? (
             <button onClick={() => this.props.deleteReply(e.id)}>Delete</button>
           ) : null}
@@ -49,37 +50,36 @@ class Answer extends Component {
     return (
       <div className={showHideReplies}>
         <div className='replies-card'>
-          <h1>{this.props.question.content}</h1>
+          <div className='close-button'>
+            <button onClick={this.props.toggleReplies}>X</button>
+          </div>
+          <h1>{this.props.question.content.toUpperCase()}</h1>
           <div className='forum-button-bar'>
+            <p>SUBMIT A REPLY: </p>
             {this.props.uid !== "" ? (
               <div className='replies-buttons'>
-                <input
+                <textarea
                   type='text'
                   name='newReplyContent'
                   value={this.state.content}
                   onChange={this.handleChange}
                 />
                 <button className='reply-button' onClick={this.submitReply}>
-                  Reply
+                  SUBMIT
                 </button>
-                <button onClick={this.props.toggleReplies}>close</button>
               </div>
             ) : (
               <div className='reply-modal'>
                 <button className='reply-modal'>Reply</button>
                 <p className='reply-text'>Must be Signed in to reply</p>
-                <button onClick={this.props.toggleReplies}>close</button>
               </div>
             )}
-            {/* <button onClick={this.props.toggleReplies}>close</button> */}
           </div>
           {!this.props.replies.length ? (
             <p>No replies</p>
           ) : (
             <div>{replies}</div>
           )}
-
-
         </div>
       </div>
     );
