@@ -107,7 +107,7 @@ class Home extends Component {
     if (this.state.user !== "") {
       axios.get(`/users/favorites/recipes/${this.state.user}`).then(res => {
         this.setState({ filteredRecipes: res.data });
-        console.log(res.data);
+        // console.log(res.data);
       });
     }
   };
@@ -115,7 +115,7 @@ class Home extends Component {
   //calls for current users own input recipes
   viewUserInputRecipes = () => {
     axios.get(`/recipes/${this.state.user}`).then(res => {
-      console.log(res.data);
+      // console.log(res.data);
       this.setState({ filteredRecipes: res.data });
     });
   };
@@ -126,8 +126,8 @@ class Home extends Component {
     axios.put(`/users/favorites/${id}`, {
       uid: this.state.user
     });
-    console.log(this.state.user);
-    console.log("added to favs");
+    // console.log(this.state.user);
+    // console.log("added to favs");
   };
 
   //open and closes the planner
@@ -142,7 +142,7 @@ class Home extends Component {
 
   toggleMealPlan = () => {
     this.setState({ showMealPlan: !this.state.showMealPlan });
-    console.log("it works");
+    // console.log("it works");
   };
 
   //sets the current recipe name and id so the information is ready to be input into the meal planner or added to user favorites
@@ -180,7 +180,7 @@ class Home extends Component {
         filters: [...prevState.filters, tag]
       }));
     }
-    console.log(this.state);
+    // console.log(this.state);
   };
 
   //filters the filteredArray using the array of filter tags
