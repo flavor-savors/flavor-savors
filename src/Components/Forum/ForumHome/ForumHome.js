@@ -18,7 +18,7 @@ class ForumHome extends Component {
   }
 
   componentDidMount() {
-    console.log(this.props);
+    // console.log(this.props);
     firebase.auth().onAuthStateChanged(user => {
       if (user !== null) {
         this.setState({ uid: user.uid, username: user.displayName });
@@ -30,7 +30,7 @@ class ForumHome extends Component {
     });
   }
 
-  //calls for current users questions STILL NEEDS A FUNCTIONAL ENDPOINT
+  //calls for current users questions
   viewUserQuestions = () => {
     if (this.state.uid !== "") {
       axios.get(`/forum/user/${this.state.uid}`).then(res => {
@@ -43,13 +43,14 @@ class ForumHome extends Component {
   getAll = () => {
     axios.get(`/forum`).then(res => {
       this.setState({ questions: res.data });
-      // console.log(res.data);
+      console.log(res.data);
     });
   };
 
   //allows logged in users to delete their own posts
   deletePost = id => {
-    axios.delete(`/forum/${id}`).then(() => this.getAll());
+    axios.delete(`/forum/post/${id}`).then(() => this.getAll());
+    console.log(id);
   };
 
   handleQuery = e => {
@@ -69,13 +70,12 @@ class ForumHome extends Component {
     // console.log(this.state.uid)
     return (
       <div className='forum-main'>
-        <div>
-          <button onClick={this.getAll} className='get-all-forum-btn'>
-            View All Posts
-          </button>
+        <div className='forum-nav'>
           {this.state.uid !== "" ? (
-            <div>
-              <button onClick={this.viewUserQuestions}>View My Posts</button>
+            <div className='forum-nav-user'>
+              <button onClick={this.viewUserQuestions} className='forum-button'>
+                MY POSTS
+              </button>
               <AskQuestion
                 uid={this.state.uid}
                 username={this.state.username}
@@ -83,19 +83,23 @@ class ForumHome extends Component {
               />
             </div>
           ) : null}
-        </div>
 
-        <div>
-          <h1>Search Forum:</h1>
-          <input
-            type='text'
-            name='queryContent'
-            value={this.state.content}
-            onChange={this.handleQuery}
-          />
-          <button onClick={this.querySubmit}>Search</button>
+          <div>
+            <h1>SEARCH FORUM:</h1>
+            <input
+              type='text'
+              name='queryContent'
+              value={this.state.content}
+              onChange={this.handleQuery}
+            />
+            <button onClick={this.querySubmit}>SEARCH</button>
+          </div>
+          <button
+            onClick={this.getAll}
+            className='get-all-forum-btn forum-button'>
+            VIEW ALL POSTS
+          </button>
         </div>
-
         <Question
           uid={this.state.uid}
           questions={this.state.questions}
