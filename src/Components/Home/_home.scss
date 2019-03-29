@@ -4,6 +4,7 @@
     darken($blue, 20%),
     $black 100%
   );
+  min-height: 100vh;
   .home-components {
     display: flex;
   }
