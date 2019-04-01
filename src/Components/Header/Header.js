@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import './_header.scss'
 import Toggle from './Toggle/Toggle';
 // import Search from './Search/Search';
 import {Link} from 'react-router-dom';
@@ -36,19 +35,18 @@ class Header extends Component {
     // console.log(firebase.auth().currentUser)
     return (
       <div className='header-div'>
+        <button className='btn-null' onClick={this.displaySearch}></button>
         <div>
             <Link to='/' className='home-link'><h3>FLAVOR-SAVOR</h3></Link>
         </div>
         <div className='header-div-2'>
             <ul className='header-ul'>
 
-              <Link to='/forum'><li className='searchModal'>FORUM</li></Link> 
+              <Link to='/forum' className='searchModal'><li>FORUM</li></Link> 
               <Link to='/home' className='l-browse'><li>BROWSE</li></Link>
-              {!this.state.signedIn? <div className="tooltip"> VIEW FAVS
-                <li className="tooltiptext">You need to be signed in</li>
+              {!this.state.signedIn? <div className="tooltip"> <li className='view-favs'>VIEW FAVS</li>
+                <small className="tooltiptext">You need to be signed in</small>
               </div> : <Link className='view-favs' to='/home/favorites'><li>VIEW FAVS</li></Link>}
-
-                {/* {!this.state.signedIn ? <SignIn/> : <Link className='view-favs' to='/home/favorites'><li>VIEW FAVS</li></Link>} */}
               {!this.state.signedIn? <li className='signInModal' onClick={this.displaySignIn}>SIGN IN</li>: <DropDown/>}  
                 {this.state.showSignIn ?( <Toggle x={this.displaySignIn}/>):(null)}
             </ul>

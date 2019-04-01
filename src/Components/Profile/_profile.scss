@@ -1,6 +1,7 @@
 .prof-cont{
     display: flex;
-    border: solid 1px red;
+    // border: solid 1px red;
+    // background-color: blue;
     justify-content: space-between;
     height: 90vh;
 }
@@ -34,15 +35,19 @@
 
 .pro-btns{
     height: 5vh;
+    outline: none;
+    cursor: pointer;
+    border-radius: 4px;
+    font-size: 15px;
 }
 
 .recCrtr{
     width: 70%;
-    border: solid 1px blue;
+    // border: solid 1px blue;
     display: flex;
     flex-direction: column;
     // justify-content: center;
-    align-items: center;
+    // align-items: center;
     // height: 100%;
 }
 
@@ -51,22 +56,4 @@
     margin: 5vh 0 5vh 0;
     width: 100%;
     height: 100%;
-}
-
-.profile-buttons{
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    width: 80%;
-    height: 25vh;
-    border: solid 1px blue;
-}
-
-.pro-btn{
-    height: 5vh;
-}
-
-.recp-cr8tor{
-    // border: 2px black solid;
-    // width: 40%;
 }
