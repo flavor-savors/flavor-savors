@@ -1,19 +1,52 @@
-import React, { Component } from 'react'
-import './_tutorial.scss'
+import React from 'react'
+import rightArrow from '../../Assets/rightArrow.png'
+import downArrow from '../../Assets/downArrow.svg'
 
+const Tutorial = () => {
+  return (
+    <div className='tut-div'>
+    <div className='tut-steps-1'> 
 
-class Tutorial extends Component {
-  render() {
-    return (
-      <div className='tut-div'>
-          <div className='tut-steps'> <p>browse recipes</p>
-            <img className='gifs' src='https://media.giphy.com/media/APq4KTnluN8E6phP5U/giphy.gif' alt='vid'/>
-          </div>
-          <div className='tut-steps'> createna plan</div>
-          <div className='tut-steps'> sign up and save plans</div>
+        <div className='gif-div'>
+          <h2 className='tut-title'>browse recipes</h2>
+          <img className='gifs' src='https://media.giphy.com/media/APq4KTnluN8E6phP5U/giphy.gif' alt='vid'/>
+        </div>
+
+      <div className='tut-des'>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
       </div>
-    )
-  }
+      
+    </div>
+    <img src={rightArrow} className='hello'/>
+
+
+    <div className='tut-steps-2'>
+        <div className='gif-div'>
+
+          <h2 className='tut-title'>Create a plan</h2>
+          <img className='gifs' src='https://media0.giphy.com/media/oS2vhP1r9Ssyk/giphy.gif?cid=790b76115c9e73bb4b4c6d6151fa7890' alt='vid'/>
+        </div>
+
+      <div className='tut-des'>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+      </div>
+    </div>
+
+    <img src={rightArrow} className='hello'/>
+
+    <div className='tut-steps-3'>
+    <div className='gif-div'>
+          <h2 className='tut-title'>Sign up and save plans</h2>
+          <img className='gifs' src='https://media.giphy.com/media/APq4KTnluN8E6phP5U/giphy.gif' alt='vid'/>
+        </div>
+
+      <div className='tut-des'>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+      </div>
+    </div>
+    <img src='https://www.iconsdb.com/icons/preview/white/arrow-216-xxl.png' className='s'/>
+</div>
+  )
 }
 
 export default Tutorial

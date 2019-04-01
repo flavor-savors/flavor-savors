@@ -25,12 +25,14 @@ class DropDown extends Component {
   render() {
     return (
       <div>
+        {/* <div className='x-drop-down' onClick={this.displayDrop}/> */}
         <img onClick={this.displayDrop} className='drop-img' src={firebase.auth().currentUser.photoURL} alt='profile'/>
+        <img src='https://www.iconsdb.com/icons/preview/white/arrow-216-xxl.png' className='s'/>
         <div className='downArrow'/>
         {this.state.showDrop ? 
         <div className='dp'>
         <div className='dp-items'>
-        <Link className='pro-link' onClick={this.displayDrop} to='/profile'>Profile</Link>
+        <Link className='pro-link' onClick={this.displayDrop} to='/profile'>profile</Link>
         <button className='logout' onClick={() => firebase.auth().signOut()}> sign out</button>
         </div>
         </div> : null}

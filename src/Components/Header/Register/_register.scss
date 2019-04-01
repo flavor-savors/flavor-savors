@@ -12,26 +12,10 @@
     height: 5vh;
     outline: none;
     border: none;
+    font-size: 15px;
+    text-indent: 3px;
 }
 
-.reg-ipt:after{
-    background: none repeat scroll 0 0 transparent;
-    bottom: 0;
-    content: "";
-    display: block;
-    height: 2px;
-    left: 50%;
-    position: absolute;
-    background: blue;
-    transition: width 0.5s ease 0s, left 0.5s ease 0s;
-    width: 0;
-    
-}
-
-.reg-ipt:hover:after { 
-    width: 100%; 
-    left: 0; 
-  }
 
 .regsub{
     width: 40%;
@@ -39,14 +23,25 @@
     margin-left: auto;
     background-color: #3F51B5;
     color: white;
+    font-size: 15px;
+    cursor: pointer;
+    outline: none;
+    font-family: $register-font;
+    font-weight: 500;
+    font-size: 14px;
 }
 
 .reg-h3{
-    margin-bottom: 2vh;
+    // margin-bottom: 0vh;
+    margin-top: 2vh;
+    font-family: $register-font;
+    // font-weight: 500;
+    // font-size: px;
 }
 
 .reg-err{
     color: red;
     top: 0%;
+    font-family: $register-font;
     // font-size: 1px;
 }

@@ -152,7 +152,7 @@ class RecipeCreator extends Component {
                 type="text"
                 className='recipe-img'
                 name="imageURL"
-
+                // type='file'
                 value={this.state.imageURL}
                 onChange={this.handleChange}
                 required
@@ -197,8 +197,8 @@ class RecipeCreator extends Component {
             </fieldset>
               </main>
 
-            <fieldset className='two'>
-              <legend>Ingredients:</legend>
+            <div className='two'>
+              <legend className='rec-ing-two'>Ingredients:</legend>
 
               <button className='rec-add' onClick={this.addIngredient}>Add another ingredient</button>
 
@@ -208,9 +208,8 @@ class RecipeCreator extends Component {
                       return(
                           <div className='add-ing' key = {id}>
                             <label htmlFor={nameId}>
-                            Name:
+                            <small>Name:</small>
                             <input
-                                className='rec-ing-input'
                                 type='text'
                                 name={nameId}
                                 data-id={id}
@@ -223,9 +222,8 @@ class RecipeCreator extends Component {
                             </label>
 
                             <label htmlFor={amtId}>
-                            Amount:
+                            <small>Amount:</small>
                             <input
-                                className='rec-ing-input'
                                 type='text'
                                 name={amtId}
                                 data-id={id}
@@ -241,8 +239,8 @@ class RecipeCreator extends Component {
                       )
                   })
               }
-            <input  className='sub-rec'type='submit' value = 'Submit'/> 
-            </fieldset>
+            <input  className='sub-rec' type='submit' value = 'Submit'/> 
+            </div>
 
 
           {this.props.recipe ? 

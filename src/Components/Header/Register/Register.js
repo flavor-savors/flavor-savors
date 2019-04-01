@@ -66,7 +66,7 @@ class Register extends Component {
   render() {
     return (
       <form onSubmit={(e) =>this.handleRegister(e)} className='reg-form'>
-        <h3 className='reg-h3'>Register</h3>
+        <h3 className='reg-h3'>REGISTER</h3>
           <input
             placeholder='Username'
             name='displayName'
@@ -99,7 +99,7 @@ class Register extends Component {
           />
           <small className='reg-err'>{this.state.imgErr}</small>
 
-          <button className='regsub' type='submit' value='Submit'>Submit</button>
+          <button className='regsub' type='submit' value='Submit'>SUBMIT</button>
       </form>
     )
   }

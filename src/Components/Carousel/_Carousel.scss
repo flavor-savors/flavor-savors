@@ -14,8 +14,9 @@
 // }
 
 .img{
-    height: 80vh;
+    height: 100%;
     width: 100%;
+    object-fit: contain;
 }
 
 .shadow{
@@ -23,7 +24,7 @@
     z-index: 1;
     background:rgba(0, 0, 0, 0.50);
     top: 10vh;
-    height: 80vh;
+    height: 100%;;
     width: 100%;
 }
 

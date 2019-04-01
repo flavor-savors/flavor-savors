@@ -1,7 +1,7 @@
 .recipeForm{
     width: 100%;
     height: 80%;
-    border: solid red 1px;
+    border: solid black 1px;
     // height: 85vh;
    display: flex;
    flex-direction: row;
@@ -15,7 +15,7 @@ fieldset{
 }
 
 .rec-out{
-    border: solid 1px blue;
+    // border: solid 1px blue;
     width: 90%;
     display: flex;
     flex-direction: column;
@@ -35,8 +35,11 @@ fieldset{
 
 .recipe-name, .recipe-img{
     height: 4vh;
+    text-indent: 3px;
     font-size: 15px;
     outline: none;
+    border-radius: 4px;
+    border: .50px solid rgb(138, 138, 138);;
 }
 
 .Cr8-2{
@@ -52,6 +55,7 @@ fieldset{
     text-indent: 5px;
     padding: 5px;
     outline: none;
+    border-radius: 4px;
 }
 
 .rec-tags{
@@ -67,11 +71,17 @@ fieldset{
 .two{
     width: 100%;
     height: 100%;
-    border: solid 1px green;
+    // border: solid 1px green;
+}
+
+.rec-ing-two{
+    margin-top: 1vh;
 }
 
 .rec-add, .sub-rec{
     margin: 2vh 0 2vh 0;
+    outline: none;
+    cursor: pointer;
 }
 
 .add-ing{
@@ -81,12 +91,23 @@ fieldset{
     margin-bottom: 1vh;
 }
 
+.name, .amount{
+    outline: none;
+    margin-left: .5vw;
+    border-radius: 2px;
+    height: 2.5vh;
+    text-indent: 3px;
+    border: .50px solid rgb(138, 138, 138);
+}
+
 .rec-ing-delete{
     border-radius: 50%;
     width: 4%;
     text-align: center;
+    outline: none;
+    cursor: pointer;
 }
 
 .rec-ing-input{
-    // margin-bottom: 3vh;
+    outline: none;
 }

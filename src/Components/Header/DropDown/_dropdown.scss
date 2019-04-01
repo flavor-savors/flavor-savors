@@ -5,7 +5,6 @@
     width: 50px;
     cursor: pointer;
     border-radius: 100%;
-    // x-color: white;
     object-fit: contain;
     position: absolute;
     z-index: 2;
@@ -15,28 +14,54 @@
 .dp{
     position: absolute;
     z-index: 2; 
-    top: 8%;
+    top: 8.5%;
     background-color: whitesmoke;
     color: black;
     width: 10%;
-    left: 84.8%;
-    height: 20vh;
+    left: 85.4%;
+    height: 15vh;
+    border-radius: 4px;
 }
 
 .dp-items{
     // border: solid 1px red;
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
-    height: 9vh;
+    justify-content: space-evenly;
+    height: 13vh;
     font-size: 20px;
+    width: 90%;
+    margin: 1vh auto 0 auto;
 }
 
 .pro-link{
     text-decoration: none;
-    border: solid black 1px;
+    // border: solid rgb(148, 147, 147) 1px;
+    text-decoration: none;
+    color: black;
+    background-color: rgb(131, 139, 148);
+    color: white;
+    padding: 3px;
+    border-radius: 4px;
 }
 
 .logout{
-    height: 3vh;
+    height: 4vh;
+    outline: none;
+    cursor: pointer;
+    color: white;
+    background-color: rgb(131, 139, 148);
+    border: none;
+    font-size: 18px;
+    border-radius: 4px;
+}
+
+.x-drop-down{
+    // background-color: blue;
+    height: 100%;
+    position: absolute;
+    z-index: -1;
+    width: 100%;
+    left: 0;
+    top: 10%;
 }
