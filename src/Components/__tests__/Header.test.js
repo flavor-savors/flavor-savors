@@ -1,11 +1,14 @@
+
 import Header from '../Header/Header'
 import React from 'react'
 import { shallow, configure,} from 'enzyme'
 
 
-import Adapter from 'enzyme-adapter-react-16'
 
-configure({ adapter: new Adapter() })
+import Adapter from "enzyme-adapter-react-16";
+
+configure({ adapter: new Adapter() });
+
 
 describe('<Header/>', () => {
 	it('should return 4', () => {
@@ -40,3 +43,4 @@ describe('<Header/>', () => {
 	})
 
 })
+

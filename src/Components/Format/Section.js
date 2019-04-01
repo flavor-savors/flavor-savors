@@ -1,16 +1,14 @@
-import React, { Component } from 'react'
+import React, { Component } from "react";
 
 class Section extends Component {
 	render() {
-		console.log('section props', this.props)
 		return (
 			<div className='sec-2'>
 				{this.props.plan.map((meal, index) => {
 					if (meal.code.includes(this.props.day)) {
 						return (
-							<section>
+							<section key={meal.recipe.id}>
 								<div>
-									{/* <p>breakfast</p> */}
 									{this.props.plan[index].code[0] === 'b' ? (
 										<div className='meal'>
 											{this.props.plan[index].code[0] === 'b' ? (
@@ -25,9 +23,9 @@ class Section extends Component {
 												<p>what did you do</p>
 											)}
 											{this.props.plan[index].recipe.recipeName}
+											<h1>ingredients</h1>
 											{this.props.plan[index].recipe.ingredient.map((ing) => (
-												<div>
-													<h1>ingredients</h1>
+												<div key={meal.unix}>
 													<div>{ing.name}</div>
 													<div>{ing.amount}</div>
 												</div>
@@ -48,9 +46,9 @@ class Section extends Component {
 												<p>what did you do</p>
 											)}
 											{this.props.plan[index].recipe.recipeName}
+											<h1>ingredients</h1>
 											{this.props.plan[index].recipe.ingredient.map((ing) => (
-												<div>
-													<h1>ingredients</h1>
+												<div key={meal.unix}>
 													<div>{ing.name}</div>
 													<div>{ing.amount}</div>
 												</div>
@@ -71,9 +69,9 @@ class Section extends Component {
 												<p>what did you do</p>
 											)}
 											{this.props.plan[index].recipe.recipeName}
+											<h1>ingredients</h1>
 											{this.props.plan[index].recipe.ingredient.map((ing) => (
-												<div>
-													<h1>ingredients</h1>
+												<div key={meal.unix}>
 													<div>{ing.name}</div>
 													<div>{ing.amount}</div>
 												</div>
@@ -94,9 +92,9 @@ class Section extends Component {
 												<p>what did you do</p>
 											)}
 											{this.props.plan[index].recipe.recipeName}
+											<h1>ingredients</h1>
 											{this.props.plan[index].recipe.ingredient.map((ing) => (
-												<div>
-													<h1>ingredients</h1>
+												<div key={meal.unix}>
 													<div>{ing.name}</div>
 													<div>{ing.amount}</div>
 												</div>
@@ -105,24 +103,6 @@ class Section extends Component {
 										</div>
 									) : null}
 								</div>
-								{/* <div className='meal'>
-									<p>lunch</p>
-									{this.props.plan[index].code[0] === 'l' ? (
-										<div>{this.props.plan[index].recipe.recipeName}</div>
-									) : null}
-								</div>
-								<div className='meal'>
-									<p>dinner</p>
-									{this.props.plan[index].code[0] === 'd' ? (
-										<div>{this.props.plan[index].recipe.recipeName}</div>
-									) : null}
-								</div>
-								<div className='meal'>
-									<p>snack</p>
-									{this.props.plan[index].code[0] === 's' ? (
-										<div>{this.props.plan[index].recipe.recipeName}</div>
-									) : null}
-								</div> */}
 							</section>
 						)
 					}
@@ -132,4 +112,4 @@ class Section extends Component {
 	}
 }
 
-export default Section
+export default Section;

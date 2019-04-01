@@ -4,6 +4,8 @@
     darken($blue, 20%),
     $black 100%
   );
+
+  min-height: 100vh;
   .home-components {
     display: flex;
   }
@@ -11,14 +13,50 @@
     display: flex;
     align-items: center;
     justify-content: space-around;
-    height: 50px;
-    background-color: $gray;
-    button {
+    height: 8vh;
+    background-color: $blue;
+    .home-user-buttons {
+      display: flex;
+      justify-content: space-around;
+      width: 20%;
+      button {
+        border: 3px solid $orange;
+        background-color: $yellow;
+        cursor: pointer;
+        border-radius: 20px;
+        padding: 3px;
+      }
+    }
+    .home-button {
+      border: 3px solid $orange;
+      background-color: $yellow;
       cursor: pointer;
-      border: 1px solid $blue;
-      border-radius: 5px;
-      background-image: linear-gradient(to right, $blue, $light-blue, $blue);
+      border-radius: 20px;
       padding: 3px;
+    }
+    .toggle-buttons {
+      border: 3px solid $yellow;
+      background-color: $light-blue;
+      cursor: pointer;
+      border-radius: 20px;
+      padding: 3px;
+    }
+    .search-bar {
+      display: flex;
+      align-items: center;
+      height: 50%;
+      width: 18%;
+      input {
+        height: 50%;
+        width: 100%;
+      }
+      button {
+        border: 3px solid $orange;
+        background-color: $yellow;
+        cursor: pointer;
+        border-radius: 20px;
+        padding: 3px;
+      }
     }
   }
 }

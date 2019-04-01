@@ -5,38 +5,34 @@ import Section from './Section'
 class MealPlaner extends Component {
 	//recieves this.props.plannerProps which is an array of objects
 	//map through
-
 	constructor(props) {
 		super(props)
 
 		this.state = {
-			1: [],
-			2: [],
-			3: [],
-			4: [],
-			5: [],
-			6: [],
-			7: [],
+			ingredients: [],
 		}
 	}
 
-	componentDidUpdate(prevProps) {
-		if (prevProps.plannerProps.length < this.props.plannerProps) {
-			for (let i = 1; i < 8; i++) {
-				this.props.plannerProps.map((recipe) => {
-					if (recipe.code.includes(i)) {
-						this.setState({
-							[i]: recipe,
-						})
-					}
-				})
-			}
-		}
-	}
+	// componentDidUpdate(prevProps) {}
 
 	render() {
-		console.log('state', this.state)
+		let list = []
+		let singleArr = []
+		if (this.props.plannerProps.length > 0) {
+			list = this.props.plannerProps.map((meal, i) => {
+				return meal.ingredients.map((ing) => ing.name)
+			})
 
+			for (let i = 0; i < list.length; i++) {
+				for (let j = 0; j < list[i].length; j++) {
+					singleArr.push(list[i][j])
+				}
+			}
+
+			singleArr = singleArr
+				.filter((name, index) => singleArr.indexOf(name) === index)
+				.filter((name) => name !== '')
+		}
 		return (
 			<div className='format'>
 				<button onClick={this.props.toggleMealPlan}>Close Plan</button>
@@ -49,6 +45,7 @@ class MealPlaner extends Component {
 						<div className='container-1'>
 							<section className='col-1'>
 								<p>Grocery list</p>
+								{singleArr.length > 0 ? singleArr.map((ing) => <div>{ing}</div>) : null}
 							</section>
 						</div>
 
@@ -60,104 +57,6 @@ class MealPlaner extends Component {
 							<Section plan={this.props.plannerProps} day={5} />
 							<Section plan={this.props.plannerProps} day={6} />
 							<Section plan={this.props.plannerProps} day={7} />
-							{/* <section className='sec-2'>
-                <div className='meal'>
-                  <p>breakfast</p>
-                </div>
-                <div className='meal'>
-                  <p>lunch</p>
-                </div>
-                <div className='meal'>
-                  <p>dinner</p>
-                </div>
-                <div className='meal'>
-                  <p>snack</p>
-                </div>
-              </section> */}
-							{/* <section className='sec-2'>
-								<div className='meal'>
-									<p>breakfast 2</p>
-								</div>
-								<div className='meal'>
-									<p>lunch</p>
-								</div>
-								<div className='meal'>
-									<p>dinner</p>
-								</div>
-								<div className='meal'>
-									<p>snack</p>
-								</div>
-							</section>
-							<section className='sec-2'>
-								<div className='meal'>
-									<p>breakfast</p>
-								</div>
-								<div className='meal'>
-									<p>lunch</p>
-								</div>
-								<div className='meal'>
-									<p>dinner</p>
-								</div>
-								<div className='meal'>
-									<p>snack</p>
-								</div>
-							</section>
-							<section className='sec-2'>
-								<div className='meal'>
-									<p>breakfast</p>
-								</div>
-								<div className='meal'>
-									<p>lunch</p>
-								</div>
-								<div className='meal'>
-									<p>dinner</p>
-								</div>
-								<div className='meal'>
-									<p>snack</p>
-								</div>
-							</section>
-							<section className='sec-2'>
-								<div className='meal'>
-									<p>breakfast</p>
-								</div>
-								<div className='meal'>
-									<p>lunch</p>
-								</div>
-								<div className='meal'>
-									<p>dinner</p>
-								</div>
-								<div className='meal'>
-									<p>snack</p>
-								</div>
-							</section>
-							<section className='sec-2'>
-								<div className='meal'>
-									<p>breakfast</p>
-								</div>
-								<div className='meal'>
-									<p>lunch</p>
-								</div>
-								<div className='meal'>
-									<p>dinner</p>
-								</div>
-								<div className='meal'>
-									<p>snack</p>
-								</div>
-							</section>
-							<section className='sec-2'>
-								<div className='meal'>
-									<p>breakfast</p>
-								</div>
-								<div className='meal'>
-									<p>lunch</p>
-								</div>
-								<div className='meal'>
-									<p>dinner</p>
-								</div>
-								<div className='meal'>
-									<p>snack</p>
-								</div>
-							</section> */}
 						</div>
 					</div>
 				</main>

@@ -102,7 +102,6 @@ module.exports = {
 						})
 						.then(async () => {
 							for (let i = 0; i < recipes.length; i++) {
-								console.log('recipeid', recipes)
 								let x = await db
 									.collection('recipes')
 									.doc(recipes[i])
@@ -255,15 +254,42 @@ module.exports = {
 	},
 
 	delete_recipe: (req, res) => {
+		console.log('req.body.uid', req.body)
+		console.log('req.params.id', req.params.id)
 		try {
 			const db = req.app.get('db')
 			const client = req.app.get('client')
+
+			let all_users = []
 
 			db.collection('recipes')
 				.doc(req.params.id)
 				.delete()
 
 			client.hdel('recipes', req.params.id)
+			client.hgetall('users', (err, result) => {
+				if (err) {
+					console.log(err)
+					res.status(500).json(err)
+				}
+
+				for (let key in result) {
+					all_users.push(JSON.parse(result[key]))
+				}
+
+				let user = all_users.filter((user) => user.uid === req.body.uid)
+				if (user) {
+					console.log(user)
+					user[0].recipes.splice(user[0].recipes.indexOf(req.params.id), 1)
+
+					db.collection('users')
+						.doc(user[0].id)
+						.set(user[0])
+						.then(() => console.log('deleted'))
+				} else {
+					res.status(404).json('user not found')
+				}
+			})
 
 			res.status(200).json('Recipe deleted')
 		} catch (err) {

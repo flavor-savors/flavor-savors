@@ -36,13 +36,9 @@ app.use((req, res, next) => {
 	next()
 })
 
-//
+//////////////////////////
 //  TODO:
-//		+ Finish query search
-//		+ Have get_user_recipes return the full recipe
-//		+ TEST:
-//			- delete reply
-//			- upvote reply/recipe
+//		+ Get Grocery list
 //
 
 // auth routes
@@ -57,14 +53,14 @@ app.get('/recipes/search/general', rc.get_recipe_by_query_search) // search for 
 app.post('/recipes', rc.add_recipe) // add a recipe ✔️
 app.put('/recipes/:id', rc.edit_recipe) // edit a recipe's ingredients
 app.put('/recipes/upvote/:id', rc.upvote_recipe) // upvote a recipe ✔️
-app.delete('/recipes/:id', rc.delete_recipe) // delete a recipe ✔️
+app.put('/recipes/remove/:id', rc.delete_recipe) // delete a recipe ✔️
 
 // user routes
 app.get('/users/:id', uc.get_user_by_id) // get user by id ✔️
 app.get('/users', uc.get_user_by_username) // get user by username by appending `?user=<username>` ✔️
 app.get('/users/favorites/recipes/:uid', uc.get_user_favorites) // get user favorites
 app.put('/users/favorites/:id', uc.add_to_favorites) // add a recipe to user favorites
-app.delete('/users/favorites/:id', uc.remove_from_favorites) // remove recipe from favorites
+app.put('/users/favorites/remove/:id', uc.remove_from_favorites) // remove recipe from favorites
 
 // meal plan routes
 app.get('/plans/:id', pc.get_plan_list) // return a list of plan links
@@ -129,7 +125,7 @@ const init = () => {
 
 const port = 4000
 app.listen(port, () => {
-	console.log('\x1b[35m', '\t[ - ] initializing redis cache....')
+	console.log('\x1b[35m', '\t[ - ] does this even work redis cache....')
 	init()
 	console.log('\x1b[33m', `\t[ * ] Listening on localhost:${port}`)
 })
