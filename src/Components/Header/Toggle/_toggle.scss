@@ -26,15 +26,38 @@
 
 .tog{
     display: flex;
-    justify-content: s;
+    // justify-content: space-evenly;
     // width: 100%;
 }
 
-.btn-1{
+.btn-1, .btn-2{
     width: 100%;
     height: 5vh;
-    border-radius: 3px;
+    outline: none;
+    color: white;
+    border: none;
+    cursor: pointer;
+    background-color: #3F51B5;
+    font-size: 15px;
+    border-top-right-radius: 4px;
+    font-family: $register-font;
+    font-weight: 500;
 }
+
+.new-btn-1, .new-btn-2{
+    width: 100%;
+    height: 5vh;
+    outline: none;
+    border: none;
+    cursor: pointer;
+    background-color: rgb(196, 196, 196);
+    font-size: 15px;
+    border-top-left-radius: 4px;
+    font-family: $register-font;
+    font-weight: 500;
+}
+
+
 
 .sign-inputs{
     // border: solid 1px black;

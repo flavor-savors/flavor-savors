@@ -50,7 +50,7 @@ class Profile extends Component {
       .then(() => {
         swal({
           title: "Email Sent",
-          text: "you will an recive email to rest your password!",
+          text: "you will receive email to rest your password!",
           icon: "success"
         });
       }).catch(err => {
@@ -93,10 +93,10 @@ class Profile extends Component {
         <div className='pro-info'>
           <img className='pro-img' src={firebase.auth().currentUser.photoURL} alt='profile'/>
           <div className='user-info'>
-            <h3>{firebase.auth().currentUser.displayName}</h3>
+            <h2>{firebase.auth().currentUser.displayName}</h2>
             <button className='pro-btns' onClick={this.resetPass}>Change Password</button>
-            <button className='pro-btns' onClick={this.deleteAcc}>acc Delete</button>
-            <button className='pro-btns' onClick={this.showChangeImg}>change Img</button>
+            <button className='pro-btns' onClick={this.deleteAcc}>Delete Account</button>
+            <button className='pro-btns' onClick={this.showChangeImg}>Change Profile Image</button>
             {this.state.changeImg ?( <ChangeImage/>):(null)}
           </div>
         </div>

@@ -13,6 +13,10 @@
     margin-left: 10vw;
 }
 
+.btn-null{
+  display: none;
+}
+
 .header-ul{
     display: flex;
     // border: solid 1px red;
@@ -21,14 +25,29 @@
     list-style-type: none;
 }
 
-.signInModal, .searchModal, .view-favs, .l-browse{
+.home-link{
+  color: $orange;
+  text-decoration: none;
+  font-family: $title-font;
+  font-size: 23px;
+}
+
+.home-link:hover{
+  color: #e09545;
+}
+
+.searchModal, .view-favs, .l-browse, .signInModal{
+    color: white;
+    text-decoration: none;
+    font-family: $text-font;
+    font-weight: 900;
     cursor: pointer;
 }
 
-.home-link, .searchModal, .view-favs, .l-browse{
-    color: white;
-    text-decoration: none;
+.searchModal:hover, .view-favs:hover, .l-browse:hover, .signInModal:hover{
+  color: rgb(196, 196, 196);
 }
+
 
 .tooltip {
     position: relative;
