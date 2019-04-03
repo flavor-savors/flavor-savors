@@ -87,36 +87,44 @@ const init = () => {
 		db.collection('recipes')
 			.get()
 			.then((snapshot) => {
-				snapshot.forEach((doc) => {
-					client.hmset('recipes', doc.data().id, JSON.stringify(doc.data()))
-				})
+				if (!snapshot.empty) {
+					snapshot.forEach((doc) => {
+						client.hmset('recipes', doc.data().id, JSON.stringify(doc.data()))
+					})
+				}
 			})
 			.catch((err) => console.log(err))
 
 		db.collection('users')
 			.get()
 			.then((snapshot) => {
-				snapshot.forEach((doc) => {
-					client.hmset('users', doc.data().id, JSON.stringify(doc.data()))
-				})
+				if (!snapshot.empty) {
+					snapshot.forEach((doc) => {
+						client.hmset('users', doc.data().id, JSON.stringify(doc.data()))
+					})
+				}
 			})
 			.catch((err) => console.log(err))
 
 		db.collection('forum')
 			.get()
 			.then((snapshot) => {
-				snapshot.forEach((doc) => {
-					client.hmset('forum', doc.data().id, JSON.stringify(doc.data()))
-				})
+				if (!snapshot.empty) {
+					snapshot.forEach((doc) => {
+						client.hmset('forum', doc.data().id, JSON.stringify(doc.data()))
+					})
+				}
 			})
 			.catch((err) => console.log(err))
 
 		db.collection('plans')
 			.get()
 			.then((snapshot) => {
-				snapshot.forEach((doc) => {
-					client.hmset('plans', doc.data().id, JSON.stringify(doc.data()))
-				})
+				if (!snapshot.empty) {
+					snapshot.forEach((doc) => {
+						client.hmset('plans', doc.data().id, JSON.stringify(doc.data()))
+					})
+				}
 			})
 	} catch (err) {
 		console.log(err)
