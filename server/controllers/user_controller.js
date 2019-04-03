@@ -260,36 +260,36 @@ module.exports = {
 			// 	}
 			// })
 
-			const db = req.app.get('db')
-			const client = req.app.get('client')
+			// const db = req.app.get('db')
+			// const client = req.app.get('client')
 
-			let all_users = []
+			// let all_users = []
 
-			console.log('req.body.uid: ', req.body.uid)
-			console.log('req.params.id: ', req.params.if)
+			// console.log('req.body.uid: ', req.body.uid)
+			// console.log('req.params.id: ', req.params.id)
 
-			client.hgetall('users', (err, result) => {
-				if (err) {
-					console.log(err)
-					res.status(500).json(err)
-				}
+			// client.hgetall('users', (err, result) => {
+			// 	if (err) {
+			// 		console.log(err)
+			// 		res.status(500).json(err)
+			// 	}
 
-				for (let key in result) {
-					all_users.push(JSON.parse(result[key]))
-				}
+			// 	for (let key in result) {
+			// 		all_users.push(JSON.parse(result[key]))
+			// 	}
 
-				let user = all_users.filter((user) => user.uid === req.body.uid)
-				if (user) {
-					console.log(user)
-					user[0].favorites.splice(user[0].favorites.indexOf(req.params.id), 1)
+			// 	let user = all_users.filter((user) => user.uid === req.body.uid)
+			// 	if (user) {
+			// 		console.log(user)
+			// 		user[0].favorites.splice(user[0].favorites.indexOf(req.params.id), 1)
 
-					db.collection('users')
-						.doc(user[0].id)
-						.set(user[0])
-				} else {
-					res.status(404).json('user not found')
-				}
-			})
+			// 		db.collection('users')
+			// 			.doc(user[0].id)
+			// 			.set(user[0])
+			// 	} else {
+			// 		res.status(404).json('user not found')
+			// 	}
+			// })
 
 			res.status(200).json('Recipe deleted')
 		} catch (err) {

@@ -254,8 +254,9 @@ module.exports = {
 	},
 
 	delete_recipe: (req, res) => {
-		console.log('req.body.uid', req.body)
-		console.log('req.params.id', req.params.id)
+		console.log('hit delete')
+		console.log('delete: req.body.uid', req.body)
+		console.log('delete: req.params.id', req.params.id)
 		try {
 			const db = req.app.get('db')
 			const client = req.app.get('client')
@@ -265,33 +266,44 @@ module.exports = {
 			db.collection('recipes')
 				.doc(req.params.id)
 				.delete()
+				.then((resp) => {
+					console.log('del response', resp)
+					client.del('recipes', req.params.id, (err, result) => {
+						if (err) {
+							console.log(err)
+						}
 
-			client.hdel('recipes', req.params.id)
+						console.log('cache del result: ', result)
+					})
+				})
+
 			client.hgetall('users', (err, result) => {
 				if (err) {
 					console.log(err)
 					res.status(500).json(err)
 				}
 
+				console.log('got all users')
+
 				for (let key in result) {
 					all_users.push(JSON.parse(result[key]))
 				}
 
 				let user = all_users.filter((user) => user.uid === req.body.uid)
+				console.log('user', user[0])
 				if (user) {
-					console.log(user)
 					user[0].recipes.splice(user[0].recipes.indexOf(req.params.id), 1)
-
+					user[0].favorites.splice(user[0].favorites.indexOf(req.params.id), 1)
+					console.log('user after slice: ', user[0])
 					db.collection('users')
 						.doc(user[0].id)
 						.set(user[0])
 						.then(() => console.log('deleted'))
+					res.status(200).json('Recipe deleted')
 				} else {
 					res.status(404).json('user not found')
 				}
 			})
-
-			res.status(200).json('Recipe deleted')
 		} catch (err) {
 			res.status(500).json(err)
 		}
