@@ -83,44 +83,48 @@ app.get('/forum/search/general', fc.query_post)
 
 // purely for development purposes
 const init = () => {
-	try {
-		db.collection('recipes')
-			.get()
-			.then((snapshot) => {
+	console.log('hit init')
+	console.log('getting')
+	db.collection('recipes')
+		.get()
+		.then((snapshot) => {
+			if (!snapshot.empty) {
 				snapshot.forEach((doc) => {
 					client.hmset('recipes', doc.data().id, JSON.stringify(doc.data()))
 				})
-			})
-			.catch((err) => console.log(err))
-
-		db.collection('users')
-			.get()
-			.then((snapshot) => {
+			}
+		})
+		.catch((err) => err)
+	db.collection('users')
+		.get()
+		.then((snapshot) => {
+			if (!snapshot.empty) {
 				snapshot.forEach((doc) => {
 					client.hmset('users', doc.data().id, JSON.stringify(doc.data()))
 				})
-			})
-			.catch((err) => console.log(err))
-
-		db.collection('forum')
-			.get()
-			.then((snapshot) => {
+			}
+		})
+		.catch((err) => err)
+	db.collection('forum')
+		.get()
+		.then((snapshot) => {
+			if (!snapshot.empty) {
 				snapshot.forEach((doc) => {
 					client.hmset('forum', doc.data().id, JSON.stringify(doc.data()))
 				})
-			})
-			.catch((err) => console.log(err))
-
-		db.collection('plans')
-			.get()
-			.then((snapshot) => {
+			}
+		})
+		.catch((err) => err)
+	db.collection('plans')
+		.get()
+		.then((snapshot) => {
+			if (!snapshot.empty) {
 				snapshot.forEach((doc) => {
 					client.hmset('plans', doc.data().id, JSON.stringify(doc.data()))
 				})
-			})
-	} catch (err) {
-		console.log(err)
-	}
+			}
+		})
+		.catch((err) => err)
 }
 
 const port = 4000

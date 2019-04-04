@@ -43,7 +43,13 @@ module.exports = {
 				.delete()
 			res.status(200).json('Post deleted')
 
-			client.hdel('forum', req.params.id)
+			client.del('forum', req.params.id, (err, result) => {
+				if (err) {
+					console.log(err)
+				}
+
+				console.log(result)
+			})
 		} catch (err) {
 			res.status(500).json(err)
 		}
