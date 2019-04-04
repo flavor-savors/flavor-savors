@@ -90,6 +90,7 @@ class Profile extends Component {
     if(this.state.user){
     return (
       <div className='prof-cont'>
+      
         <div className='pro-info'>
           <img className='pro-img' src={firebase.auth().currentUser.photoURL} alt='profile'/>
           <div className='user-info'>

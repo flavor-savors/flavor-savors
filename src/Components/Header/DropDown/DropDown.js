@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import firebase from '../../firebase/firebase';
 import {Link} from 'react-router-dom';
 
+
 class DropDown extends Component {
     constructor(){
         super();
@@ -27,7 +28,7 @@ class DropDown extends Component {
       <div>
         {/* <div className='x-drop-down' onClick={this.displayDrop}/> */}
         <img onClick={this.displayDrop} className='drop-img' src={firebase.auth().currentUser.photoURL} alt='profile'/>
-        <img src='https://www.iconsdb.com/icons/preview/white/arrow-216-xxl.png' className='s'/>
+        {/* <img src='https://www.iconsdb.com/icons/preview/white/arrow-216-xxl.png' className='s'/> */}
         <div className='downArrow'/>
         {this.state.showDrop ? 
         <div className='dp'>

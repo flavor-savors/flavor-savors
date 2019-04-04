@@ -1,14 +1,16 @@
 .recipeForm{
     width: 100%;
     height: 80%;
-    border: solid black 1px;
+    // border: solid black 1px;
     // height: 85vh;
    display: flex;
    flex-direction: row;
    height: 100%;;
 }
 
-
+.rc-name{
+    margin-bottom: .50vh;
+}
 
 fieldset{
     border: none;
@@ -82,6 +84,27 @@ fieldset{
     margin: 2vh 0 2vh 0;
     outline: none;
     cursor: pointer;
+    padding: 5px;
+    border-radius: 4px;
+    font-size: 12px;
+    border: none;
+}
+
+.rec-add{
+    background-color: $blue;
+    color: white;
+}
+
+.rec-add:hover{
+    background-color: #506f91
+}
+
+.sub-rec{
+    background-color: $yellow;
+}
+
+.sub-rec:hover{
+    background-color: #fdbf43;
 }
 
 .add-ing{
