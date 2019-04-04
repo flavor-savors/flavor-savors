@@ -1,68 +1,48 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## FLAVOR-SAVORS
 
-## Available Scripts
+A full stack application that allows users to browse recipes, build a meal plan, and brows a cooking realated forum.
+Registered users can also input their own recipes and post questions and replies to the forum
 
-In the project directory, you can run:
+### Tech used
 
-### `npm start`
+This app was created with React and utilizes:
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- Node.js
+- Express.js
+- React
+- Firebase
+- Docker
+- Redis
+- Sass
+- React-to-print
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+## User Views
 
-### `npm test`
+### Landing Page
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+The user first encouters the user page with links to a tutorial, browsing recipes, and a link to build a meal plan.
+Both links take the user to the same component, however clicking build a plan will render the page with the meal planning drawer open.
 
-### `npm run build`
+### Home
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
+This view includes three components:
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
+####Main view of all recipes
+The header of this view includes buttons to open and close the filter and meal planner, and if the user is logged in it also includes buttons to only view favorites or their own input recipes.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+The recipes are rendered as preview cards, and includes a favorites icon if the user is logged in. On click a modal is activated for the user to inspect each recipe for more information. This includes the ability to favorite the recipe, or add the recipe to the meal plan, and if the user is logged in it also includes the ability to delete the recipe.
 
-### `npm run eject`
+####A filter drawer
+Allows users to narrow down recipes rendered with preset filters.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+####A meal planner drawer
+This component allows users to save recipes to four meals per day with seven days of planning allowed. Multiple recipes can be planned for each meal.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+To use the meal planner, the user must first inspect a recipe and click the 'Add to meal plan' button. This closes the modal, and opens the meal planner drawer if not already open. To add the recipe the user clicks the button for the meal they would like to save it to. the recipe name and a button to delete the recipe is rendered so the user can track what they have planned.
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+####Meal Plan Generation
+After the user is satisfied with their plan they can click the 'Generate meal plan' button, which opens a modal with a formatted calendar with the full recipes for each meal and a grocery list of all ingredients listed in the planned recipes. Using react-to-print the user can print a copy of the component.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+### Forum
 
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+The forum is intended for users to ask questions about recipes or cooking topics. Any user can access and read the forum, but only registered users can post or reply.
