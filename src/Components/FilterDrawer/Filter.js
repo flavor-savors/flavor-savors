@@ -25,7 +25,7 @@ class Filter extends Component {
       <div className='filter-main'>
         <form>
           <fieldset>
-            <legend>Filters:</legend>
+            <h4 className='filter-title'>FILTERS:</h4>
             <div className='filter-tags'>
               <div className='tag'>
                 <input
@@ -112,8 +112,8 @@ class Filter extends Component {
           <button type='reset' onClick={this.props.resetFilters}>
             Reset
           </button>
+          <button onClick={this.props.filterSearch}>Filter</button>
         </form>
-        <button onClick={this.props.filterSearch}>Filter</button>
       </div>
     );
   }

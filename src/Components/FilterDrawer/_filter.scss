@@ -1,20 +1,36 @@
-.filter-main{
-    position: -webkit-sticky;
-    position: sticky;
-    top:12%;
-    left: 0;
+.filter-main {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 12%;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  width: 10vw;
+  height: 50%;
+  background-color: $light-blue;
+  font-family: $text-font;
+  border: 2px solid $orange;
+  border-top: none;
+  .filter-title {
+    margin: 10px;
+  }
+  button {
+    border: 2px solid $orange;
+    background-color: $yellow;
+    cursor: pointer;
+    border-radius: 20px;
+    padding: 3px;
+    font-family: $text-font;
+    margin: 10px;
+  }
+
+  .filter-tags {
     display: flex;
     flex-direction: column;
-    height:50%;
-    width:10vw;
-
-    .filter-tags{
-        display: flex;
-        flex-direction: column;
-        width: 150px;
-        .tag{
-            display: flex;
-            margin-left: 10px;
-        }
+    width: 150px;
+    .tag {
+      display: flex;
+      margin-left: 10px;
     }
+  }
 }

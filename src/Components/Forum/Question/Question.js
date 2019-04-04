@@ -44,7 +44,7 @@ class Question extends Component {
           className='question-card'>
           <div className='question-title-view'>
             <button className='user-buttons' onClick={this.toggleReplies}>
-              VIEW REPLIES
+              REPLIES
             </button>
             <div className='question-title'>
               <h2>{e.content.toUpperCase()}</h2>

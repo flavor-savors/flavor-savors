@@ -55,9 +55,9 @@ class Answer extends Component {
           </div>
           <h1>{this.props.question.content.toUpperCase()}</h1>
           <div className='forum-button-bar'>
-            <p>SUBMIT A REPLY: </p>
             {this.props.uid !== "" ? (
               <div className='replies-buttons'>
+                <p>SUBMIT A REPLY: </p>
                 <textarea
                   type='text'
                   name='newReplyContent'
@@ -75,6 +75,7 @@ class Answer extends Component {
               </div>
             )}
           </div>
+          <h3>REPLIES TO THIS QUESTION: </h3>
           {!this.props.replies.length ? (
             <p>No replies</p>
           ) : (

@@ -8,6 +8,8 @@
   min-height: 100vh;
   .home-components {
     display: flex;
+    justify-content: space-between;
+    // align-items: center;
   }
   .home-header {
     display: flex;
@@ -15,11 +17,15 @@
     justify-content: space-around;
     height: 8vh;
     background-color: $blue;
+    border: 2px solid $orange;
+
     .home-user-buttons {
       display: flex;
       justify-content: space-around;
       width: 20%;
+
       button {
+        font-family: $text-font;
         border: 3px solid $orange;
         background-color: $yellow;
         cursor: pointer;
@@ -33,6 +39,7 @@
       cursor: pointer;
       border-radius: 20px;
       padding: 3px;
+      font-family: $text-font;
     }
     .toggle-buttons {
       border: 3px solid $yellow;
@@ -40,6 +47,7 @@
       cursor: pointer;
       border-radius: 20px;
       padding: 3px;
+      font-family: $text-font;
     }
     .search-bar {
       display: flex;
@@ -56,6 +64,7 @@
         cursor: pointer;
         border-radius: 20px;
         padding: 3px;
+        font-family: $text-font;
       }
     }
   }
