@@ -1,9 +1,10 @@
 .small-recipe-main {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
   align-items: baseline;
-  width: 70%;
-  margin: auto;
+  width: 100%;
+  min-height: 100vh;
   font-family: $text-font;
 
   .small-recipe-card-holder {

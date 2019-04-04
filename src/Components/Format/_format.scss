@@ -6,18 +6,16 @@
   width: 100%;
 }
 
-
 .meal-planner-main {
-  border: solid 1px black;
+  border: solid 1px $orange;
   // height: 100%;
   // width: 80%;
   margin: auto;
   // padding-top: 2vh;
 }
 
-
 nav {
-  border: solid 1px green;
+  border: solid 1px $orange;
   height: 4vh;
   text-align: center;
 }
@@ -31,19 +29,19 @@ nav {
 .container-1 {
   display: flex;
   justify-content: space-between;
-  border: solid 1px red;
+  border: solid 1px $orange;
   width: 15%;
   // height: 100%;
 }
 
 .col-1 {
-  border: solid 1px red;
+  border: solid 1px $orange;
   width: 100%;
   height: 100%;
 }
 
 .col-2 {
-  border: solid 1px black;
+  border: solid 1px $orange;
   height: 100%;
   width: 25%;
 }
@@ -60,26 +58,51 @@ nav {
 .sec-2 {
   display: flex;
   justify-content: space-around;
-  border: solid 1px darkblue;
+  border: solid 1px $orange;
   height: 30vh;
   width: 100%;
 
   .meal {
-    width: 25%;
-    border: solid darkgoldenrod 1px;
+    display: flex;
+    justify-content: space-around;
+    height: 100%;
+    .directions {
+      display: flex;
+      flex-direction: column;
+    }
   }
 }
 
 .container-2 {
-  border: solid darkgoldenrod 1px;
+  border: solid $orange 1px;
   width: 85%;
   display: flex;
   flex-direction: column;
-  height: 90%;
+  height: 100%;
   // *! change height
 }
 
 .sec-3 {
-  border: solid 1px black;
+  border: solid 1px $orange;
   height: 30vh;
+}
+
+section {
+  border: solid $orange 1px;
+  width: 25%;
+}
+
+button {
+  border: 3px solid $orange;
+  background-color: $yellow;
+  cursor: pointer;
+  border-radius: 20px;
+  padding: 3px;
+  font-family: $text-font;
+  margin: 10px;
+}
+
+.ingredients {
+  display: flex;
+  justify-content: center;
 }
