@@ -5,11 +5,17 @@
     display: flex;
     // justify-content: center;
     justify-content: space-around;
-    margin-top: 13vh
+    margin-top: 13vh;
+    // background-color: #999999;
+}
+
+.background{
+    background-color: $gray;
+   height: 90vh;
 }
 
 .tut-steps-1, .tut-steps-2, .tut-steps-3{
-    border: solid 1px black;
+    background-color: white;
     width: 30%;
     border-radius: 4px;
 }

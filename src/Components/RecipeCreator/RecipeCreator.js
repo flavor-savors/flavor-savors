@@ -131,11 +131,11 @@ class RecipeCreator extends Component {
         <form onSubmit={this.handleSubmit} className="recipeForm">
 
           <main className='rec-out'>
-            <legend>Edit Your Recipe</legend>
+            <h3>Edit Your Recipe</h3>
 
 
             <div className='Cr8-1'>
-            <small>Recipe Name:</small>
+            <h4 className='rc-name'>Recipe Name:</h4>
               <input
 
                 type="text"
@@ -146,7 +146,7 @@ class RecipeCreator extends Component {
                 onChange={this.handleChange}
                 required
               />
-              <small>Recipe Image:</small>
+              <h4 className='rc-name'>Recipe Image:</h4>
               <input
 
                 type="text"
@@ -160,7 +160,7 @@ class RecipeCreator extends Component {
             </div>
           
             <div className='Cr8-2'>
-              <legend>Directions:</legend>
+              <h4 className='rc-name'>Directions:</h4>
               <textarea 
                 className='cr8-2-area'
                 type="text"
@@ -172,7 +172,7 @@ class RecipeCreator extends Component {
             </div>
 
             <fieldset className='rec-tags'>
-              <legend>Tags:</legend>
+              <h4 className='rc-name'>Tags:</h4>
               <input className='tag' type="checkbox" name="dietTags" value="breakfast" id="breakfast" onClick={this.handleTags}/>
               <label className='tag' htmlFor="breakfast">Breakfast</label>
               <input className='tag' type="checkbox" name="dietTags" value="lunch" id='lunch' onClick={this.handleTags}/>
@@ -192,13 +192,13 @@ class RecipeCreator extends Component {
             </fieldset>
 
             <fieldset>
-              <legend>Make this recipe private?</legend>
+              <legend className='rc-name'>Make this recipe private?</legend>
               <input type="checkbox" name="public" value={this.state.public ? "true" : "false"} onChange={this.makePrivate}/>
             </fieldset>
               </main>
 
             <div className='two'>
-              <legend className='rec-ing-two'>Ingredients:</legend>
+              <h4 className='rec-ing-two'>Ingredients:</h4>
 
               <button className='rec-add' onClick={this.addIngredient}>Add another ingredient</button>
 

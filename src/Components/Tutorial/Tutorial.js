@@ -1,9 +1,11 @@
 import React from 'react'
 import rightArrow from '../../Assets/rightArrow.png'
-import downArrow from '../../Assets/downArrow.svg'
 
 const Tutorial = () => {
   return (
+    <div className='background'>
+
+    
     <div className='tut-div'>
     <div className='tut-steps-1'> 
 
@@ -44,7 +46,9 @@ const Tutorial = () => {
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
       </div>
     </div>
-    <img src='https://www.iconsdb.com/icons/preview/white/arrow-216-xxl.png' className='s'/>
+</div>
+
+
 </div>
   )
 }

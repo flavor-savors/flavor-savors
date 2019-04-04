@@ -20,27 +20,45 @@ class Landing extends Component {
                 
 {/* the div below holds the two main cards that link to Home with the planner either extended or hidden */}
                 <div className='main-landing'>
-                    <div>
-                        <Link to='/home'>
-                        <div>View Recipes</div>
-                        </Link>
-
-                        <Link to='/home/build'>
-                        <div>Build a plan</div>
-                        </Link>
+                    <div className='box-1'>
+                        <div className='div-1'>
+                            <Link className='land-link' to='/home'>
+                            <h1 className='land-title'>View Recipes</h1>
+                            </Link>
+                        </div>
+                       
+                        <div className='div-2'>
+                            <Link className='land-link' to='/home/build'>
+                             <h1 className='land-title'>Build a plan</h1>
+                             </Link>
+                        </div>
                     </div>
 
     {/* the div below holds the how to graphic  */}
 
-                    <Link to='/tutorial'>
-                    <div>
-                        <div>step one</div>
-                        <div>arrow</div>
-                        <div>step two</div>
-                        <div>arrow</div>
-                        <div>step three</div>
+                    
+                    <div className='box-2'>
+                        <div className='div-3'>
+                        <Link className='land-step' to='/tutorial'>
+                        <h4 className='land-sq'>Step One</h4>
+                        </Link>
+                        </div>
+                        <img className='arrow' src='https://www.freeiconspng.com/uploads/white-arrow-transparent-png-22.png'/>
+                        <div className='div-4'>
+                        <Link className='land-step' to='/tutorial'>
+                        <h4 className='land-sq'>Step Two</h4>
+                        </Link>
+                        </div>
+                        <img className='arrow' src='https://www.freeiconspng.com/uploads/white-arrow-transparent-png-22.png'/>
+
+                        <div className='div-5'>
+                        <Link className='land-step' to='/tutorial'>
+                        <h4 className='land-sq'>Step Three</h4>
+                        </Link>
+                        </div>
+
                     </div>
-                    </Link>
+                    
                 </div>
            </div> 
         )
